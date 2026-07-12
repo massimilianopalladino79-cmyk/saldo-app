@@ -135,6 +135,19 @@ function renderMovimenti() {
   const chip = (val, lbl) => `<button class="chip ${f.cat === val ? 'on' : ''}" data-cat="${escapeAttr(val)}">${lbl}</button>`;
   const pchip = (val, lbl) => `<button class="chip ${f.person === val ? 'on' : ''}" data-fperson="${escapeAttr(val)}">${lbl}</button>`;
 
+  const ft = store.totals(filtered);
+  const filterActive = f.type !== 'all' || f.cat !== 'all' || f.person !== 'all' || !!f.q;
+  const personTag = f.person !== 'all' ? ` · <span class="who">👤 ${escapeHtml(f.person)}</span>` : '';
+  const summaryHTML = filterActive ? `<div class="filtsum">
+      <div class="fs-top">
+        <span><b>${filtered.length}</b> ${filtered.length === 1 ? 'voce' : 'voci'}${personTag}</span>
+        <span class="fs-net ${ft.netto >= 0 ? 'pos' : 'neg'}">${ft.netto >= 0 ? '+' : '−'} ${money(Math.abs(ft.netto))}</span>
+      </div>
+      ${ft.entrate && ft.uscite ? `<div class="fs-sub">
+        <span class="pos">Entrate +${money(ft.entrate)}</span>
+        <span class="neg">Uscite −${money(ft.uscite)}</span></div>` : ''}
+    </div>` : '';
+
   view.innerHTML = `
     <div class="page-head"><div><h1 class="page-title">Movimenti</h1>
       <div class="page-sub">${filtered.length} voci · saldo ${money(store.currentBalance())}</div></div></div>
@@ -153,6 +166,7 @@ function renderMovimenti() {
       ${pchip('all', '👤 Tutti')}
       ${usedPeople.map((pp) => pchip(pp, `👤 ${escapeHtml(pp)}`)).join('')}
     </div>` : ''}
+    ${summaryHTML}
 
     ${keys.length ? keys.map((k) => {
       const items = groups.get(k);

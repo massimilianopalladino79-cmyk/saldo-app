@@ -249,3 +249,13 @@ input,select,textarea{font-family:inherit}
 .ptl-spark{flex:1;min-width:0}
 .ptl-spark .spark{width:100%;height:34px;display:block}
 .ptl-tot{flex:0 0 auto;font-weight:800;font-size:14px}
+
+/* barra riepilogo filtro (Movimenti) */
+.filtsum{margin:12px 0 4px;padding:12px 14px;border-radius:16px;
+  background:linear-gradient(135deg, color-mix(in srgb,var(--accent) 16%,transparent), var(--card));
+  border:1px solid var(--card-brd);box-shadow:var(--shadow)}
+.filtsum .fs-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.filtsum .fs-top>span:first-child{font-size:14px;color:var(--txt2);font-weight:600}
+.filtsum .fs-top b{color:var(--txt);font-size:16px}
+.filtsum .fs-net{font-size:19px;font-weight:800;letter-spacing:-.3px}
+.filtsum .fs-sub{display:flex;gap:16px;margin-top:7px;font-size:12.5px;font-weight:700}
