@@ -21,10 +21,19 @@ const ui = {
 store.load();
 applyTheme(store.getSettings().tema);
 applyAccent(store.getSettings().accent);
-render();
-wireChrome();
-store.onChange(() => render());
 registerSW();
+
+let appStarted = false;
+function startApp() {
+  if (appStarted) return;
+  appStarted = true;
+  render();
+  wireChrome();
+  store.onChange(() => render());
+}
+
+if (store.getSettings().pin) showLock();
+else startApp();
 
 // ---------------- chrome (tabbar + fab) ----------------
 function wireChrome() {
@@ -346,6 +355,8 @@ function renderImpostazioni() {
   const s = store.getSettings();
   const n = store.getState().movements.length;
   const tema = s.tema || 'auto';
+  const repMonths = store.availableMonths();
+  const curYm = monthKey(todayISO());
 
   view.innerHTML = `
     <div class="page-head"><div><h1 class="page-title">Impostazioni</h1>
@@ -385,6 +396,23 @@ function renderImpostazioni() {
     </div>
 
     <div class="card">
+      <div class="card-t"><h3>Riepilogo del mese</h3><span class="muted">immagine</span></div>
+      <div class="field"><label>Mese</label>
+        <select id="rep-month">${(repMonths.length ? repMonths : [curYm]).map((mm) => `<option value="${mm}" ${mm === curYm ? 'selected' : ''}>${fmtMonth(mm)}</option>`).join('')}</select></div>
+      <button class="btn btn-primary" id="rep-share">📤 Condividi / salva immagine</button>
+    </div>
+
+    <div class="card">
+      <div class="card-t"><h3>Sicurezza</h3></div>
+      ${s.pin ? `
+        <div class="setrow" style="padding-top:0"><div class="s-ic">🔒</div>
+          <div class="s-main"><div class="s-t">Blocco con codice attivo</div><div class="s-d">Richiesto all'apertura dell'app</div></div></div>
+        <button class="btn btn-danger" id="pin-off">Disattiva blocco</button>` : `
+        <button class="btn btn-primary" id="pin-on">Attiva blocco con codice</button>
+        <div class="page-sub" style="margin-top:8px">Il Face ID nativo non è accessibile a una web-app: si usa un codice numerico locale (4–6 cifre).</div>`}
+    </div>
+
+    <div class="card">
       <div class="card-t"><h3>Excel & dati</h3></div>
       <div class="setlist">
         <div class="setrow" id="do-import"><div class="s-ic">📥</div>
@@ -417,6 +445,27 @@ function renderImpostazioni() {
 
   view.querySelectorAll('[data-accent]').forEach((b) =>
     b.addEventListener('click', () => { store.setSetting('accent', b.dataset.accent); applyAccent(b.dataset.accent); renderImpostazioni(); }));
+
+  $('#rep-share').addEventListener('click', async () => {
+    try { await shareSummary($('#rep-month').value || curYm); }
+    catch (e) { toast('Errore immagine: ' + e.message, 'err'); }
+  });
+  const pinOn = $('#pin-on'), pinOff = $('#pin-off');
+  if (pinOn) pinOn.addEventListener('click', async () => {
+    const pin = (window.prompt('Scegli un codice (4-6 cifre):') || '').trim();
+    if (!/^\d{4,6}$/.test(pin)) { toast('Codice non valido (4-6 cifre)', 'err'); return; }
+    const conf = (window.prompt('Conferma il codice:') || '').trim();
+    if (conf !== pin) { toast('I codici non coincidono', 'err'); return; }
+    store.setSetting('pinLen', pin.length);
+    store.setSetting('pin', await hashPin(pin));
+    toast('Blocco attivato', 'ok');
+  });
+  if (pinOff) pinOff.addEventListener('click', async () => {
+    const pin = (window.prompt('Inserisci il codice attuale per disattivare:') || '').trim();
+    if (await hashPin(pin) !== store.getSettings().pin) { toast('Codice errato', 'err'); return; }
+    store.setSetting('pin', ''); store.setSetting('pinLen', 0);
+    toast('Blocco disattivato', 'ok');
+  });
 
   $('#set-padd').addEventListener('click', () => {
     const name = (window.prompt('Nuova persona:') || '').trim();
@@ -640,6 +689,147 @@ function attachChartTip(container, formatHtml) {
     h.addEventListener('pointerdown', () => show(i, h));
   });
   svg.addEventListener('pointerleave', () => tip.classList.remove('show'));
+}
+
+// ---------------- blocco con codice (PIN) ----------------
+async function hashPin(pin) {
+  const data = new TextEncoder().encode('saldo:' + pin);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function showLock() {
+  const ov = document.createElement('div');
+  ov.className = 'lockscreen';
+  ov.innerHTML = `
+    <div class="lock-inner">
+      <div class="lock-ic">🔒</div>
+      <h2>Inserisci il codice</h2>
+      <div class="pin-dots" id="pin-dots"></div>
+      <div class="keypad">
+        ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => `<button class="key" data-k="${n}">${n}</button>`).join('')}
+        <span></span>
+        <button class="key" data-k="0">0</button>
+        <button class="key key-del" data-k="del">⌫</button>
+      </div>
+      <div class="lock-err" id="lock-err"></div>
+    </div>`;
+  document.getElementById('modal-root').appendChild(ov);
+  const len = store.getSettings().pinLen || 4;
+  const dots = ov.querySelector('#pin-dots');
+  const err = ov.querySelector('#lock-err');
+  let entry = '';
+  const renderDots = () => {
+    dots.innerHTML = Array.from({ length: len }, (_, i) => `<span class="pdot ${i < entry.length ? 'on' : ''}"></span>`).join('');
+  };
+  renderDots();
+  const submit = async () => {
+    const h = await hashPin(entry);
+    if (h === store.getSettings().pin) { ov.remove(); startApp(); }
+    else {
+      err.textContent = 'Codice errato';
+      const inner = ov.querySelector('.lock-inner');
+      inner.classList.add('shake');
+      entry = ''; renderDots();
+      setTimeout(() => inner.classList.remove('shake'), 400);
+    }
+  };
+  ov.querySelectorAll('[data-k]').forEach((b) => b.addEventListener('click', async () => {
+    const k = b.dataset.k;
+    if (k === 'del') { entry = entry.slice(0, -1); renderDots(); return; }
+    if (entry.length >= len) return;
+    entry += k; renderDots();
+    if (entry.length === len) await submit();
+  }));
+}
+
+// ---------------- riepilogo mensile come immagine ----------------
+function roundRect(g, x, y, w, h, r) {
+  g.beginPath();
+  g.moveTo(x + r, y);
+  g.arcTo(x + w, y, x + w, y + h, r);
+  g.arcTo(x + w, y + h, x, y + h, r);
+  g.arcTo(x, y + h, x, y, r);
+  g.arcTo(x, y, x + w, y, r);
+  g.closePath();
+}
+
+function generateSummaryImage(ym) {
+  return new Promise((resolve) => {
+    const W = 1080, H = 1350;
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const g = c.getContext('2d');
+    const accent = store.getSettings().accent || '#7C5CFF';
+    const cur = (n) => fmtCurrency(n, store.getSettings().valuta);
+    const font = (spec) => `${spec} -apple-system, "Segoe UI", Roboto, sans-serif`;
+
+    const bg = g.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0, '#0B0B12'); bg.addColorStop(1, '#16162c');
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    const glow = g.createRadialGradient(W * 0.25, 0, 40, W * 0.25, 0, 760);
+    glow.addColorStop(0, accent + '66'); glow.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = glow; g.fillRect(0, 0, W, H);
+
+    const row = store.monthlySummary().find((r) => r.ym === ym) || { entrate: 0, uscite: 0, netto: 0 };
+    const balRow = store.balanceByMonth().find((r) => r.ym === ym);
+    const cats = store.categoryTotals('out', ym).slice(0, 3);
+
+    g.fillStyle = '#A7A7C0'; g.font = font('600 38px'); g.fillText('RIEPILOGO', 80, 140);
+    g.fillStyle = '#F4F4FB'; g.font = font('800 84px'); g.fillText(fmtMonth(ym), 78, 232);
+
+    // card saldo
+    g.fillStyle = accent; roundRect(g, 80, 300, W - 160, 210, 40); g.fill();
+    g.fillStyle = 'rgba(255,255,255,.85)'; g.font = font('600 34px'); g.fillText('Saldo a fine mese', 130, 380);
+    g.fillStyle = '#fff'; g.font = font('800 92px'); g.fillText(cur(balRow ? balRow.balance : store.currentBalance()), 128, 470);
+
+    // tre blocchi
+    const blocks = [
+      { l: 'Entrate', v: row.entrate, c: '#30D158' },
+      { l: 'Uscite', v: row.uscite, c: '#FF453A' },
+      { l: 'Netto', v: row.netto, c: row.netto >= 0 ? '#30D158' : '#FF453A' },
+    ];
+    const bw = (W - 160 - 40) / 3;
+    blocks.forEach((b, i) => {
+      const x = 80 + i * (bw + 20);
+      g.fillStyle = 'rgba(255,255,255,.06)'; roundRect(g, x, 560, bw, 180, 28); g.fill();
+      g.fillStyle = '#A7A7C0'; g.font = font('600 30px'); g.fillText(b.l, x + 28, 620);
+      let sign = '';
+      if (b.l === 'Uscite' && b.v > 0) sign = '−';
+      else if (b.l === 'Netto' && b.v < 0) sign = '−';
+      g.fillStyle = b.c; g.font = font('800 44px');
+      g.fillText(sign + cur(Math.abs(b.v)), x + 28, 690);
+    });
+
+    // uscite principali
+    g.fillStyle = '#F4F4FB'; g.font = font('700 40px'); g.fillText('Uscite principali', 80, 850);
+    const maxV = Math.max(1, ...cats.map((x) => x.total));
+    cats.forEach((ct, i) => {
+      const y = 900 + i * 110;
+      g.fillStyle = '#C9C9DE'; g.font = font('600 34px'); g.fillText(ct.category, 80, y);
+      g.fillStyle = '#F4F4FB'; g.font = font('700 34px');
+      g.textAlign = 'right'; g.fillText(cur(ct.total), W - 80, y); g.textAlign = 'left';
+      g.fillStyle = 'rgba(255,255,255,.10)'; roundRect(g, 80, y + 18, W - 160, 18, 9); g.fill();
+      g.fillStyle = accent; roundRect(g, 80, y + 18, (W - 160) * (ct.total / maxV), 18, 9); g.fill();
+    });
+    if (!cats.length) { g.fillStyle = '#6E6E8A'; g.font = font('500 32px'); g.fillText('Nessuna uscita nel mese', 80, 920); }
+
+    g.fillStyle = '#6E6E8A'; g.font = font('600 30px'); g.fillText('Saldo · gestione entrate/uscite', 80, H - 70);
+
+    c.toBlob((b) => resolve(b), 'image/png');
+  });
+}
+
+async function shareSummary(ym) {
+  const blob = await generateSummaryImage(ym);
+  const file = new File([blob], `riepilogo-${ym}.png`, { type: 'image/png' });
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], title: 'Riepilogo ' + fmtMonth(ym) }); return; }
+    catch (e) { if (e && e.name === 'AbortError') return; }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `riepilogo-${ym}.png`;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
 }
 
 // ---------------- helpers ----------------

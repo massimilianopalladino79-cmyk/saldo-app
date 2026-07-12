@@ -297,3 +297,22 @@ input,select,textarea{font-family:inherit}
 .budget .bmsg{font-size:13.5px;font-weight:700;color:var(--txt2)}
 .budget.near .bmsg{color:var(--amber)}
 .budget.over .bmsg{color:var(--red)}
+
+/* schermata di blocco (PIN) */
+.lockscreen{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;
+  padding:calc(var(--safe-t) + 20px) 24px calc(var(--safe-b) + 20px);
+  background-image:radial-gradient(700px 420px at 50% -40px, color-mix(in srgb,var(--accent) 30%,transparent), transparent 62%)}
+.lock-inner{width:100%;max-width:340px;text-align:center}
+.lock-inner.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+.lock-ic{font-size:44px;margin-bottom:8px}
+.lock-inner h2{margin:0 0 22px;font-size:20px;font-weight:800}
+.pin-dots{display:flex;justify-content:center;gap:16px;margin-bottom:30px;min-height:18px}
+.pdot{width:16px;height:16px;border-radius:50%;border:2px solid var(--txt3);transition:.15s}
+.pdot.on{background:var(--accent);border-color:var(--accent)}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:280px;margin:0 auto}
+.key{height:74px;border-radius:50%;background:var(--card);border:1px solid var(--card-brd);
+  font-size:28px;font-weight:700;color:var(--txt);transition:transform .1s}
+.key:active{transform:scale(.92);background:var(--card-hi)}
+.key-del{font-size:22px}
+.lock-err{color:var(--red);font-weight:700;font-size:14px;margin-top:18px;min-height:20px}

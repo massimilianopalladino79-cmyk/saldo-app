@@ -16,7 +16,7 @@ const DEFAULT_PEOPLE = ['Cecio', 'Gaia', 'Max', 'Evelyn'];
 const DEFAULT_STATE = {
   // niente dataVersion qui: i dati già presenti (senza versione) devono risultare v0
   // così la migrazione parte. La versione viene impostata da migrate()/seed.
-  settings: { saldoIniziale: 0, valuta: 'EUR', tema: 'auto', people: [...DEFAULT_PEOPLE], accent: '#7C5CFF', budget: 0 },
+  settings: { saldoIniziale: 0, valuta: 'EUR', tema: 'auto', people: [...DEFAULT_PEOPLE], accent: '#7C5CFF', budget: 0, pin: '', pinLen: 0 },
   movements: [], // { id, date:'YYYY-MM-DD', description, category, type:'in'|'out', amount:Number, note, person }
 };
 
