@@ -521,7 +521,8 @@ function openPersonSheet(name) {
   const col = personColor(name);
   const stat = (lbl, val) => `<div class="pstat"><div class="pstat-v">${val}</div><div class="pstat-l">${lbl}</div></div>`;
   const html = `
-    <h2><span style="color:${col}">👤</span> ${escapeHtml(name)}</h2>
+    <div class="sheet-head"><h2><span style="color:${col}">👤</span> ${escapeHtml(name)}</h2>
+      <button class="sheet-x" id="ps-close" aria-label="Chiudi">✕</button></div>
     <div class="pstats">
       ${stat('Totale dato', money(totalOut))}
       ${stat('Movimenti', out.length)}
@@ -536,7 +537,8 @@ function openPersonSheet(name) {
         <div class="amt ${m.type === 'in' ? 'pos' : 'neg'}">${m.type === 'in' ? '+' : '−'} ${money(m.amount)}</div>
       </div>`).join('') : emptyInline('Nessun movimento per questa persona')}
     </div>`;
-  const { sheet } = openSheet(html);
+  const { sheet, close } = openSheet(html);
+  $('#ps-close', sheet).addEventListener('click', close);
   sheet.querySelectorAll('[data-edit]').forEach((el) =>
     el.addEventListener('click', () => openMovementSheet(store.getMovement(el.dataset.edit))));
 }
@@ -627,12 +629,13 @@ function openSheet(innerHTML) {
   const root = $('#modal-root');
   const scrim = document.createElement('div');
   scrim.className = 'scrim';
-  scrim.innerHTML = `<div class="sheet"><div class="grab"></div>${innerHTML}</div>`;
+  scrim.innerHTML = `<div class="sheet"><button class="grab" aria-label="Chiudi"></button>${innerHTML}</div>`;
   root.appendChild(scrim);
   const sheet = scrim.querySelector('.sheet');
   requestAnimationFrame(() => scrim.classList.add('show'));
   const close = () => { scrim.classList.remove('show'); setTimeout(() => scrim.remove(), 340); };
   scrim.addEventListener('click', (e) => { if (e.target === scrim) close(); });
+  scrim.querySelector('.grab').addEventListener('click', close); // maniglia toccabile = chiudi
   return { scrim, sheet, close };
 }
 

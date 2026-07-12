@@ -181,8 +181,15 @@ input,select,textarea{font-family:inherit}
   padding:8px 18px calc(20px + var(--safe-b));box-shadow:0 -20px 60px rgba(0,0,0,.5);
   transform:translateY(100%);transition:transform .34s cubic-bezier(.22,1,.36,1);max-height:92vh;overflow:auto}
 .scrim.show .sheet{transform:none}
-.sheet .grab{width:38px;height:5px;border-radius:3px;background:var(--txt3);opacity:.5;margin:8px auto 12px}
+.sheet .grab{display:block;width:100%;border:0;background:transparent;padding:14px 0 10px;cursor:pointer}
+.sheet .grab::before{content:"";display:block;width:42px;height:5px;border-radius:3px;background:var(--txt3);opacity:.55;margin:0 auto;transition:opacity .15s}
+.sheet .grab:active::before{opacity:.9}
 .sheet h2{margin:0 0 16px;font-size:20px;font-weight:800;letter-spacing:-.4px}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.sheet-head h2{margin:0}
+.sheet-x{width:34px;height:34px;flex:0 0 auto;border-radius:50%;background:var(--card-hi);
+  border:1px solid var(--card-brd);color:var(--txt2);font-size:15px;font-weight:800;display:grid;place-items:center}
+.sheet-x:active{transform:scale(.92)}
 
 /* ---------- form ---------- */
 .field{margin-bottom:14px}
