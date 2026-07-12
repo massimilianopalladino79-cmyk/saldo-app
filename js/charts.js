@@ -130,7 +130,7 @@ export function groupedBars(data, opts = {}) {
     grid += `<text x="${W - padR}" y="${(yy - 4).toFixed(1)}" class="ch-ylabel" text-anchor="end">${esc(opts.fmtY ? opts.fmtY(v) : Math.round(v))}</text>`;
   }
 
-  let bars = '', xlab = '';
+  let bars = '', xlab = '', hits = '';
   const base = padT + ih;
   data.forEach((d, i) => {
     const cx = padL + i * groupW + groupW / 2;
@@ -141,6 +141,7 @@ export function groupedBars(data, opts = {}) {
     bars += roundedTopRect(x1, y(d.a), barW, hA, r, cA);
     bars += roundedTopRect(x2, y(d.b), barW, hB, r, cB);
     xlab += `<text x="${cx.toFixed(1)}" y="${H - 8}" class="ch-xlabel" text-anchor="middle">${esc(d.label)}</text>`;
+    hits += `<rect class="ch-hit" data-i="${i}" x="${(padL + i * groupW).toFixed(1)}" y="${padT}" width="${groupW.toFixed(1)}" height="${ih}" fill="transparent"/>`;
   });
 
   return `
@@ -148,6 +149,7 @@ export function groupedBars(data, opts = {}) {
     <g>${grid}</g>
     <g>${bars}</g>
     <g>${xlab}</g>
+    <g>${hits}</g>
   </svg>`;
 }
 

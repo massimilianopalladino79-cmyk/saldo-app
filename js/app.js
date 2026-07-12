@@ -14,7 +14,7 @@ const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 const ui = {
   tab: 'dashboard',
   filt: { q: '', cat: 'all', type: 'all', person: 'all' },
-  ana: { type: 'out', month: 'all', dim: 'cat' },
+  ana: { type: 'out', month: 'all', dim: 'cat', from: '', to: '' },
 };
 
 // ---------------- bootstrap ----------------
@@ -87,12 +87,12 @@ function renderDashboard() {
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-tip="area">
       <div class="card-t"><h3>Andamento saldo</h3><span class="muted">${months.length} mesi</span></div>
-      ${charts.areaChart(areaPts, { color: '#7C5CFF', fmtY: fmtShort })}
+      ${charts.areaChart(areaPts, { color: store.getSettings().accent || '#7C5CFF', fmtY: fmtShort })}
     </div>
 
-    <div class="card">
+    <div class="card" data-tip="bars">
       <div class="card-t"><h3>Entrate vs Uscite</h3><span class="muted">ultimi ${barsData.length || 0} mesi</span></div>
       ${charts.groupedBars(barsData, { fmtY: fmtShort })}
       <div class="legend">
@@ -108,6 +108,10 @@ function renderDashboard() {
     </div>
   `;
   wireCommon();
+  attachChartTip(view.querySelector('[data-tip="area"]'), (i) =>
+    areaPts[i] ? `<b>${escapeHtml(areaPts[i].label)}</b> ${money(areaPts[i].value)}` : '');
+  attachChartTip(view.querySelector('[data-tip="bars"]'), (i) =>
+    barsData[i] ? `<b>${escapeHtml(barsData[i].label)}</b> <span class="pos">+${money(barsData[i].a)}</span> <span class="neg">−${money(barsData[i].b)}</span>` : '');
 }
 
 // ---------------- MOVIMENTI ----------------
@@ -212,25 +216,26 @@ function rowHTML(m) {
 function renderAnalisi() {
   const months = store.monthlySummary();
   const a = ui.ana;
-  const ym = a.month === 'all' ? null : a.month;
+  const hasRange = !!(a.from || a.to);
+  const period = hasRange ? { from: a.from, to: a.to } : (a.month === 'all' ? null : a.month);
   const monthOpts = ['all', ...store.availableMonths()];
 
   // dimensione: categoria oppure persona ("Chi la usa")
   const items = a.dim === 'person'
-    ? store.personTotals(a.type, ym).map((r) => ({ key: r.person, label: r.person, total: r.total, color: personColor(r.person), icon: '👤' }))
-    : store.categoryTotals(a.type, ym).map((r) => ({ key: r.category, label: r.category, total: r.total, color: catMeta(r.category).color, icon: catMeta(r.category).icon }));
+    ? store.personTotals(a.type, period).map((r) => ({ key: r.person, label: r.person, total: r.total, color: personColor(r.person), icon: '👤' }))
+    : store.categoryTotals(a.type, period).map((r) => ({ key: r.category, label: r.category, total: r.total, color: catMeta(r.category).color, icon: catMeta(r.category).icon }));
   const tot = items.reduce((s, c) => s + c.total, 0);
   const slices = items.map((c) => ({ label: c.label, value: c.total, color: c.color }));
 
   const barsData = months.map((m) => ({ label: fmtMonthShort(m.ym), a: m.entrate, b: m.uscite }));
   const monthChips = monthOpts.map((mo) =>
-    `<button class="chip ${a.month === mo ? 'on' : ''}" data-anamonth="${mo}">${mo === 'all' ? 'Tutto' : fmtMonth(mo)}</button>`).join('');
+    `<button class="chip ${!hasRange && a.month === mo ? 'on' : ''}" data-anamonth="${mo}">${mo === 'all' ? 'Tutto' : fmtMonth(mo)}</button>`).join('');
 
   view.innerHTML = `
     <div class="page-head"><div><h1 class="page-title">Analisi</h1>
       <div class="page-sub">Dove vanno i tuoi soldi</div></div></div>
 
-    <div class="card">
+    <div class="card" data-tip="bars">
       <div class="card-t"><h3>Entrate vs Uscite</h3><span class="muted">per mese</span></div>
       ${charts.groupedBars(barsData, { fmtY: fmtShort })}
       <div class="legend">
@@ -251,6 +256,11 @@ function renderAnalisi() {
         <button data-anadim="person" class="${a.dim === 'person' ? 'on' : ''}" style="flex:1">Per persona</button>
       </div>
       <div class="chips" style="margin-bottom:8px">${monthChips}</div>
+      <div class="range-row">
+        <label>Da <input type="date" id="ana-from" value="${a.from}"></label>
+        <label>A <input type="date" id="ana-to" value="${a.to}"></label>
+        ${hasRange ? '<button class="range-clear" id="ana-clear">Pulisci</button>' : ''}
+      </div>
       ${charts.donut(slices, { centerLabel: a.type === 'out' ? 'Uscite' : 'Entrate', centerValue: fmtShort(tot) })}
       <div style="margin-top:14px">
         ${items.length ? items.map((c) => {
@@ -271,9 +281,15 @@ function renderAnalisi() {
   view.querySelectorAll('[data-anadim]').forEach((b) =>
     b.addEventListener('click', () => { a.dim = b.dataset.anadim; renderAnalisi(); }));
   view.querySelectorAll('[data-anamonth]').forEach((b) =>
-    b.addEventListener('click', () => { a.month = b.dataset.anamonth; renderAnalisi(); }));
+    b.addEventListener('click', () => { a.month = b.dataset.anamonth; a.from = ''; a.to = ''; renderAnalisi(); }));
+  const anaFrom = $('#ana-from'), anaTo = $('#ana-to'), anaClear = $('#ana-clear');
+  if (anaFrom) anaFrom.addEventListener('change', () => { a.from = anaFrom.value; a.month = 'all'; renderAnalisi(); });
+  if (anaTo) anaTo.addEventListener('change', () => { a.to = anaTo.value; a.month = 'all'; renderAnalisi(); });
+  if (anaClear) anaClear.addEventListener('click', () => { a.from = ''; a.to = ''; renderAnalisi(); });
   view.querySelectorAll('[data-persondetail]').forEach((el) =>
     el.addEventListener('click', () => openPersonSheet(el.dataset.persondetail)));
+  attachChartTip(view.querySelector('[data-tip="bars"]'), (i) =>
+    barsData[i] ? `<b>${escapeHtml(barsData[i].label)}</b> <span class="pos">+${money(barsData[i].a)}</span> <span class="neg">−${money(barsData[i].b)}</span>` : '');
   wireCommon();
 }
 
@@ -574,6 +590,33 @@ const ACCENTS = ['#7C5CFF', '#0A84FF', '#30D158', '#FF9F0A', '#FF375F', '#BF5AF2
 function applyAccent(color) {
   if (!color) return;
   document.documentElement.style.setProperty('--accent', color);
+}
+
+// Tooltip interattivo sui grafici: mostra il valore del punto/mese toccato.
+function attachChartTip(container, formatHtml) {
+  if (!container) return;
+  const svg = container.querySelector('svg.chart');
+  if (!svg) return;
+  container.style.position = 'relative';
+  let tip = container.querySelector('.chart-tip');
+  if (!tip) { tip = document.createElement('div'); tip.className = 'chart-tip'; container.appendChild(tip); }
+  const show = (i, el) => {
+    const html = formatHtml(i);
+    if (!html) { tip.classList.remove('show'); return; }
+    const er = el.getBoundingClientRect(), cr = container.getBoundingClientRect();
+    tip.innerHTML = html;
+    let left = er.left - cr.left + er.width / 2;
+    left = Math.max(46, Math.min(cr.width - 46, left));
+    tip.style.left = left + 'px';
+    tip.style.top = Math.max(2, er.top - cr.top - 4) + 'px';
+    tip.classList.add('show');
+  };
+  svg.querySelectorAll('.ch-hit').forEach((h) => {
+    const i = +h.dataset.i;
+    h.addEventListener('pointerenter', () => show(i, h));
+    h.addEventListener('pointerdown', () => show(i, h));
+  });
+  svg.addEventListener('pointerleave', () => tip.classList.remove('show'));
 }
 
 // ---------------- helpers ----------------

@@ -159,11 +159,11 @@ export function removePerson(name) {
 }
 
 // Totali per persona di un dato tipo ('in'|'out'), opz. filtrati per mese
-export function personTotals(type, ym = null) {
+export function personTotals(type, period = null) {
   const map = new Map();
   for (const m of state.movements) {
     if (m.type !== type || !m.person) continue;
-    if (ym && monthKey(m.date) !== ym) continue;
+    if (!matchPeriod(m.date, period)) continue;
     map.set(m.person, (map.get(m.person) || 0) + m.amount);
   }
   return [...map.entries()].map(([person, total]) => ({ person, total })).sort((a, b) => b.total - a.total);
@@ -232,12 +232,22 @@ export function balanceByMonth() {
   });
 }
 
-// Totali per categoria di un dato tipo ('in'|'out'), opzionalmente filtrati per mese
-export function categoryTotals(type, ym = null) {
+// period: null (tutto) | 'YYYY-MM' (un mese) | { from:'YYYY-MM-DD', to:'YYYY-MM-DD' }
+export function matchPeriod(dateISO, period) {
+  if (!period) return true;
+  if (typeof period === 'string') return monthKey(dateISO) === period;
+  const d = dateISO || '';
+  if (period.from && d < period.from) return false;
+  if (period.to && d > period.to) return false;
+  return true;
+}
+
+// Totali per categoria di un dato tipo ('in'|'out'), opzionalmente filtrati per periodo
+export function categoryTotals(type, period = null) {
   const map = new Map();
   for (const m of state.movements) {
     if (m.type !== type) continue;
-    if (ym && monthKey(m.date) !== ym) continue;
+    if (!matchPeriod(m.date, period)) continue;
     map.set(m.category, (map.get(m.category) || 0) + m.amount);
   }
   return [...map.entries()]

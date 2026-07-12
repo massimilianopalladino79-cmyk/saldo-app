@@ -270,3 +270,21 @@ input,select,textarea{font-family:inherit}
 .pstat{background:var(--card-hi);border:1px solid var(--card-brd);border-radius:14px;padding:12px 13px}
 .pstat-v{font-size:18px;font-weight:800;letter-spacing:-.3px}
 .pstat-l{font-size:12px;color:var(--txt2);font-weight:600;margin-top:2px}
+
+/* periodo personalizzato analisi */
+.range-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:2px 0 12px}
+.range-row label{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--txt2)}
+.range-row input[type=date]{padding:8px 10px;border-radius:12px;background:var(--card-hi);
+  border:1px solid var(--card-brd);color:var(--txt);font-size:13px;outline:none}
+.range-row input[type=date]:focus{border-color:var(--accent)}
+.range-clear{padding:8px 12px;border-radius:12px;background:rgba(255,69,58,.14);color:var(--red);
+  font-size:12.5px;font-weight:700;border:1px solid rgba(255,69,58,.3)}
+
+/* tooltip grafici interattivi */
+.chart-tip{position:absolute;pointer-events:none;transform:translate(-50%,-100%);
+  background:var(--txt);color:var(--bg);
+  padding:6px 10px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);opacity:0;transition:opacity .15s;z-index:5}
+.chart-tip.show{opacity:1}
+.chart-tip b{display:block;font-size:11px;opacity:.7;font-weight:700;margin-bottom:1px}
+.chart-tip .pos{color:var(--green)} .chart-tip .neg{color:var(--red)}
