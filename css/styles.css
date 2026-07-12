@@ -333,3 +333,9 @@ input,select,textarea{font-family:inherit}
 .key:active{transform:scale(.92);background:var(--card-hi)}
 .key-del{font-size:22px}
 .lock-err{color:var(--red);font-weight:700;font-size:14px;margin-top:18px;min-height:20px}
+/* schermata di login */
+.lock-inner.login{max-width:360px;text-align:left}
+.lock-inner.login .lock-ic,.lock-inner.login h2,.lock-inner.login>.page-sub{text-align:center}
+.lock-inner.login .field{margin-bottom:14px}
+.lock-inner.login .btn{margin-top:4px}
+.lock-inner.login .lock-err{text-align:center}

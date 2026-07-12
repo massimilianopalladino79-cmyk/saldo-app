@@ -1,5 +1,5 @@
 ﻿// sw.js - service worker: rete-prima per i file dell'app, cache come fallback offline
-const CACHE = 'saldo-v19';
+const CACHE = 'saldo-v20';
 const ASSETS = [
   './',
   'index.html',
@@ -12,6 +12,7 @@ const ASSETS = [
   'js/format.js',
   'js/xlsx-io.js',
   'js/seed.js',
+  'js/firebase.js',
   'vendor/xlsx.full.min.js',
   'icons/icon-192.png',
   'icons/icon-512.png',
@@ -64,8 +65,16 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // altre origini: cache-first
-  e.respondWith(caches.match(req).then((c) => c || fetch(req)));
+  // SDK Firebase (gstatic): cache-first (statico, versionato)
+  if (new URL(req.url).hostname === 'www.gstatic.com') {
+    e.respondWith(caches.match(req).then((c) => c || fetch(req).then((res) => {
+      const copy = res.clone();
+      caches.open(CACHE).then((c2) => c2.put(req, copy)).catch(() => {});
+      return res;
+    })));
+    return;
+  }
+  // tutto il resto (Firestore/Auth su googleapis...): lascia gestire al browser
 });
 
 

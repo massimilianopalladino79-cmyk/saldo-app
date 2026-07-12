@@ -1,159 +1,141 @@
-// store.js — livello dati: movimenti, saldo progressivo, riepiloghi.
-// Persistenza su localStorage (offline, stabile). Pattern osservabile.
-
-import { monthKey, newId } from './format.js';
+// store.js — livello dati.
+// Movimenti + impostazioni condivise: Firestore (cloud, in tempo reale).
+// Preferenze locali del dispositivo (tema, colore, PIN): localStorage.
+import { monthKey } from './format.js';
 import { SEED } from './seed.js';
+import {
+  db, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc, getDocs, writeBatch,
+} from './firebase.js';
 
-const KEY = 'saldoapp:v1';
-const SEED_FLAG = 'saldoapp:seeded';
-
-const DATA_VERSION = 2;
-// Date dedotte (regola: data del movimento precedente nel file) per i 5 movimenti
-// che nell'Excel erano senza data. Chiavi = ID stabili del seed.
-const DATE_FIX = { x1: '2026-02-28', x3: '2026-03-10', x16: '2026-04-18', x17: '2026-04-18', x24: '2026-05-09' };
 const DEFAULT_PEOPLE = ['Cecio', 'Gaia', 'Max', 'Evelyn'];
-// Nomi-persona usati come categoria nei dati reali: vanno copiati in "Chi spende"
-const PERSON_NAMES = ['Cecio', 'Gaia', 'Max', 'Evelyn', 'Ivan', 'Paola', 'Jenny', 'Stefano'];
+const LOCAL_KEY = 'saldoapp:local';
+const LOCAL_KEYS = new Set(['tema', 'accent', 'pin', 'pinLen']); // preferenze per dispositivo
 
-const DEFAULT_STATE = {
-  // niente dataVersion qui: i dati già presenti (senza versione) devono risultare v0
-  // così la migrazione parte. La versione viene impostata da migrate()/seed.
-  settings: { saldoIniziale: 0, valuta: 'EUR', tema: 'auto', people: [...DEFAULT_PEOPLE], accent: '#7C5CFF', budget: 0, pin: '', pinLen: 0 },
-  movements: [], // { id, date:'YYYY-MM-DD', description, category, type:'in'|'out', amount:Number, note, person }
+function cloudDefaults() {
+  return { saldoIniziale: 0, valuta: 'EUR', people: [...DEFAULT_PEOPLE], budget: 0, dataVersion: 2 };
+}
+function localDefaults() {
+  return { tema: 'auto', accent: '#7C5CFF', pin: '', pinLen: 0 };
+}
+
+let state = {
+  cloud: cloudDefaults(),
+  local: localDefaults(),
+  movements: [],
 };
-
-let state = structuredClone(DEFAULT_STATE);
+let cloudEmpty = true;         // true finché non esiste settings/main
 const listeners = new Set();
 
-export function load() {
+// ---- preferenze locali ----
+export function loadLocal() {
   try {
-    const raw = localStorage.getItem(KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      state = {
-        settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) },
-        movements: Array.isArray(parsed.movements) ? parsed.movements : [],
-      };
-    } else if (!localStorage.getItem(SEED_FLAG) && SEED && Array.isArray(SEED.movements) && SEED.movements.length) {
-      // primo avvio in assoluto: precarica i dati importati dall'Excel (una volta sola)
-      state = {
-        settings: { ...DEFAULT_STATE.settings, ...(SEED.settings || {}) },
-        movements: SEED.movements.map((m) => ({ ...m, id: m.id || newId() })),
-      };
-      localStorage.setItem(SEED_FLAG, '1');
-      persist();
-    }
-  } catch (e) {
-    console.error('Errore lettura dati locali, riparto da stato vuoto:', e);
-    state = structuredClone(DEFAULT_STATE);
-  }
-  if (migrate()) persist(); // aggiorna dati già presenti sul dispositivo
-  return state;
+    const raw = localStorage.getItem(LOCAL_KEY);
+    if (raw) state.local = { ...localDefaults(), ...JSON.parse(raw) };
+  } catch (e) { console.error('Errore preferenze locali:', e); }
+  return state.local;
 }
-
-// Migrazioni idempotenti sui dati esistenti (installazioni già attive).
-function migrate() {
-  const from = state.settings.dataVersion || 0;
-  if (from >= DATA_VERSION) return false;
-  if (from < 1) {
-    for (const m of state.movements) {
-      if (m.category === 'Francy') m.category = 'Cecio';        // rinomina persona
-      if (!m.date && DATE_FIX[m.id]) m.date = DATE_FIX[m.id];   // date dedotte
-      if (m.person == null) m.person = '';                      // nuovo campo
-    }
-    if (!Array.isArray(state.settings.people) || !state.settings.people.length) {
-      state.settings.people = [...DEFAULT_PEOPLE];
-    }
-  }
-  if (from < 2) {
-    // "Chi spende": copia dal campo Categoria i nomi-persona (Evelyn, Max, ...)
-    assignFromCategory(PERSON_NAMES);
-  }
-  state.settings.dataVersion = DATA_VERSION;
-  return true;
+function persistLocal() {
+  try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state.local)); } catch (e) { console.error(e); }
 }
+export function getLocal() { return state.local; }
 
-// Assegna "Chi spende" = categoria, per i movimenti la cui categoria è un nome
-// nell'elenco `names` e che non hanno ancora una persona. Aggiorna la lista persone.
-function assignFromCategory(names) {
-  const set = new Set(names);
-  let n = 0;
-  for (const m of state.movements) {
-    if (!m.person && set.has(m.category)) { m.person = m.category; n++; }
-  }
-  if (!Array.isArray(state.settings.people)) state.settings.people = [];
-  for (const nm of names) if (!state.settings.people.includes(nm)) state.settings.people.push(nm);
-  return n;
-}
-
-// Versione pubblica (pulsante in Impostazioni): usa la lista persone corrente.
-export function assignPersonFromCategory(names) {
-  const list = Array.isArray(names) && names.length ? names : getPeople();
-  const n = assignFromCategory(list);
-  emit();
-  return n;
-}
-
-function persist() {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(state));
-  } catch (e) {
-    console.error('Errore salvataggio dati locali:', e);
-    throw e;
-  }
-}
-
+// ---- osservabilità ----
 export function onChange(cb) { listeners.add(cb); return () => listeners.delete(cb); }
-function emit() { persist(); listeners.forEach((cb) => cb(state)); }
+function emit() { listeners.forEach((cb) => cb(state)); }
 
 // ---- accessi ----
-export function getState() { return state; }
-export function getSettings() { return state.settings; }
+// getSettings(): impostazioni condivise (cloud) + preferenze locali unite.
+export function getSettings() { return { ...state.cloud, ...state.local }; }
+export function getState() { return { movements: state.movements, settings: getSettings() }; }
+export function cloudIsEmpty() { return cloudEmpty; }
 
-export function setSetting(key, value) {
-  state.settings[key] = value;
-  emit();
+// ---- realtime cloud ----
+export function initCloud() {
+  return new Promise((resolve) => {
+    let gotS = false, gotM = false;
+    const done = () => { if (gotS && gotM) resolve(); };
+    onSnapshot(doc(db, 'settings', 'main'), (snap) => {
+      if (snap.exists()) { cloudEmpty = false; state.cloud = { ...cloudDefaults(), ...snap.data() }; }
+      else { cloudEmpty = true; state.cloud = cloudDefaults(); }
+      gotS = true; emit(); done();
+    }, (err) => { console.error('settings snapshot:', err); gotS = true; done(); });
+
+    onSnapshot(collection(db, 'movements'), (snap) => {
+      state.movements = snap.docs.map((d) => ({ ...normalize(d.data()), id: d.id }));
+      gotM = true; emit(); done();
+    }, (err) => { console.error('movements snapshot:', err); gotM = true; done(); });
+  });
 }
 
-// ---- CRUD movimenti ----
-export function addMovement(m) {
-  const mov = normalize(m);
-  mov.id = newId();
-  state.movements.push(mov);
-  emit();
-  return mov;
+// ---- impostazioni ----
+// setSetting: preferenza locale -> localStorage; impostazione condivisa -> Firestore (solo admin).
+export async function setSetting(key, value) {
+  if (LOCAL_KEYS.has(key)) {
+    state.local[key] = value; persistLocal(); emit(); return;
+  }
+  state.cloud[key] = value; emit(); // ottimistico
+  try { await setDoc(doc(db, 'settings', 'main'), { [key]: value }, { merge: true }); }
+  catch (e) { console.error('setSetting cloud (permesso negato?):', e); }
 }
 
-export function updateMovement(id, patch) {
-  const i = state.movements.findIndex((x) => x.id === id);
-  if (i === -1) return null;
-  state.movements[i] = normalize({ ...state.movements[i], ...patch, id });
-  emit();
-  return state.movements[i];
+// ---- CRUD movimenti (Firestore) ----
+export async function addMovement(m) {
+  return addDoc(collection(db, 'movements'), cleanMov(m));
 }
-
-export function deleteMovement(id) {
-  const before = state.movements.length;
-  state.movements = state.movements.filter((x) => x.id !== id);
-  if (state.movements.length !== before) emit();
+export async function updateMovement(id, patch) {
+  const cur = getMovement(id) || {};
+  return updateDoc(doc(db, 'movements', id), cleanMov({ ...cur, ...patch }));
 }
-
+export async function deleteMovement(id) {
+  return deleteDoc(doc(db, 'movements', id));
+}
 export function getMovement(id) {
   return state.movements.find((x) => x.id === id) || null;
 }
 
-// Sostituzione completa (usata dall'import Excel)
-export function replaceAll({ movements, settings }) {
-  state.movements = (movements || []).map(normalize).map((m) => ({ ...m, id: m.id || newId() }));
-  if (settings) state.settings = { ...state.settings, ...settings };
-  emit();
+// Import Excel (admin): sostituisce tutti i movimenti + impostazioni condivise.
+export async function replaceAll({ movements, settings }) {
+  await wipeAndWrite(movements || [], settings || null);
+}
+// Reset (admin): svuota i movimenti (mantiene le impostazioni).
+export async function clearAll() {
+  const existing = await getDocs(collection(db, 'movements'));
+  const batch = writeBatch(db);
+  existing.forEach((d) => batch.delete(d.ref));
+  await batch.commit();
 }
 
-export function clearAll() {
-  state.movements = [];
-  emit();
+// Migrazione una-tantum: carica nel cloud i dati locali del vecchio storage (o il seed).
+export async function migrateLocalToCloud() {
+  let local = null;
+  try { local = JSON.parse(localStorage.getItem('saldoapp:v1') || 'null'); } catch { /* ignore */ }
+  const movements = (local && Array.isArray(local.movements) && local.movements.length)
+    ? local.movements : (SEED && SEED.movements) || [];
+  const settings = (local && local.settings) ? local.settings : (SEED && SEED.settings) || {};
+  await wipeAndWrite(movements, settings);
 }
 
+async function wipeAndWrite(movements, settings) {
+  const existing = await getDocs(collection(db, 'movements'));
+  const batch = writeBatch(db);
+  existing.forEach((d) => batch.delete(d.ref));
+  for (const m of movements) batch.set(doc(collection(db, 'movements')), cleanMov(m));
+  const s = settings || {};
+  batch.set(doc(db, 'settings', 'main'), {
+    saldoIniziale: Number(s.saldoIniziale) || 0,
+    valuta: s.valuta || 'EUR',
+    people: Array.isArray(s.people) && s.people.length ? s.people : [...DEFAULT_PEOPLE],
+    budget: Number(s.budget) || 0,
+    dataVersion: 2,
+  }, { merge: true });
+  await batch.commit();
+}
+
+function cleanMov(m) {
+  const n = normalize(m);
+  delete n.id;
+  return n;
+}
 function normalize(m) {
   const type = m.type === 'out' ? 'out' : 'in';
   return {
@@ -168,36 +150,35 @@ function normalize(m) {
   };
 }
 
-// ---- persone ("Chi la usa" / a chi è destinata la spesa) ----
+// ---- persone ("Chi spende") — impostazione condivisa (solo admin scrive) ----
 export function getPeople() {
-  return Array.isArray(state.settings.people) ? state.settings.people : [];
+  return Array.isArray(state.cloud.people) ? state.cloud.people : [];
 }
-export function addPerson(name) {
+export async function addPerson(name) {
   name = (name || '').toString().trim();
   if (!name) return null;
-  if (!Array.isArray(state.settings.people)) state.settings.people = [];
-  if (!state.settings.people.includes(name)) { state.settings.people.push(name); emit(); }
+  const people = getPeople();
+  if (people.includes(name)) return name;
+  await setSetting('people', [...people, name]);
   return name;
 }
-export function removePerson(name) {
-  if (!Array.isArray(state.settings.people)) return;
-  state.settings.people = state.settings.people.filter((p) => p !== name);
-  emit();
+export async function removePerson(name) {
+  await setSetting('people', getPeople().filter((p) => p !== name));
 }
-
-// Totali per persona di un dato tipo ('in'|'out'), opz. filtrati per mese
-export function personTotals(type, period = null) {
-  const map = new Map();
+// Assegna "Chi spende" = categoria per i movimenti la cui categoria è un nome persona.
+export async function assignPersonFromCategory(names) {
+  const list = Array.isArray(names) && names.length ? names : getPeople();
+  const set = new Set(list);
+  const batch = writeBatch(db);
+  let n = 0;
   for (const m of state.movements) {
-    if (m.type !== type || !m.person) continue;
-    if (!matchPeriod(m.date, period)) continue;
-    map.set(m.person, (map.get(m.person) || 0) + m.amount);
+    if (!m.person && set.has(m.category)) { batch.update(doc(db, 'movements', m.id), { person: m.category }); n++; }
   }
-  return [...map.entries()].map(([person, total]) => ({ person, total })).sort((a, b) => b.total - a.total);
+  if (n) await batch.commit();
+  return n;
 }
 
-// ---- ordinamento & saldo progressivo ----
-// Ordina per data crescente; a parità di data mantiene l'ordine d'inserimento.
+// ================= calcoli (invariati) =================
 export function getMovementsSorted() {
   return state.movements
     .map((m, idx) => ({ m, idx }))
@@ -209,9 +190,8 @@ export function getMovementsSorted() {
     .map((x) => x.m);
 }
 
-// Movimenti con saldo progressivo (dal più vecchio al più recente)
 export function withRunningBalance() {
-  let bal = Number(state.settings.saldoIniziale) || 0;
+  let bal = Number(state.cloud.saldoIniziale) || 0;
   return getMovementsSorted().map((m) => {
     bal += m.type === 'in' ? m.amount : -m.amount;
     return { ...m, balance: bal };
@@ -219,22 +199,16 @@ export function withRunningBalance() {
 }
 
 export function currentBalance() {
-  const start = Number(state.settings.saldoIniziale) || 0;
-  return state.movements.reduce(
-    (acc, m) => acc + (m.type === 'in' ? m.amount : -m.amount),
-    start
-  );
+  const start = Number(state.cloud.saldoIniziale) || 0;
+  return state.movements.reduce((acc, m) => acc + (m.type === 'in' ? m.amount : -m.amount), start);
 }
 
 export function totals(movements = state.movements) {
   let entrate = 0, uscite = 0;
-  for (const m of movements) {
-    if (m.type === 'in') entrate += m.amount; else uscite += m.amount;
-  }
+  for (const m of movements) { if (m.type === 'in') entrate += m.amount; else uscite += m.amount; }
   return { entrate, uscite, netto: entrate - uscite };
 }
 
-// Riepilogo per mese, ordinato cronologicamente
 export function monthlySummary() {
   const map = new Map();
   for (const m of state.movements) {
@@ -244,22 +218,15 @@ export function monthlySummary() {
     const row = map.get(k);
     if (m.type === 'in') row.entrate += m.amount; else row.uscite += m.amount;
   }
-  return [...map.values()]
-    .map((r) => ({ ...r, netto: r.entrate - r.uscite }))
-    .sort((a, b) => (a.ym < b.ym ? -1 : 1));
+  return [...map.values()].map((r) => ({ ...r, netto: r.entrate - r.uscite })).sort((a, b) => (a.ym < b.ym ? -1 : 1));
 }
 
-// Serie del saldo progressivo aggregata a fine mese (per il grafico ad area)
 export function balanceByMonth() {
   const months = monthlySummary();
-  let bal = Number(state.settings.saldoIniziale) || 0;
-  return months.map((r) => {
-    bal += r.netto;
-    return { ym: r.ym, balance: bal };
-  });
+  let bal = Number(state.cloud.saldoIniziale) || 0;
+  return months.map((r) => { bal += r.netto; return { ym: r.ym, balance: bal }; });
 }
 
-// period: null (tutto) | 'YYYY-MM' (un mese) | { from:'YYYY-MM-DD', to:'YYYY-MM-DD' }
 export function matchPeriod(dateISO, period) {
   if (!period) return true;
   if (typeof period === 'string') return monthKey(dateISO) === period;
@@ -269,7 +236,6 @@ export function matchPeriod(dateISO, period) {
   return true;
 }
 
-// Totali per categoria di un dato tipo ('in'|'out'), opzionalmente filtrati per periodo
 export function categoryTotals(type, period = null) {
   const map = new Map();
   for (const m of state.movements) {
@@ -277,18 +243,21 @@ export function categoryTotals(type, period = null) {
     if (!matchPeriod(m.date, period)) continue;
     map.set(m.category, (map.get(m.category) || 0) + m.amount);
   }
-  return [...map.entries()]
-    .map(([category, total]) => ({ category, total }))
-    .sort((a, b) => b.total - a.total);
+  return [...map.entries()].map(([category, total]) => ({ category, total })).sort((a, b) => b.total - a.total);
 }
 
-// Elenco dei mesi presenti nei dati (per i selettori periodo)
-export function availableMonths() {
-  return monthlySummary().map((r) => r.ym);
+export function personTotals(type, period = null) {
+  const map = new Map();
+  for (const m of state.movements) {
+    if (m.type !== type || !m.person) continue;
+    if (!matchPeriod(m.date, period)) continue;
+    map.set(m.person, (map.get(m.person) || 0) + m.amount);
+  }
+  return [...map.entries()].map(([person, total]) => ({ person, total })).sort((a, b) => b.total - a.total);
 }
 
-// "Quanto ho dato a ciascuno nel tempo": per ogni persona, importi per mese
-// (monthly) e cumulato (cumulative), sull'asse di tutti i mesi presenti.
+export function availableMonths() { return monthlySummary().map((r) => r.ym); }
+
 export function personOverTime(type = 'out') {
   const months = monthlySummary().map((r) => r.ym);
   const idx = new Map(months.map((m, i) => [m, i]));
@@ -301,8 +270,7 @@ export function personOverTime(type = 'out') {
     map.get(m.person)[idx.get(k)] += m.amount;
   }
   const people = [...map.entries()].map(([person, monthly]) => {
-    let run = 0;
-    const cumulative = monthly.map((v) => (run += v));
+    let run = 0; const cumulative = monthly.map((v) => (run += v));
     return { person, monthly, cumulative, total: run };
   }).sort((a, b) => b.total - a.total);
   return { months, people };

@@ -2,6 +2,7 @@
 import * as store from './store.js';
 import * as charts from './charts.js';
 import * as io from './xlsx-io.js';
+import { auth, ADMIN_EMAIL, signInWithEmailAndPassword, signOut, onAuthStateChanged } from './firebase.js';
 import {
   fmtCurrency, fmtShort, fmtDate, fmtMonth, fmtMonthShort,
   todayISO, monthKey, parseAmount, CATEGORIES, catMeta, personColor,
@@ -10,7 +11,9 @@ import {
 const $ = (s, r = document) => r.querySelector(s);
 const view = $('#view');
 let balanceHidden = true; // privacy: saldo nascosto a ogni apertura
-const APP_VERSION = 'v19';
+const APP_VERSION = 'v20';
+let currentUser = null;
+let canEdit = false;      // true solo per l'amministratore
 const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 
 const ui = {
@@ -20,7 +23,7 @@ const ui = {
 };
 
 // ---------------- bootstrap ----------------
-store.load();
+store.loadLocal();
 applyTheme(store.getSettings().tema);
 applyAccent(store.getSettings().accent);
 registerSW();
@@ -34,8 +37,24 @@ function startApp() {
   store.onChange(() => render());
 }
 
-if (store.getSettings().pin) showLock();
-else startApp();
+let cloudInited = false;
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+  if (!user) { appStarted = false; cloudInited = false; showLoginScreen(); return; }
+  canEdit = (user.email || '').toLowerCase() === ADMIN_EMAIL.toLowerCase();
+  removeOverlay('login');
+  if (!cloudInited) {
+    cloudInited = true;
+    showLoadingScreen('Caricamento dei dati…');
+    await store.initCloud();
+    if (canEdit && store.cloudIsEmpty()) {
+      setLoadingText('Preparo i dati condivisi…');
+      try { await store.migrateLocalToCloud(); } catch (e) { console.error('Migrazione:', e); }
+    }
+    removeOverlay('loading');
+  }
+  if (store.getLocal().pin) showLock(); else startApp();
+});
 
 // ---------------- chrome (tabbar + fab) ----------------
 function wireChrome() {
@@ -372,6 +391,14 @@ function renderImpostazioni() {
       <div class="page-sub">${n} movimenti · ${s.valuta}</div></div></div>
 
     <div class="card">
+      <div class="card-t"><h3>Account</h3><span class="muted">${canEdit ? 'Amministratore' : 'Solo lettura'}</span></div>
+      <div class="setrow" style="padding-top:0"><div class="s-ic">${canEdit ? '👑' : '👤'}</div>
+        <div class="s-main"><div class="s-t">${escapeHtml((currentUser && currentUser.email) || '')}</div>
+          <div class="s-d">${canEdit ? 'Vedi, aggiungi, modifica ed elimina' : 'Puoi vedere e aggiungere spese'}</div></div></div>
+      <button class="btn btn-ghost" id="do-logout">Esci</button>
+    </div>
+
+    ${canEdit ? `<div class="card">
       <div class="card-t"><h3>Conto</h3></div>
       <div class="field"><label>Saldo iniziale</label>
         <input id="set-saldo" inputmode="decimal" value="${s.saldoIniziale}"></div>
@@ -382,7 +409,7 @@ function renderImpostazioni() {
       <div class="field"><label>Budget mensile di spesa (0 = disattivato)</label>
         <input id="set-budget" inputmode="decimal" value="${s.budget || 0}"></div>
       <button class="btn btn-primary" id="save-conto">Salva</button>
-    </div>
+    </div>` : ''}
 
     <div class="card">
       <div class="card-t"><h3>Aspetto</h3></div>
@@ -395,7 +422,7 @@ function renderImpostazioni() {
       </div>
     </div>
 
-    <div class="card">
+    ${canEdit ? `<div class="card">
       <div class="card-t"><h3>Persone · Chi spende</h3><span class="muted">${(s.people || []).length}</span></div>
       <div class="peoplepick" id="set-people">
         ${(s.people || []).map((p) => `<span class="pchip" style="color:${personColor(p)}">👤 ${escapeHtml(p)}<button class="prm" data-rmperson="${escapeAttr(p)}" aria-label="Rimuovi">×</button></span>`).join('')}
@@ -403,7 +430,7 @@ function renderImpostazioni() {
       </div>
       <button class="btn btn-ghost" id="set-assign" style="margin-top:12px">Assegna "Chi spende" dalle categorie</button>
       <div class="page-sub" style="margin-top:8px">Seleziona chi spende quando aggiungi/modifichi una spesa. Il pulsante assegna in automatico i movimenti la cui categoria è uno di questi nomi.</div>
-    </div>
+    </div>` : ''}
 
     <div class="card">
       <div class="card-t"><h3>Riepilogo del mese</h3><span class="muted">immagine</span></div>
@@ -425,9 +452,9 @@ function renderImpostazioni() {
     <div class="card">
       <div class="card-t"><h3>Excel & dati</h3></div>
       <div class="setlist">
-        <div class="setrow" id="do-import"><div class="s-ic">📥</div>
+        ${canEdit ? `<div class="setrow" id="do-import"><div class="s-ic">📥</div>
           <div class="s-main"><div class="s-t">Importa da Excel</div><div class="s-d">Carica il file .xlsx del template</div></div>
-          <div class="chev">›</div></div>
+          <div class="chev">›</div></div>` : ''}
         <div class="setrow" id="do-export"><div class="s-ic">📤</div>
           <div class="s-main"><div class="s-t">Esporta in Excel</div><div class="s-d">Stesso formato del template</div></div>
           <div class="chev">›</div></div>
@@ -442,12 +469,14 @@ function renderImpostazioni() {
       <div class="card-t"><h3>App</h3><span class="muted" id="ver-badge">${APP_VERSION}</span></div>
       <div class="page-sub" id="ver-line" style="margin:-2px 0 12px">Controllo aggiornamenti…</div>
       <button class="btn btn-ghost" id="app-update">🔄 Aggiorna all'ultima versione</button>
-      <div class="btn-row"><button class="btn btn-danger" id="do-reset">Elimina tutti i dati</button></div>
+      ${canEdit ? `<div class="btn-row"><button class="btn btn-danger" id="do-reset">Elimina tutti i dati</button></div>` : ''}
     </div>
     <div class="page-sub" style="text-align:center">Saldo · gestione entrate/uscite</div>
   `;
 
-  $('#save-conto').addEventListener('click', () => {
+  $('#do-logout').addEventListener('click', doLogout);
+  const saveConto = $('#save-conto');
+  if (saveConto) saveConto.addEventListener('click', () => {
     // leggi TUTTI i valori prima di salvare: il primo setSetting ri-disegna la
     // schermata e ricreerebbe i campi, facendo perdere gli altri valori.
     const saldoIniziale = parseAmount($('#set-saldo').value);
@@ -485,37 +514,46 @@ function renderImpostazioni() {
     toast('Blocco disattivato', 'ok');
   });
 
-  $('#set-padd').addEventListener('click', () => {
+  const setPadd = $('#set-padd');
+  if (setPadd) setPadd.addEventListener('click', async () => {
     const name = (window.prompt('Nuova persona:') || '').trim();
-    if (name) store.addPerson(name); // emette change -> ri-render automatico
+    if (name) await store.addPerson(name);
   });
   view.querySelectorAll('[data-rmperson]').forEach((b) =>
     b.addEventListener('click', () => store.removePerson(b.dataset.rmperson)));
-  $('#set-assign').addEventListener('click', () => {
-    const n = store.assignPersonFromCategory(store.getPeople());
-    toast(n ? `Assegnati ${n} movimenti` : 'Nessun movimento da assegnare', 'ok');
+  const setAssign = $('#set-assign');
+  if (setAssign) setAssign.addEventListener('click', async () => {
+    try { const n = await store.assignPersonFromCategory(store.getPeople());
+      toast(n ? `Assegnati ${n} movimenti` : 'Nessun movimento da assegnare', 'ok');
+    } catch (e) { toast(permErr(e), 'err'); }
   });
 
   const fileInput = $('#file-input');
-  $('#do-import').addEventListener('click', () => fileInput.click());
-  fileInput.addEventListener('change', async () => {
-    const file = fileInput.files[0];
-    if (!file) return;
-    try {
-      const { movements, settings } = await io.importXlsx(file);
-      openConfirm(`Importare ${movements.length} movimenti?`,
-        'I dati attuali verranno sostituiti.', () => {
-          store.replaceAll({ movements, settings });
-          toast(`Importati ${movements.length} movimenti`, 'ok');
-        });
-    } catch (e) {
-      toast('Import fallito: ' + e.message, 'err');
-    } finally { fileInput.value = ''; }
-  });
+  const doImport = $('#do-import');
+  if (doImport) {
+    doImport.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      try {
+        const { movements, settings } = await io.importXlsx(file);
+        openConfirm(`Importare ${movements.length} movimenti?`,
+          'I dati attuali verranno sostituiti.', async () => {
+            try { await store.replaceAll({ movements, settings }); toast(`Importati ${movements.length} movimenti`, 'ok'); }
+            catch (e) { toast(permErr(e), 'err'); }
+          });
+      } catch (e) {
+        toast('Import fallito: ' + e.message, 'err');
+      } finally { fileInput.value = ''; }
+    });
+  }
   $('#do-export').addEventListener('click', () => { try { io.exportXlsx(); toast('Excel esportato', 'ok'); } catch (e) { toast('Errore export: ' + e.message, 'err'); } });
   $('#do-csv').addEventListener('click', () => { try { io.exportCsv(); toast('CSV esportato', 'ok'); } catch (e) { toast('Errore: ' + e.message, 'err'); } });
-  $('#do-reset').addEventListener('click', () =>
-    openConfirm('Eliminare tutti i dati?', 'Operazione non reversibile.', () => { store.clearAll(); toast('Dati eliminati', 'ok'); }, true));
+  const doReset = $('#do-reset');
+  if (doReset) doReset.addEventListener('click', () =>
+    openConfirm('Eliminare tutti i dati?', 'Operazione non reversibile.', async () => {
+      try { await store.clearAll(); toast('Dati eliminati', 'ok'); } catch (e) { toast(permErr(e), 'err'); }
+    }, true));
   // controllo aggiornamenti: confronta la versione installata con quella online
   (async () => {
     const line = $('#ver-line'), badge = $('#ver-badge');
@@ -595,12 +633,13 @@ function openPersonSheet(name) {
 // ---------------- sheet aggiungi/modifica ----------------
 function openMovementSheet(mov) {
   const edit = !!mov;
+  const readOnly = edit && !canEdit; // il non-admin può aggiungere ma non modificare/eliminare
   const m = mov || { type: 'out', amount: '', description: '', category: 'Altro', date: todayISO(), note: '', person: '' };
   let type = m.type;
   let person = m.person || '';
 
   const html = `
-    <h2>${edit ? 'Modifica movimento' : 'Nuovo movimento'}</h2>
+    <h2>${readOnly ? 'Dettaglio movimento' : edit ? 'Modifica movimento' : 'Nuovo movimento'}</h2>
     <div class="typeswitch">
       <button data-t="in" class="in ${type === 'in' ? 'on' : ''}">＋ Entrata</button>
       <button data-t="out" class="out ${type === 'out' ? 'on' : ''}">－ Uscita</button>
@@ -619,10 +658,12 @@ function openMovementSheet(mov) {
       <div class="peoplepick" id="f-people"></div></div>
     <div class="field"><label>Note (facoltative)</label>
       <textarea id="f-note" placeholder="Aggiungi una nota…">${escapeHtml(m.note)}</textarea></div>
-    <button class="btn btn-primary" id="f-save">${edit ? 'Salva modifiche' : 'Aggiungi movimento'}</button>
-    ${edit ? `<div class="btn-row"><button class="btn btn-danger" id="f-del">Elimina</button></div>` : ''}
+    ${readOnly ? '' : `<button class="btn btn-primary" id="f-save">${edit ? 'Salva modifiche' : 'Aggiungi movimento'}</button>`}
+    ${edit && canEdit ? `<div class="btn-row"><button class="btn btn-danger" id="f-del">Elimina</button></div>` : ''}
+    ${readOnly ? `<div class="page-sub" style="text-align:center;margin-top:8px">Solo l'amministratore può modificare o eliminare.</div>` : ''}
   `;
   const { sheet, close } = openSheet(html);
+  if (readOnly) sheet.querySelectorAll('input, select, textarea, [data-t], #f-people').forEach((el) => { el.disabled = true; el.style.pointerEvents = 'none'; el.style.opacity = '0.85'; });
 
   sheet.querySelectorAll('[data-t]').forEach((b) =>
     b.addEventListener('click', () => {
@@ -640,17 +681,19 @@ function openMovementSheet(mov) {
     peopleBox.innerHTML =
       chip('', 'Nessuno') +
       people.map((p) => chip(p, `👤 ${escapeHtml(p)}`)).join('') +
-      `<button type="button" class="pchip add" id="p-add">＋ Nuovo</button>`;
+      (canEdit ? `<button type="button" class="pchip add" id="p-add">＋ Nuovo</button>` : '');
     peopleBox.querySelectorAll('[data-person]').forEach((b) =>
       b.addEventListener('click', () => { person = b.dataset.person; renderPeople(); }));
-    $('#p-add', peopleBox).addEventListener('click', () => {
+    const addBtn = $('#p-add', peopleBox);
+    if (addBtn) addBtn.addEventListener('click', async () => {
       const name = (window.prompt('Nome della persona che spende:') || '').trim();
-      if (name) { store.addPerson(name); person = name; renderPeople(); }
+      if (name) { await store.addPerson(name); person = name; renderPeople(); }
     });
   }
   renderPeople();
 
-  $('#f-save', sheet).addEventListener('click', () => {
+  const saveBtn = $('#f-save', sheet);
+  if (saveBtn) saveBtn.addEventListener('click', async () => {
     const amount = parseAmount($('#f-amount', sheet).value);
     if (!amount) { toast('Inserisci un importo', 'err'); return; }
     const data = {
@@ -662,13 +705,19 @@ function openMovementSheet(mov) {
       note: $('#f-note', sheet).value,
       person,
     };
-    if (edit) { store.updateMovement(m.id, data); toast('Movimento aggiornato', 'ok'); }
-    else { store.addMovement(data); toast('Movimento aggiunto', 'ok'); }
-    close();
+    saveBtn.disabled = true;
+    try {
+      if (edit) { await store.updateMovement(m.id, data); toast('Movimento aggiornato', 'ok'); }
+      else { await store.addMovement(data); toast('Movimento aggiunto', 'ok'); }
+      close();
+    } catch (e) { saveBtn.disabled = false; toast(permErr(e), 'err'); }
   });
 
-  if (edit) $('#f-del', sheet).addEventListener('click', () =>
-    openConfirm('Eliminare questo movimento?', '', () => { store.deleteMovement(m.id); close(); toast('Eliminato', 'ok'); }, true));
+  if (edit && canEdit) $('#f-del', sheet).addEventListener('click', () =>
+    openConfirm('Eliminare questo movimento?', '', async () => {
+      try { await store.deleteMovement(m.id); close(); toast('Eliminato', 'ok'); }
+      catch (e) { toast(permErr(e), 'err'); }
+    }, true));
 
   setTimeout(() => $('#f-amount', sheet)?.focus(), 250);
 }
@@ -746,6 +795,71 @@ function attachChartTip(container, formatHtml) {
     h.addEventListener('pointerdown', () => show(i, h));
   });
   svg.addEventListener('pointerleave', () => tip.classList.remove('show'));
+}
+
+// ---------------- login (Firebase Auth) ----------------
+function showOverlay(id, innerHTML) {
+  removeOverlay(id);
+  const o = document.createElement('div');
+  o.className = 'lockscreen'; o.id = 'ov-' + id;
+  o.innerHTML = innerHTML;
+  document.getElementById('modal-root').appendChild(o);
+  return o;
+}
+function removeOverlay(id) { const o = document.getElementById('ov-' + id); if (o) o.remove(); }
+function showLoadingScreen(text) {
+  showOverlay('loading', `<div class="lock-inner"><div class="lock-ic">⏳</div><h2 id="ov-loading-txt">${escapeHtml(text || 'Caricamento…')}</h2></div>`);
+}
+function setLoadingText(text) { const el = document.getElementById('ov-loading-txt'); if (el) el.textContent = text; }
+
+function showLoginScreen() {
+  const o = showOverlay('login', `
+    <div class="lock-inner login">
+      <div class="lock-ic">👑</div>
+      <h2>Accedi</h2>
+      <div class="page-sub" style="margin:-8px 0 18px">Palladino · gestione spese di famiglia</div>
+      <div class="field"><label>Email</label>
+        <input id="lg-email" type="email" inputmode="email" autocomplete="username" placeholder="nome@email.com"></div>
+      <div class="field"><label>Password</label>
+        <input id="lg-pass" type="password" autocomplete="current-password" placeholder="password"></div>
+      <button class="btn btn-primary" id="lg-btn">Entra</button>
+      <div class="lock-err" id="lg-err"></div>
+    </div>`);
+  const btn = o.querySelector('#lg-btn');
+  const err = o.querySelector('#lg-err');
+  const doLogin = async () => {
+    const email = o.querySelector('#lg-email').value.trim();
+    const pass = o.querySelector('#lg-pass').value;
+    if (!email || !pass) { err.textContent = 'Inserisci email e password'; return; }
+    btn.disabled = true; btn.textContent = 'Accesso…'; err.textContent = '';
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      // onAuthStateChanged proseguirà da solo
+    } catch (e) {
+      btn.disabled = false; btn.textContent = 'Entra';
+      err.textContent = loginError(e);
+    }
+  };
+  btn.addEventListener('click', doLogin);
+  o.querySelector('#lg-pass').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+}
+function loginError(e) {
+  const c = (e && e.code) || '';
+  if (c.includes('invalid-credential') || c.includes('wrong-password') || c.includes('user-not-found')) return 'Email o password errati';
+  if (c.includes('invalid-email')) return 'Email non valida';
+  if (c.includes('too-many-requests')) return 'Troppi tentativi, riprova tra poco';
+  if (c.includes('network')) return 'Connessione assente';
+  return 'Accesso non riuscito';
+}
+async function doLogout() {
+  try { await signOut(auth); } catch (e) { console.error(e); }
+  location.reload();
+}
+function permErr(e) {
+  const c = (e && e.code) || '';
+  if (c.includes('permission-denied')) return "Solo l'amministratore può farlo";
+  if (c.includes('unavailable') || c.includes('network')) return 'Connessione assente, riprova';
+  return 'Operazione non riuscita';
 }
 
 // ---------------- blocco con codice (PIN) ----------------
