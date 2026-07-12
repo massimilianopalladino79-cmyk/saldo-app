@@ -1,0 +1,46 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#0B0B12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Saldo">
+<title>Saldo · Entrate/Uscite</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/styles.css">
+
+<div id="app">
+  <main id="view" class="view"></main>
+
+  <nav class="tabbar" aria-label="Navigazione principale">
+    <button class="tab" data-tab="dashboard" aria-label="Dashboard">
+      <svg viewBox="0 0 24 24" class="tab-ic"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm9 0h7v-9h-7v9Zm0-16v5h7V4h-7Z"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="tab" data-tab="movimenti" aria-label="Movimenti">
+      <svg viewBox="0 0 24 24" class="tab-ic"><path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h10v2H4v-2Z"/></svg>
+      <span>Movimenti</span>
+    </button>
+
+    <button class="fab" id="fab" aria-label="Aggiungi movimento">
+      <svg viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z"/></svg>
+    </button>
+
+    <button class="tab" data-tab="analisi" aria-label="Analisi">
+      <svg viewBox="0 0 24 24" class="tab-ic"><path d="M4 20V10h3v10H4Zm6.5 0V4h3v16h-3ZM17 20v-7h3v7h-3Z"/></svg>
+      <span>Analisi</span>
+    </button>
+    <button class="tab" data-tab="impostazioni" aria-label="Impostazioni">
+      <svg viewBox="0 0 24 24" class="tab-ic"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8.9 4.6.1-.6-.1-.6 1.7-1.4-1.7-3-2.1.7a6.7 6.7 0 0 0-1-.6l-.4-2.2H9.6l-.4 2.2c-.4.2-.7.4-1 .6l-2.1-.7-1.7 3L6.1 11l-.1.6.1.6-1.7 1.4 1.7 3 2.1-.7c.3.2.6.4 1 .6l.4 2.2h4.8l.4-2.2c.3-.2.7-.4 1-.6l2.1.7 1.7-3-1.7-1.4Z"/></svg>
+      <span>Impostazioni</span>
+    </button>
+  </nav>
+</div>
+
+<div id="modal-root"></div>
+<div id="toast-root" aria-live="polite"></div>
+
+<script src="vendor/xlsx.full.min.js"></script>
+<script type="module" src="js/app.js"></script>
