@@ -444,9 +444,14 @@ function renderImpostazioni() {
   `;
 
   $('#save-conto').addEventListener('click', () => {
-    store.setSetting('saldoIniziale', parseAmount($('#set-saldo').value));
-    store.setSetting('valuta', $('#set-valuta').value);
-    store.setSetting('budget', parseAmount($('#set-budget').value));
+    // leggi TUTTI i valori prima di salvare: il primo setSetting ri-disegna la
+    // schermata e ricreerebbe i campi, facendo perdere gli altri valori.
+    const saldoIniziale = parseAmount($('#set-saldo').value);
+    const valuta = $('#set-valuta').value;
+    const budget = parseAmount($('#set-budget').value);
+    store.setSetting('saldoIniziale', saldoIniziale);
+    store.setSetting('valuta', valuta);
+    store.setSetting('budget', budget);
     toast('Impostazioni salvate', 'ok');
   });
   view.querySelectorAll('[data-tema]').forEach((b) =>
