@@ -310,9 +310,9 @@ input,select,textarea{font-family:inherit}
 .pin-dots{display:flex;justify-content:center;gap:16px;margin-bottom:30px;min-height:18px}
 .pdot{width:16px;height:16px;border-radius:50%;border:2px solid var(--txt3);transition:.15s}
 .pdot.on{background:var(--accent);border-color:var(--accent)}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:280px;margin:0 auto}
-.key{height:74px;border-radius:50%;background:var(--card);border:1px solid var(--card-brd);
-  font-size:28px;font-weight:700;color:var(--txt);transition:transform .1s}
+.keypad{display:grid;grid-template-columns:repeat(3,76px);gap:20px;justify-content:center;margin:0 auto}
+.key{width:76px;height:76px;border-radius:50%;background:var(--card);border:1px solid var(--card-brd);
+  font-size:28px;font-weight:700;color:var(--txt);transition:transform .1s;justify-self:center}
 .key:active{transform:scale(.92);background:var(--card-hi)}
 .key-del{font-size:22px}
 .lock-err{color:var(--red);font-weight:700;font-size:14px;margin-top:18px;min-height:20px}
