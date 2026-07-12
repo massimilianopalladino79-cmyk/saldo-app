@@ -77,6 +77,13 @@ input,select,textarea{font-family:inherit}
   radial-gradient(420px 200px at 90% -20%, rgba(255,255,255,.35), transparent 60%);pointer-events:none}
 .hero .lbl{font-size:13px;opacity:.85;font-weight:600;letter-spacing:.2px}
 .hero .amount{font-size:40px;font-weight:850;letter-spacing:-1px;margin:4px 0 2px;line-height:1.05}
+.hero .amount-row{display:flex;align-items:center;gap:12px}
+.hero .eye{flex:0 0 auto;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);
+  display:grid;place-items:center;position:relative;color:#fff}
+.hero .eye svg{width:22px;height:22px}
+.hero .eye:active{transform:scale(.92)}
+.hero .eye.off::after{content:"";position:absolute;width:27px;height:2.5px;border-radius:2px;
+  background:#fff;box-shadow:0 -2px 0 0 #5B3FE0;transform:rotate(45deg)}
 .hero .delta{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;
   background:rgba(255,255,255,.18);padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)}
 .hero .delta.neg{background:rgba(0,0,0,.18)}

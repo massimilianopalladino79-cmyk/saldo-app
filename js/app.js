@@ -9,6 +9,7 @@ import {
 
 const $ = (s, r = document) => r.querySelector(s);
 const view = $('#view');
+let balanceHidden = true; // privacy: saldo nascosto a ogni apertura
 const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 
 const ui = {
@@ -79,8 +80,15 @@ function renderDashboard() {
 
     <div class="hero">
       <div class="lbl">Saldo attuale</div>
-      <div class="amount">${money(bal)}</div>
-      ${hasData ? `<span class="delta ${deltaCls}">${deltaTxt}</span>` : `<span class="delta">Aggiungi il primo movimento</span>`}
+      <div class="amount-row">
+        <div class="amount">${balanceHidden ? '••••••' : money(bal)}</div>
+        <button class="eye ${balanceHidden ? 'off' : ''}" id="toggle-bal" aria-label="Mostra o nascondi saldo">
+          <svg viewBox="0 0 24 24"><path d="M12 5C5 5 2 12 2 12s3 7 10 7 10-7 10-7-3-7-10-7Z" fill="#fff"/><circle cx="12" cy="12" r="3.1" fill="#5B3FE0"/></svg>
+        </button>
+      </div>
+      ${hasData
+        ? `<span class="delta ${deltaCls}">${balanceHidden ? `${cur.netto >= 0 ? '▲' : '▼'} ••• questo mese` : deltaTxt}</span>`
+        : `<span class="delta">Aggiungi il primo movimento</span>`}
     </div>
 
     <div class="kpi-row">
@@ -507,6 +515,8 @@ function wireCommon() {
     el.addEventListener('click', () => openMovementSheet(store.getMovement(el.dataset.edit))));
   view.querySelectorAll('[data-goto]').forEach((el) =>
     el.addEventListener('click', () => { ui.tab = el.dataset.goto; render(); }));
+  const tb = view.querySelector('#toggle-bal');
+  if (tb) tb.addEventListener('click', () => { balanceHidden = !balanceHidden; renderDashboard(); });
 }
 
 // ---------------- scheda persona ----------------
