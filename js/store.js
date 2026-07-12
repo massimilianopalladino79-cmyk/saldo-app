@@ -249,3 +249,24 @@ export function categoryTotals(type, ym = null) {
 export function availableMonths() {
   return monthlySummary().map((r) => r.ym);
 }
+
+// "Quanto ho dato a ciascuno nel tempo": per ogni persona, importi per mese
+// (monthly) e cumulato (cumulative), sull'asse di tutti i mesi presenti.
+export function personOverTime(type = 'out') {
+  const months = monthlySummary().map((r) => r.ym);
+  const idx = new Map(months.map((m, i) => [m, i]));
+  const map = new Map();
+  for (const m of state.movements) {
+    if (m.type !== type || !m.person) continue;
+    const k = monthKey(m.date);
+    if (!idx.has(k)) continue;
+    if (!map.has(m.person)) map.set(m.person, new Array(months.length).fill(0));
+    map.get(m.person)[idx.get(k)] += m.amount;
+  }
+  const people = [...map.entries()].map(([person, monthly]) => {
+    let run = 0;
+    const cumulative = monthly.map((v) => (run += v));
+    return { person, monthly, cumulative, total: run };
+  }).sort((a, b) => b.total - a.total);
+  return { months, people };
+}

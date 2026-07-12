@@ -241,3 +241,11 @@ input,select,textarea{font-family:inherit}
 .peoplepick .prm{margin-left:2px;width:18px;height:18px;border-radius:50%;background:rgba(127,127,127,.18);
   color:var(--txt2);font-size:13px;line-height:1;display:grid;place-items:center}
 .mrow .who{color:var(--txt2);font-weight:700}
+
+/* riga "dato a ciascuno nel tempo" */
+.ptl-row{display:flex;align-items:center;gap:12px;padding:9px 2px;border-bottom:1px solid var(--card-brd)}
+.ptl-row:last-child{border-bottom:0}
+.ptl-name{flex:0 0 auto;min-width:96px;font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptl-spark{flex:1;min-width:0}
+.ptl-spark .spark{width:100%;height:34px;display:block}
+.ptl-tot{flex:0 0 auto;font-weight:800;font-size:14px}

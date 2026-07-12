@@ -198,6 +198,51 @@ function ring(cx, cy, rO, rI, a0, a1, fill) {
   return `<path d="M${x0o.toFixed(2)},${y0o.toFixed(2)} A${rO},${rO} 0 ${large} 1 ${x1o.toFixed(2)},${y1o.toFixed(2)} L${x0i.toFixed(2)},${y0i.toFixed(2)} A${rI},${rI} 0 ${large} 0 ${x1i.toFixed(2)},${y1i.toFixed(2)} Z" fill="${fill}"/>`;
 }
 
+/**
+ * Grafico multi-linea (una linea per persona nel tempo).
+ * series: [{ name, color, points:[Number] }] allineate a opts.labels
+ */
+export function multiLine(series, opts = {}) {
+  const W = 680, H = 260;
+  const padL = 8, padR = 8, padT = 18, padB = 30;
+  const labels = opts.labels || [];
+  if (!series || !series.length || labels.length < 1) return emptyChart(W, H, 'Nessun dato');
+
+  const all = series.flatMap((s) => s.points);
+  const hi = Math.max(1, ...all), lo = 0;
+  const iw = W - padL - padR, ih = H - padT - padB;
+  const n = labels.length;
+  const x = (i) => padL + (n === 1 ? iw / 2 : (i / (n - 1)) * iw);
+  const y = (v) => padT + ih - ((v - lo) / (hi - lo || 1)) * ih;
+
+  let grid = '';
+  const ticks = 4;
+  for (let i = 0; i <= ticks; i++) {
+    const v = lo + (i / ticks) * (hi - lo);
+    const yy = y(v);
+    grid += `<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W - padR}" y2="${yy.toFixed(1)}" class="ch-grid"/>`;
+    grid += `<text x="${W - padR}" y="${(yy - 4).toFixed(1)}" class="ch-ylabel" text-anchor="end">${esc(opts.fmtY ? opts.fmtY(v) : Math.round(v))}</text>`;
+  }
+
+  let lines = '';
+  for (const s of series) {
+    const pts = s.points.map((v, i) => ({ x: x(i), y: y(v) }));
+    const d = smoothPath(pts);
+    lines += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const last = pts[pts.length - 1];
+    if (last) lines += `<circle cx="${last.x.toFixed(1)}" cy="${last.y.toFixed(1)}" r="3.5" fill="${s.color}"/>`;
+  }
+
+  let xlab = '';
+  const step = Math.max(1, Math.ceil(n / 6));
+  for (let i = 0; i < n; i += step) {
+    xlab += `<text x="${x(i).toFixed(1)}" y="${H - 8}" class="ch-xlabel" text-anchor="middle">${esc(labels[i])}</text>`;
+  }
+
+  return `<svg viewBox="0 0 ${W} ${H}" class="chart" preserveAspectRatio="none" role="img">
+    <g>${grid}</g><g>${lines}</g><g>${xlab}</g></svg>`;
+}
+
 // Mini sparkline per le card KPI. values: [Number]
 export function sparkline(values, color = '#7C5CFF') {
   const W = 120, H = 36, pad = 3;

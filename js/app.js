@@ -239,6 +239,8 @@ function renderAnalisi() {
         }).join('') : `<div class="empty" style="padding:26px"><p>${a.dim === 'person' ? 'Nessun movimento con persona per questo periodo' : 'Nessun dato per questo periodo'}</p></div>`}
       </div>
     </div>
+
+    ${personTimeCardHTML()}
   `;
   view.querySelectorAll('[data-anatype]').forEach((b) =>
     b.addEventListener('click', () => { a.type = b.dataset.anatype; renderAnalisi(); }));
@@ -247,6 +249,34 @@ function renderAnalisi() {
   view.querySelectorAll('[data-anamonth]').forEach((b) =>
     b.addEventListener('click', () => { a.month = b.dataset.anamonth; renderAnalisi(); }));
   wireCommon();
+}
+
+// Card "Quanto ho dato a ciascuno nel tempo" (uscite attribuite a una persona)
+function personTimeCardHTML() {
+  const ot = store.personOverTime('out');
+  if (!ot.people.length) {
+    return `<div class="card">
+      <div class="card-t"><h3>Dato a ciascuno · nel tempo</h3></div>
+      <div class="empty" style="padding:22px"><p>Attribuisci le spese a una persona (campo "Chi la usa") per vedere qui l'andamento nel tempo.</p></div>
+    </div>`;
+  }
+  const top = ot.people.slice(0, 8);
+  const labels = ot.months.map(fmtMonthShort);
+  const series = top.map((pp) => ({ name: pp.person, color: personColor(pp.person), points: pp.cumulative }));
+  return `<div class="card">
+    <div class="card-t"><h3>Dato a ciascuno · nel tempo</h3><span class="muted">cumulato</span></div>
+    ${charts.multiLine(series, { labels, fmtY: fmtShort })}
+    <div class="legend">
+      ${top.map((pp) => `<span class="li"><span class="sw" style="background:${personColor(pp.person)}"></span>${escapeHtml(pp.person)}</span>`).join('')}
+    </div>
+    <div style="margin-top:12px">
+      ${ot.people.map((pp) => `<div class="ptl-row">
+        <span class="ptl-name">👤 ${escapeHtml(pp.person)}</span>
+        <span class="ptl-spark">${charts.sparkline(pp.monthly.length > 1 ? pp.monthly : [0, 0], personColor(pp.person))}</span>
+        <span class="ptl-tot">${money(pp.total)}</span>
+      </div>`).join('')}
+    </div>
+  </div>`;
 }
 
 // ---------------- IMPOSTAZIONI ----------------
