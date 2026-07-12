@@ -10,7 +10,7 @@ import {
 const $ = (s, r = document) => r.querySelector(s);
 const view = $('#view');
 let balanceHidden = true; // privacy: saldo nascosto a ogni apertura
-const APP_VERSION = 'v17';
+const APP_VERSION = 'v18';
 const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 
 const ui = {
@@ -439,10 +439,12 @@ function renderImpostazioni() {
     </div>
 
     <div class="card">
-      <button class="btn btn-ghost" id="app-update">🔄 Aggiorna app all'ultima versione</button>
+      <div class="card-t"><h3>App</h3><span class="muted" id="ver-badge">${APP_VERSION}</span></div>
+      <div class="page-sub" id="ver-line" style="margin:-2px 0 12px">Controllo aggiornamenti…</div>
+      <button class="btn btn-ghost" id="app-update">🔄 Aggiorna all'ultima versione</button>
       <div class="btn-row"><button class="btn btn-danger" id="do-reset">Elimina tutti i dati</button></div>
     </div>
-    <div class="page-sub" style="text-align:center">Saldo · PWA offline · ${APP_VERSION}</div>
+    <div class="page-sub" style="text-align:center">Saldo · gestione entrate/uscite</div>
   `;
 
   $('#save-conto').addEventListener('click', () => {
@@ -514,6 +516,24 @@ function renderImpostazioni() {
   $('#do-csv').addEventListener('click', () => { try { io.exportCsv(); toast('CSV esportato', 'ok'); } catch (e) { toast('Errore: ' + e.message, 'err'); } });
   $('#do-reset').addEventListener('click', () =>
     openConfirm('Eliminare tutti i dati?', 'Operazione non reversibile.', () => { store.clearAll(); toast('Dati eliminati', 'ok'); }, true));
+  // controllo aggiornamenti: confronta la versione installata con quella online
+  (async () => {
+    const line = $('#ver-line'), badge = $('#ver-badge');
+    if (!line) return;
+    try {
+      const r = await fetch('./version.json?ts=' + Date.now(), { cache: 'no-store' });
+      const j = await r.json();
+      if (j.version === APP_VERSION) {
+        line.innerHTML = `<span class="pos">✅ Aggiornata</span> — release ${escapeHtml(j.date || '')}`;
+      } else {
+        line.innerHTML = `<span class="neg">🔄 Disponibile ${escapeHtml(j.version)}</span> — tocca "Aggiorna"`;
+        if (badge) badge.textContent = `${APP_VERSION} → ${j.version}`;
+      }
+    } catch {
+      line.textContent = `Versione ${APP_VERSION} (offline)`;
+    }
+  })();
+
   $('#app-update').addEventListener('click', async () => {
     toast('Aggiornamento in corso…', 'ok');
     try {

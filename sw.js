@@ -1,9 +1,10 @@
 ﻿// sw.js - service worker: rete-prima per i file dell'app, cache come fallback offline
-const CACHE = 'saldo-v17';
+const CACHE = 'saldo-v18';
 const ASSETS = [
   './',
   'index.html',
   'manifest.webmanifest',
+  'version.json',
   'css/styles.css',
   'js/app.js',
   'js/store.js',
