@@ -13,7 +13,7 @@ const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 
 const ui = {
   tab: 'dashboard',
-  filt: { q: '', cat: 'all', type: 'all' },
+  filt: { q: '', cat: 'all', type: 'all', person: 'all' },
   ana: { type: 'out', month: 'all', dim: 'cat' },
 };
 
@@ -116,6 +116,7 @@ function renderMovimenti() {
   const filtered = all.filter((m) => {
     if (f.type !== 'all' && m.type !== f.type) return false;
     if (f.cat !== 'all' && m.category !== f.cat) return false;
+    if (f.person !== 'all' && m.person !== f.person) return false;
     if (f.q && !(`${m.description} ${m.category} ${m.note} ${m.person}`.toLowerCase().includes(f.q.toLowerCase()))) return false;
     return true;
   });
@@ -130,7 +131,9 @@ function renderMovimenti() {
   const keys = [...groups.keys()].sort((a, b) => (a < b ? 1 : -1));
 
   const usedCats = [...new Set(all.map((m) => m.category))];
-  const chip = (val, lbl) => `<button class="chip ${f.cat === val ? 'on' : ''}" data-cat="${val}">${lbl}</button>`;
+  const usedPeople = [...new Set(all.filter((m) => m.person).map((m) => m.person))];
+  const chip = (val, lbl) => `<button class="chip ${f.cat === val ? 'on' : ''}" data-cat="${escapeAttr(val)}">${lbl}</button>`;
+  const pchip = (val, lbl) => `<button class="chip ${f.person === val ? 'on' : ''}" data-fperson="${escapeAttr(val)}">${lbl}</button>`;
 
   view.innerHTML = `
     <div class="page-head"><div><h1 class="page-title">Movimenti</h1>
@@ -146,6 +149,10 @@ function renderMovimenti() {
       ${chip('all', 'Tutte')}
       ${usedCats.map((c) => chip(c, `${catMeta(c).icon} ${c}`)).join('')}
     </div>
+    ${usedPeople.length ? `<div class="chips" style="margin-top:2px">
+      ${pchip('all', '👤 Tutti')}
+      ${usedPeople.map((pp) => pchip(pp, `👤 ${escapeHtml(pp)}`)).join('')}
+    </div>` : ''}
 
     ${keys.length ? keys.map((k) => {
       const items = groups.get(k);
@@ -164,6 +171,8 @@ function renderMovimenti() {
     b.addEventListener('click', () => { f.type = b.dataset.type; renderMovimenti(); }));
   view.querySelectorAll('[data-cat]').forEach((b) =>
     b.addEventListener('click', () => { f.cat = b.dataset.cat; renderMovimenti(); }));
+  view.querySelectorAll('[data-fperson]').forEach((b) =>
+    b.addEventListener('click', () => { f.person = b.dataset.fperson; renderMovimenti(); }));
   wireCommon();
 }
 
