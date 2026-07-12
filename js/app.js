@@ -10,6 +10,7 @@ import {
 const $ = (s, r = document) => r.querySelector(s);
 const view = $('#view');
 let balanceHidden = true; // privacy: saldo nascosto a ogni apertura
+const APP_VERSION = 'v17';
 const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 
 const ui = {
@@ -438,9 +439,10 @@ function renderImpostazioni() {
     </div>
 
     <div class="card">
-      <button class="btn btn-danger" id="do-reset">Elimina tutti i dati</button>
+      <button class="btn btn-ghost" id="app-update">🔄 Aggiorna app all'ultima versione</button>
+      <div class="btn-row"><button class="btn btn-danger" id="do-reset">Elimina tutti i dati</button></div>
     </div>
-    <div class="page-sub" style="text-align:center">Saldo · PWA offline · v1.0</div>
+    <div class="page-sub" style="text-align:center">Saldo · PWA offline · ${APP_VERSION}</div>
   `;
 
   $('#save-conto').addEventListener('click', () => {
@@ -512,6 +514,18 @@ function renderImpostazioni() {
   $('#do-csv').addEventListener('click', () => { try { io.exportCsv(); toast('CSV esportato', 'ok'); } catch (e) { toast('Errore: ' + e.message, 'err'); } });
   $('#do-reset').addEventListener('click', () =>
     openConfirm('Eliminare tutti i dati?', 'Operazione non reversibile.', () => { store.clearAll(); toast('Dati eliminati', 'ok'); }, true));
+  $('#app-update').addEventListener('click', async () => {
+    toast('Aggiornamento in corso…', 'ok');
+    try {
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map((r) => r.update()));
+      }
+      const keys = await caches.keys();
+      await Promise.all(keys.map((k) => caches.delete(k)));
+    } catch (e) { /* ignora: ricarico comunque */ }
+    setTimeout(() => location.reload(), 700);
+  });
 }
 
 // ---------------- comune ----------------

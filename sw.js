@@ -1,5 +1,5 @@
-﻿// sw.js â€” service worker: app shell offline (cache-first con fallback rete)
-const CACHE = 'saldo-v16';
+﻿// sw.js - service worker: rete-prima per i file dell'app, cache come fallback offline
+const CACHE = 'saldo-v17';
 const ASSETS = [
   './',
   'index.html',
@@ -37,24 +37,34 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
+  const sameOrigin = new URL(req.url).origin === self.location.origin;
 
-  // navigazioni: rete con fallback alla shell in cache (offline)
+  // navigazioni: rete, con fallback alla shell in cache (offline)
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).catch(() => caches.match('index.html')));
+    e.respondWith(
+      fetch(req).then((res) => {
+        caches.open(CACHE).then((c) => c.put('index.html', res.clone())).catch(() => {});
+        return res;
+      }).catch(() => caches.match('index.html'))
+    );
     return;
   }
 
-  // asset: cache-first, poi rete (e aggiorna la cache)
-  e.respondWith(
-    caches.match(req).then((cached) =>
-      cached ||
+  // file dell'app (stessa origine): RETE PRIMA -> sempre l'ultima versione quando
+  // online; la cache resta come fallback offline. Elimina il ritardo di aggiornamento.
+  if (sameOrigin) {
+    e.respondWith(
       fetch(req).then((res) => {
         const copy = res.clone();
         caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
         return res;
-      }).catch(() => cached)
-    )
-  );
+      }).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // altre origini: cache-first
+  e.respondWith(caches.match(req).then((c) => c || fetch(req)));
 });
 
 
