@@ -288,3 +288,12 @@ input,select,textarea{font-family:inherit}
 .chart-tip.show{opacity:1}
 .chart-tip b{display:block;font-size:11px;opacity:.7;font-weight:700;margin-bottom:1px}
 .chart-tip .pos{color:var(--green)} .chart-tip .neg{color:var(--red)}
+
+/* budget mensile */
+.budget .btrack{height:12px;border-radius:999px;background:var(--card-hi);overflow:hidden;margin:2px 0 10px}
+.budget .bfill{height:100%;border-radius:999px;background:var(--green);transition:width .45s cubic-bezier(.22,1,.36,1)}
+.budget.near .bfill{background:var(--amber)}
+.budget.over .bfill{background:var(--red)}
+.budget .bmsg{font-size:13.5px;font-weight:700;color:var(--txt2)}
+.budget.near .bmsg{color:var(--amber)}
+.budget.over .bmsg{color:var(--red)}

@@ -87,6 +87,8 @@ function renderDashboard() {
       </div>
     </div>
 
+    ${budgetCardHTML(cur.uscite)}
+
     <div class="card" data-tip="area">
       <div class="card-t"><h3>Andamento saldo</h3><span class="muted">${months.length} mesi</span></div>
       ${charts.areaChart(areaPts, { color: store.getSettings().accent || '#7C5CFF', fmtY: fmtShort })}
@@ -112,6 +114,24 @@ function renderDashboard() {
     areaPts[i] ? `<b>${escapeHtml(areaPts[i].label)}</b> ${money(areaPts[i].value)}` : '');
   attachChartTip(view.querySelector('[data-tip="bars"]'), (i) =>
     barsData[i] ? `<b>${escapeHtml(barsData[i].label)}</b> <span class="pos">+${money(barsData[i].a)}</span> <span class="neg">−${money(barsData[i].b)}</span>` : '');
+}
+
+// Card budget mensile con avviso (uscite del mese vs tetto impostato)
+function budgetCardHTML(speso) {
+  const budget = Number(store.getSettings().budget) || 0;
+  if (budget <= 0) return '';
+  const ratio = speso / budget;
+  const over = speso > budget;
+  const near = !over && ratio >= 0.8;
+  const cls = over ? 'over' : near ? 'near' : 'okb';
+  const msg = over ? `⚠️ Budget superato di ${money(speso - budget)}`
+    : near ? `Attenzione: rimane ${money(budget - speso)}`
+    : `Rimane ${money(budget - speso)} questo mese`;
+  return `<div class="card budget ${cls}">
+    <div class="card-t"><h3>Budget del mese</h3><span class="muted">${money(speso)} / ${money(budget)}</span></div>
+    <div class="btrack"><div class="bfill" style="width:${Math.min(100, ratio * 100).toFixed(1)}%"></div></div>
+    <div class="bmsg">${msg}</div>
+  </div>`;
 }
 
 // ---------------- MOVIMENTI ----------------
@@ -339,6 +359,8 @@ function renderImpostazioni() {
         <select id="set-valuta">
           ${['EUR', 'USD', 'GBP', 'CHF'].map((c) => `<option ${c === s.valuta ? 'selected' : ''}>${c}</option>`).join('')}
         </select></div>
+      <div class="field"><label>Budget mensile di spesa (0 = disattivato)</label>
+        <input id="set-budget" inputmode="decimal" value="${s.budget || 0}"></div>
       <button class="btn btn-primary" id="save-conto">Salva</button>
     </div>
 
@@ -387,6 +409,7 @@ function renderImpostazioni() {
   $('#save-conto').addEventListener('click', () => {
     store.setSetting('saldoIniziale', parseAmount($('#set-saldo').value));
     store.setSetting('valuta', $('#set-valuta').value);
+    store.setSetting('budget', parseAmount($('#set-budget').value));
     toast('Impostazioni salvate', 'ok');
   });
   view.querySelectorAll('[data-tema]').forEach((b) =>
