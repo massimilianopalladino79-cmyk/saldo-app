@@ -11,7 +11,7 @@ import {
 const $ = (s, r = document) => r.querySelector(s);
 const view = $('#view');
 let balanceHidden = true; // privacy: saldo nascosto a ogni apertura
-const APP_VERSION = 'v20';
+const APP_VERSION = 'v21';
 let currentUser = null;
 let canEdit = false;      // true solo per l'amministratore
 const money = (n) => fmtCurrency(n, store.getSettings().valuta);

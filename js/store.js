@@ -8,6 +8,7 @@ import {
 } from './firebase.js';
 
 const DEFAULT_PEOPLE = ['Cecio', 'Gaia', 'Max', 'Evelyn'];
+const PERSON_NAMES = ['Cecio', 'Gaia', 'Max', 'Evelyn', 'Ivan', 'Paola', 'Jenny', 'Stefano'];
 const LOCAL_KEY = 'saldoapp:local';
 const LOCAL_KEYS = new Set(['tema', 'accent', 'pin', 'pinLen']); // preferenze per dispositivo
 
@@ -109,9 +110,11 @@ export async function clearAll() {
 export async function migrateLocalToCloud() {
   let local = null;
   try { local = JSON.parse(localStorage.getItem('saldoapp:v1') || 'null'); } catch { /* ignore */ }
-  const movements = (local && Array.isArray(local.movements) && local.movements.length)
+  const raw = (local && Array.isArray(local.movements) && local.movements.length)
     ? local.movements : (SEED && SEED.movements) || [];
   const settings = (local && local.settings) ? local.settings : (SEED && SEED.settings) || {};
+  // assicura "Chi spende": se manca, deducilo dalla categoria (nomi persona)
+  const movements = raw.map((m) => (!m.person && PERSON_NAMES.includes(m.category)) ? { ...m, person: m.category } : m);
   await wipeAndWrite(movements, settings);
 }
 
