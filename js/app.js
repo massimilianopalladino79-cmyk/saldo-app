@@ -4,7 +4,7 @@ import * as charts from './charts.js';
 import * as io from './xlsx-io.js';
 import {
   fmtCurrency, fmtShort, fmtDate, fmtMonth, fmtMonthShort,
-  todayISO, monthKey, parseAmount, CATEGORIES, catMeta,
+  todayISO, monthKey, parseAmount, CATEGORIES, catMeta, personColor,
 } from './format.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -14,7 +14,7 @@ const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 const ui = {
   tab: 'dashboard',
   filt: { q: '', cat: 'all', type: 'all' },
-  ana: { type: 'out', month: 'all' },
+  ana: { type: 'out', month: 'all', dim: 'cat' },
 };
 
 // ---------------- bootstrap ----------------
@@ -116,7 +116,7 @@ function renderMovimenti() {
   const filtered = all.filter((m) => {
     if (f.type !== 'all' && m.type !== f.type) return false;
     if (f.cat !== 'all' && m.category !== f.cat) return false;
-    if (f.q && !(`${m.description} ${m.category} ${m.note}`.toLowerCase().includes(f.q.toLowerCase()))) return false;
+    if (f.q && !(`${m.description} ${m.category} ${m.note} ${m.person}`.toLowerCase().includes(f.q.toLowerCase()))) return false;
     return true;
   });
 
@@ -175,7 +175,7 @@ function rowHTML(m) {
     <div class="ic" style="background:${cm.color}22;color:${cm.color}">${cm.icon}</div>
     <div class="mid">
       <div class="desc">${escapeHtml(m.description || m.category)}</div>
-      <div class="meta">${escapeHtml(m.category)} · ${fmtDate(m.date)}</div>
+      <div class="meta">${escapeHtml(m.category)} · ${fmtDate(m.date)}${m.person ? ` · <span class="who">👤 ${escapeHtml(m.person)}</span>` : ''}</div>
     </div>
     <div style="text-align:right">
       <div class="amt ${cls}">${sign} ${money(m.amount)}</div>
@@ -188,13 +188,17 @@ function rowHTML(m) {
 function renderAnalisi() {
   const months = store.monthlySummary();
   const a = ui.ana;
+  const ym = a.month === 'all' ? null : a.month;
   const monthOpts = ['all', ...store.availableMonths()];
-  const cats = store.categoryTotals(a.type, a.month === 'all' ? null : a.month);
-  const tot = cats.reduce((s, c) => s + c.total, 0);
-  const slices = cats.map((c) => ({ label: c.category, value: c.total, color: catMeta(c.category).color }));
+
+  // dimensione: categoria oppure persona ("Chi la usa")
+  const items = a.dim === 'person'
+    ? store.personTotals(a.type, ym).map((r) => ({ key: r.person, label: r.person, total: r.total, color: personColor(r.person), icon: '👤' }))
+    : store.categoryTotals(a.type, ym).map((r) => ({ key: r.category, label: r.category, total: r.total, color: catMeta(r.category).color, icon: catMeta(r.category).icon }));
+  const tot = items.reduce((s, c) => s + c.total, 0);
+  const slices = items.map((c) => ({ label: c.label, value: c.total, color: c.color }));
 
   const barsData = months.map((m) => ({ label: fmtMonthShort(m.ym), a: m.entrate, b: m.uscite }));
-
   const monthChips = monthOpts.map((mo) =>
     `<button class="chip ${a.month === mo ? 'on' : ''}" data-anamonth="${mo}">${mo === 'all' ? 'Tutto' : fmtMonth(mo)}</button>`).join('');
 
@@ -212,29 +216,34 @@ function renderAnalisi() {
     </div>
 
     <div class="card">
-      <div class="card-t"><h3>Per categoria</h3>
+      <div class="card-t"><h3>Ripartizione</h3>
         <div class="seg">
           <button data-anatype="out" class="${a.type === 'out' ? 'on' : ''}">Uscite</button>
           <button data-anatype="in" class="${a.type === 'in' ? 'on' : ''}">Entrate</button>
         </div>
       </div>
+      <div class="seg" style="width:100%;display:flex;margin-bottom:10px">
+        <button data-anadim="cat" class="${a.dim === 'cat' ? 'on' : ''}" style="flex:1">Per categoria</button>
+        <button data-anadim="person" class="${a.dim === 'person' ? 'on' : ''}" style="flex:1">Per persona</button>
+      </div>
       <div class="chips" style="margin-bottom:8px">${monthChips}</div>
       ${charts.donut(slices, { centerLabel: a.type === 'out' ? 'Uscite' : 'Entrate', centerValue: fmtShort(tot) })}
       <div style="margin-top:14px">
-        ${cats.length ? cats.map((c) => {
-          const cm = catMeta(c.category);
+        ${items.length ? items.map((c) => {
           const pct = tot ? (c.total / tot) * 100 : 0;
           return `<div class="catbar">
-            <div class="top"><span>${cm.icon} ${escapeHtml(c.category)}</span>
+            <div class="top"><span>${c.icon} ${escapeHtml(c.label)}</span>
               <span>${money(c.total)} · ${pct.toFixed(0)}%</span></div>
-            <div class="track"><div class="fill" style="width:${pct.toFixed(1)}%;background:${cm.color}"></div></div>
+            <div class="track"><div class="fill" style="width:${pct.toFixed(1)}%;background:${c.color}"></div></div>
           </div>`;
-        }).join('') : `<div class="empty" style="padding:26px"><p>Nessun dato per questo periodo</p></div>`}
+        }).join('') : `<div class="empty" style="padding:26px"><p>${a.dim === 'person' ? 'Nessun movimento con persona per questo periodo' : 'Nessun dato per questo periodo'}</p></div>`}
       </div>
     </div>
   `;
   view.querySelectorAll('[data-anatype]').forEach((b) =>
     b.addEventListener('click', () => { a.type = b.dataset.anatype; renderAnalisi(); }));
+  view.querySelectorAll('[data-anadim]').forEach((b) =>
+    b.addEventListener('click', () => { a.dim = b.dataset.anadim; renderAnalisi(); }));
   view.querySelectorAll('[data-anamonth]').forEach((b) =>
     b.addEventListener('click', () => { a.month = b.dataset.anamonth; renderAnalisi(); }));
   wireCommon();
@@ -269,6 +278,15 @@ function renderImpostazioni() {
     </div>
 
     <div class="card">
+      <div class="card-t"><h3>Persone · Chi la usa</h3><span class="muted">${(s.people || []).length}</span></div>
+      <div class="peoplepick" id="set-people">
+        ${(s.people || []).map((p) => `<span class="pchip" style="color:${personColor(p)}">👤 ${escapeHtml(p)}<button class="prm" data-rmperson="${escapeAttr(p)}" aria-label="Rimuovi">×</button></span>`).join('')}
+        <button type="button" class="pchip add" id="set-padd">＋ Nuovo</button>
+      </div>
+      <div class="page-sub" style="margin-top:8px">Usate quando inserisci una spesa per indicare a chi è destinata.</div>
+    </div>
+
+    <div class="card">
       <div class="card-t"><h3>Excel & dati</h3></div>
       <div class="setlist">
         <div class="setrow" id="do-import"><div class="s-ic">📥</div>
@@ -297,6 +315,13 @@ function renderImpostazioni() {
   });
   view.querySelectorAll('[data-tema]').forEach((b) =>
     b.addEventListener('click', () => { store.setSetting('tema', b.dataset.tema); applyTheme(b.dataset.tema); renderImpostazioni(); }));
+
+  $('#set-padd').addEventListener('click', () => {
+    const name = (window.prompt('Nuova persona:') || '').trim();
+    if (name) store.addPerson(name); // emette change -> ri-render automatico
+  });
+  view.querySelectorAll('[data-rmperson]').forEach((b) =>
+    b.addEventListener('click', () => store.removePerson(b.dataset.rmperson)));
 
   const fileInput = $('#file-input');
   $('#do-import').addEventListener('click', () => fileInput.click());
@@ -331,8 +356,9 @@ function wireCommon() {
 // ---------------- sheet aggiungi/modifica ----------------
 function openMovementSheet(mov) {
   const edit = !!mov;
-  const m = mov || { type: 'out', amount: '', description: '', category: 'Altro', date: todayISO(), note: '' };
+  const m = mov || { type: 'out', amount: '', description: '', category: 'Altro', date: todayISO(), note: '', person: '' };
   let type = m.type;
+  let person = m.person || '';
 
   const html = `
     <h2>${edit ? 'Modifica movimento' : 'Nuovo movimento'}</h2>
@@ -350,6 +376,8 @@ function openMovementSheet(mov) {
       <div class="field"><label>Data</label>
         <input id="f-date" type="date" value="${m.date}"></div>
     </div>
+    <div class="field"><label>Chi la usa</label>
+      <div class="peoplepick" id="f-people"></div></div>
     <div class="field"><label>Note (facoltative)</label>
       <textarea id="f-note" placeholder="Aggiungi una nota…">${escapeHtml(m.note)}</textarea></div>
     <button class="btn btn-primary" id="f-save">${edit ? 'Salva modifiche' : 'Aggiungi movimento'}</button>
@@ -363,6 +391,26 @@ function openMovementSheet(mov) {
       sheet.querySelectorAll('[data-t]').forEach((x) => x.classList.toggle('on', x.dataset.t === type));
     }));
 
+  // selettore "Chi la usa"
+  const peopleBox = $('#f-people', sheet);
+  function renderPeople() {
+    const people = store.getPeople();
+    const chip = (val, label, extra = '') =>
+      `<button type="button" class="pchip ${person === val ? 'on' : ''} ${extra}" data-person="${escapeAttr(val)}"
+        ${person === val && val ? `style="background:${personColor(val)}"` : ''}>${label}</button>`;
+    peopleBox.innerHTML =
+      chip('', 'Nessuno') +
+      people.map((p) => chip(p, `👤 ${escapeHtml(p)}`)).join('') +
+      `<button type="button" class="pchip add" id="p-add">＋ Nuovo</button>`;
+    peopleBox.querySelectorAll('[data-person]').forEach((b) =>
+      b.addEventListener('click', () => { person = b.dataset.person; renderPeople(); }));
+    $('#p-add', peopleBox).addEventListener('click', () => {
+      const name = (window.prompt('Nome della persona a cui è destinata la spesa:') || '').trim();
+      if (name) { store.addPerson(name); person = name; renderPeople(); }
+    });
+  }
+  renderPeople();
+
   $('#f-save', sheet).addEventListener('click', () => {
     const amount = parseAmount($('#f-amount', sheet).value);
     if (!amount) { toast('Inserisci un importo', 'err'); return; }
@@ -373,6 +421,7 @@ function openMovementSheet(mov) {
       category: $('#f-cat', sheet).value,
       date: $('#f-date', sheet).value || todayISO(),
       note: $('#f-note', sheet).value,
+      person,
     };
     if (edit) { store.updateMovement(m.id, data); toast('Movimento aggiornato', 'ok'); }
     else { store.addMovement(data); toast('Movimento aggiunto', 'ok'); }

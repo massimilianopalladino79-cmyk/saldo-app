@@ -1,10 +1,17 @@
 // seed.js — dati iniziali importati da Saldo_progressivo_template_IT.xlsx (OneDrive).
-// Caricati SOLO al primo avvio (se non ci sono ancora dati). Poi modificabili nell'app.
+// Caricati SOLO al primo avvio. Date dei 5 senza-data dedotte dal movimento precedente; Francy->Cecio.
 export const SEED = {
   "settings": {
     "saldoIniziale": 0,
     "valuta": "EUR",
-    "tema": "auto"
+    "tema": "auto",
+    "people": [
+      "Cecio",
+      "Gaia",
+      "Max",
+      "Evelyn"
+    ],
+    "dataVersion": 1
   },
   "movements": [
     {
@@ -14,16 +21,18 @@ export const SEED = {
       "category": "Incassi vari",
       "type": "in",
       "amount": 44730,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x1",
-      "date": "",
+      "date": "2026-02-28",
       "description": "",
       "category": "Altro",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x2",
@@ -32,16 +41,18 @@ export const SEED = {
       "category": "Spese macchina",
       "type": "out",
       "amount": 400,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x3",
-      "date": "",
+      "date": "2026-03-10",
       "description": "",
       "category": "Altro",
       "type": "in",
       "amount": 5750,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x4",
@@ -50,7 +61,8 @@ export const SEED = {
       "category": "Ivan",
       "type": "out",
       "amount": 500,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x5",
@@ -59,7 +71,8 @@ export const SEED = {
       "category": "Paola",
       "type": "out",
       "amount": 50,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x6",
@@ -68,7 +81,8 @@ export const SEED = {
       "category": "Max",
       "type": "out",
       "amount": 100,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x7",
@@ -77,7 +91,8 @@ export const SEED = {
       "category": "Jenny",
       "type": "out",
       "amount": 500,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x8",
@@ -86,7 +101,8 @@ export const SEED = {
       "category": "Altro",
       "type": "in",
       "amount": 5000,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x9",
@@ -95,7 +111,8 @@ export const SEED = {
       "category": "Gaia",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x10",
@@ -104,7 +121,8 @@ export const SEED = {
       "category": "Altro",
       "type": "in",
       "amount": 5000,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x11",
@@ -113,7 +131,8 @@ export const SEED = {
       "category": "Altro",
       "type": "in",
       "amount": 14090,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x12",
@@ -122,7 +141,8 @@ export const SEED = {
       "category": "Jenny",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x13",
@@ -131,7 +151,8 @@ export const SEED = {
       "category": "Cecio",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x14",
@@ -140,7 +161,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 600,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x15",
@@ -149,25 +171,28 @@ export const SEED = {
       "category": "Max",
       "type": "out",
       "amount": 50,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x16",
-      "date": "",
+      "date": "2026-04-18",
       "description": "",
       "category": "Moto",
       "type": "out",
       "amount": 5000,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x17",
-      "date": "",
+      "date": "2026-04-18",
       "description": "",
       "category": "Evelyn",
       "type": "out",
       "amount": 100,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x18",
@@ -176,7 +201,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 50,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x19",
@@ -185,7 +211,8 @@ export const SEED = {
       "category": "Assicurazione",
       "type": "out",
       "amount": 400,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x20",
@@ -194,7 +221,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x21",
@@ -203,7 +231,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 100,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x22",
@@ -212,7 +241,8 @@ export const SEED = {
       "category": "Stefano",
       "type": "out",
       "amount": 1050,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x23",
@@ -221,16 +251,18 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x24",
-      "date": "",
+      "date": "2026-05-09",
       "description": "",
       "category": "Altro",
       "type": "in",
       "amount": 5620,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x25",
@@ -239,7 +271,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 700,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x26",
@@ -248,7 +281,8 @@ export const SEED = {
       "category": "Cecio",
       "type": "out",
       "amount": 600,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x27",
@@ -257,7 +291,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 50,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x28",
@@ -266,7 +301,8 @@ export const SEED = {
       "category": "Max",
       "type": "out",
       "amount": 1000,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x29",
@@ -275,7 +311,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 50,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x30",
@@ -284,7 +321,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 300,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x31",
@@ -293,7 +331,8 @@ export const SEED = {
       "category": "Max",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x32",
@@ -302,7 +341,8 @@ export const SEED = {
       "category": "Max",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x33",
@@ -311,7 +351,8 @@ export const SEED = {
       "category": "Max",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x34",
@@ -320,7 +361,8 @@ export const SEED = {
       "category": "Evelyn",
       "type": "out",
       "amount": 300,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x35",
@@ -329,7 +371,8 @@ export const SEED = {
       "category": "Altro",
       "type": "in",
       "amount": 6700,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x36",
@@ -338,25 +381,28 @@ export const SEED = {
       "category": "Altro",
       "type": "in",
       "amount": 6000,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x37",
       "date": "2026-06-10",
       "description": "",
-      "category": "Francy",
+      "category": "Cecio",
       "type": "out",
       "amount": 3000,
-      "note": ""
+      "note": "",
+      "person": ""
     },
     {
       "id": "x38",
       "date": "2026-06-11",
       "description": "",
-      "category": "Francy",
+      "category": "Cecio",
       "type": "out",
       "amount": 200,
-      "note": ""
+      "note": "",
+      "person": ""
     }
   ]
 };

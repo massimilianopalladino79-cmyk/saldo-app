@@ -1,5 +1,5 @@
 // sw.js — service worker: app shell offline (cache-first con fallback rete)
-const CACHE = 'saldo-v2';
+const CACHE = 'saldo-v3';
 const ASSETS = [
   './',
   'index.html',

@@ -7,9 +7,17 @@ import { SEED } from './seed.js';
 const KEY = 'saldoapp:v1';
 const SEED_FLAG = 'saldoapp:seeded';
 
+const DATA_VERSION = 1;
+// Date dedotte (regola: data del movimento precedente nel file) per i 5 movimenti
+// che nell'Excel erano senza data. Chiavi = ID stabili del seed.
+const DATE_FIX = { x1: '2026-02-28', x3: '2026-03-10', x16: '2026-04-18', x17: '2026-04-18', x24: '2026-05-09' };
+const DEFAULT_PEOPLE = ['Cecio', 'Gaia', 'Max', 'Evelyn'];
+
 const DEFAULT_STATE = {
-  settings: { saldoIniziale: 0, valuta: 'EUR', tema: 'auto' },
-  movements: [], // { id, date:'YYYY-MM-DD', description, category, type:'in'|'out', amount:Number, note }
+  // niente dataVersion qui: i dati già presenti (senza versione) devono risultare v0
+  // così la migrazione parte. La versione viene impostata da migrate()/seed.
+  settings: { saldoIniziale: 0, valuta: 'EUR', tema: 'auto', people: [...DEFAULT_PEOPLE] },
+  movements: [], // { id, date:'YYYY-MM-DD', description, category, type:'in'|'out', amount:Number, note, person }
 };
 
 let state = structuredClone(DEFAULT_STATE);
@@ -37,7 +45,26 @@ export function load() {
     console.error('Errore lettura dati locali, riparto da stato vuoto:', e);
     state = structuredClone(DEFAULT_STATE);
   }
+  if (migrate()) persist(); // aggiorna dati già presenti sul dispositivo
   return state;
+}
+
+// Migrazioni idempotenti sui dati esistenti (installazioni già attive).
+function migrate() {
+  const from = state.settings.dataVersion || 0;
+  if (from >= DATA_VERSION) return false;
+  if (from < 1) {
+    for (const m of state.movements) {
+      if (m.category === 'Francy') m.category = 'Cecio';        // rinomina persona
+      if (!m.date && DATE_FIX[m.id]) m.date = DATE_FIX[m.id];   // date dedotte
+      if (m.person == null) m.person = '';                      // nuovo campo
+    }
+    if (!Array.isArray(state.settings.people) || !state.settings.people.length) {
+      state.settings.people = [...DEFAULT_PEOPLE];
+    }
+  }
+  state.settings.dataVersion = DATA_VERSION;
+  return true;
 }
 
 function persist() {
@@ -110,7 +137,36 @@ function normalize(m) {
     type,
     amount: Math.abs(Number(m.amount) || 0),
     note: (m.note || '').toString(),
+    person: (m.person || '').toString().trim(),
   };
+}
+
+// ---- persone ("Chi la usa" / a chi è destinata la spesa) ----
+export function getPeople() {
+  return Array.isArray(state.settings.people) ? state.settings.people : [];
+}
+export function addPerson(name) {
+  name = (name || '').toString().trim();
+  if (!name) return null;
+  if (!Array.isArray(state.settings.people)) state.settings.people = [];
+  if (!state.settings.people.includes(name)) { state.settings.people.push(name); emit(); }
+  return name;
+}
+export function removePerson(name) {
+  if (!Array.isArray(state.settings.people)) return;
+  state.settings.people = state.settings.people.filter((p) => p !== name);
+  emit();
+}
+
+// Totali per persona di un dato tipo ('in'|'out'), opz. filtrati per mese
+export function personTotals(type, ym = null) {
+  const map = new Map();
+  for (const m of state.movements) {
+    if (m.type !== type || !m.person) continue;
+    if (ym && monthKey(m.date) !== ym) continue;
+    map.set(m.person, (map.get(m.person) || 0) + m.amount);
+  }
+  return [...map.entries()].map(([person, total]) => ({ person, total })).sort((a, b) => b.total - a.total);
 }
 
 // ---- ordinamento & saldo progressivo ----

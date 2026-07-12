@@ -231,3 +231,13 @@ input,select,textarea{font-family:inherit}
 .toast.ok{background:var(--green);color:#04210d}
 
 .hidden-file{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+
+/* ---------- persone (Chi la usa) ---------- */
+.peoplepick{display:flex;flex-wrap:wrap;gap:8px}
+.peoplepick .pchip{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:999px;
+  background:var(--card-hi);border:1px solid var(--card-brd);font-size:13.5px;font-weight:700;color:var(--txt2);transition:.15s}
+.peoplepick .pchip.on{color:#fff;border-color:transparent}
+.peoplepick .pchip.add{color:var(--accent);border-style:dashed}
+.peoplepick .prm{margin-left:2px;width:18px;height:18px;border-radius:50%;background:rgba(127,127,127,.18);
+  color:var(--txt2);font-size:13px;line-height:1;display:grid;place-items:center}
+.mrow .who{color:var(--txt2);font-weight:700}

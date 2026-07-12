@@ -35,6 +35,11 @@ function hashColor(s) {
   return `hsl(${h} 68% 55%)`;
 }
 
+// colore stabile per una persona ("Chi la usa")
+export function personColor(name) {
+  return hashColor((name || '') + '·p');
+}
+
 const MONTHS_SHORT = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
 
 export function fmtCurrency(n, currency = 'EUR') {

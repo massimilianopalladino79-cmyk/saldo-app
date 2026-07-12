@@ -56,7 +56,8 @@ export function buildWorkbook() {
   aoa.push([]);                                                 // R2
   aoa.push(['Saldo iniziale', Number(s.saldoIniziale) || 0, null, 'Valuta', s.valuta || 'EUR']); // R3
   aoa.push([]);                                                 // R4
-  aoa.push(['Data', 'Descrizione', 'Categoria', 'Entrate', 'Uscite', 'Saldo progressivo', 'Note']); // R5
+  // colonne A–G identiche al template; H "Persona" aggiunta per non perdere il dato
+  aoa.push(['Data', 'Descrizione', 'Categoria', 'Entrate', 'Uscite', 'Saldo progressivo', 'Note', 'Persona']); // R5
   const firstDataRow = aoa.length + 1; // 1-based
   for (const m of rows) {
     aoa.push([
@@ -67,16 +68,17 @@ export function buildWorkbook() {
       m.type === 'out' ? m.amount : null,
       m.balance,
       m.note || '',
+      m.person || '',
     ]);
   }
   const lastDataRow = firstDataRow + rows.length - 1;
   // riga totali
   const t = totals();
   aoa.push([]);
-  aoa.push(['Totali', null, null, t.entrate, t.uscite, currentBalance(), '']);
+  aoa.push(['Totali', null, null, t.entrate, t.uscite, currentBalance(), '', '']);
 
   const ws = X.utils.aoa_to_sheet(aoa, { cellDates: true });
-  ws['!cols'] = [{ wch: 12 }, { wch: 30 }, { wch: 18 }, { wch: 12 }, { wch: 12 }, { wch: 16 }, { wch: 24 }];
+  ws['!cols'] = [{ wch: 12 }, { wch: 30 }, { wch: 18 }, { wch: 12 }, { wch: 12 }, { wch: 16 }, { wch: 24 }, { wch: 14 }];
 
   // formati numero (supportati anche in community): date + valuta
   const money = '#,##0.00';
@@ -130,7 +132,7 @@ export function exportXlsx(filename) {
 
 export function exportCsv(filename) {
   const rows = withRunningBalance();
-  const head = ['Data', 'Descrizione', 'Categoria', 'Entrate', 'Uscite', 'Saldo progressivo', 'Note'];
+  const head = ['Data', 'Descrizione', 'Categoria', 'Entrate', 'Uscite', 'Saldo progressivo', 'Note', 'Persona'];
   const lines = [head.join(';')];
   for (const m of rows) {
     lines.push([
@@ -139,7 +141,7 @@ export function exportCsv(filename) {
       m.type === 'in' ? m.amount.toFixed(2).replace('.', ',') : '',
       m.type === 'out' ? m.amount.toFixed(2).replace('.', ',') : '',
       m.balance.toFixed(2).replace('.', ','),
-      csv(m.note),
+      csv(m.note), csv(m.person),
     ].join(';'));
   }
   const bom = '﻿';
@@ -193,6 +195,7 @@ export async function importXlsx(file) {
       col.entrate = row.indexOf('entrate');
       col.uscite = row.indexOf('uscite');
       col.note = row.indexOf('note');
+      col.person = row.indexOf('persona');
       break;
     }
   }
@@ -220,6 +223,7 @@ export async function importXlsx(file) {
       type: entrate >= uscite && entrate > 0 ? 'in' : 'out',
       amount: entrate > 0 ? entrate : uscite,
       note: col.note >= 0 ? (row[col.note] ?? '').toString() : '',
+      person: col.person >= 0 ? (row[col.person] ?? '').toString().trim() : '',
     });
   }
 
