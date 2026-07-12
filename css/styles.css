@@ -259,3 +259,14 @@ input,select,textarea{font-family:inherit}
 .filtsum .fs-top b{color:var(--txt);font-size:16px}
 .filtsum .fs-net{font-size:19px;font-weight:800;letter-spacing:-.3px}
 .filtsum .fs-sub{display:flex;gap:16px;margin-top:7px;font-size:12.5px;font-weight:700}
+
+/* swatch colore accento */
+.swatches{display:flex;flex-wrap:wrap;gap:12px;padding:2px}
+.swatch{width:32px;height:32px;border-radius:50%;transition:transform .15s;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.swatch.on{outline:2.5px solid var(--txt);outline-offset:2px;transform:scale(1.06)}
+
+/* statistiche scheda persona */
+.pstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.pstat{background:var(--card-hi);border:1px solid var(--card-brd);border-radius:14px;padding:12px 13px}
+.pstat-v{font-size:18px;font-weight:800;letter-spacing:-.3px}
+.pstat-l{font-size:12px;color:var(--txt2);font-weight:600;margin-top:2px}

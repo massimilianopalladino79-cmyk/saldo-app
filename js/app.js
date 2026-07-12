@@ -20,6 +20,7 @@ const ui = {
 // ---------------- bootstrap ----------------
 store.load();
 applyTheme(store.getSettings().tema);
+applyAccent(store.getSettings().accent);
 render();
 wireChrome();
 store.onChange(() => render());
@@ -254,7 +255,7 @@ function renderAnalisi() {
       <div style="margin-top:14px">
         ${items.length ? items.map((c) => {
           const pct = tot ? (c.total / tot) * 100 : 0;
-          return `<div class="catbar">
+          return `<div class="catbar" ${a.dim === 'person' ? `data-persondetail="${escapeAttr(c.key)}" style="cursor:pointer"` : ''}>
             <div class="top"><span>${c.icon} ${escapeHtml(c.label)}</span>
               <span>${money(c.total)} · ${pct.toFixed(0)}%</span></div>
             <div class="track"><div class="fill" style="width:${pct.toFixed(1)}%;background:${c.color}"></div></div>
@@ -271,6 +272,8 @@ function renderAnalisi() {
     b.addEventListener('click', () => { a.dim = b.dataset.anadim; renderAnalisi(); }));
   view.querySelectorAll('[data-anamonth]').forEach((b) =>
     b.addEventListener('click', () => { a.month = b.dataset.anamonth; renderAnalisi(); }));
+  view.querySelectorAll('[data-persondetail]').forEach((el) =>
+    el.addEventListener('click', () => openPersonSheet(el.dataset.persondetail)));
   wireCommon();
 }
 
@@ -293,7 +296,7 @@ function personTimeCardHTML() {
       ${top.map((pp) => `<span class="li"><span class="sw" style="background:${personColor(pp.person)}"></span>${escapeHtml(pp.person)}</span>`).join('')}
     </div>
     <div style="margin-top:12px">
-      ${ot.people.map((pp) => `<div class="ptl-row">
+      ${ot.people.map((pp) => `<div class="ptl-row" data-persondetail="${escapeAttr(pp.person)}" style="cursor:pointer">
         <span class="ptl-name">👤 ${escapeHtml(pp.person)}</span>
         <span class="ptl-spark">${charts.sparkline(pp.monthly.length > 1 ? pp.monthly : [0, 0], personColor(pp.person))}</span>
         <span class="ptl-tot">${money(pp.total)}</span>
@@ -327,6 +330,10 @@ function renderImpostazioni() {
       <div class="card-t"><h3>Aspetto</h3></div>
       <div class="seg" style="width:100%;display:flex">
         ${['auto', 'light', 'dark'].map((t) => `<button data-tema="${t}" class="${tema === t ? 'on' : ''}" style="flex:1">${{ auto: 'Auto', light: 'Chiaro', dark: 'Scuro' }[t]}</button>`).join('')}
+      </div>
+      <div class="card-t" style="margin:16px 0 10px 2px"><span class="muted">Colore accento</span></div>
+      <div class="swatches">
+        ${ACCENTS.map((c) => `<button class="swatch ${(s.accent || '#7C5CFF').toLowerCase() === c.toLowerCase() ? 'on' : ''}" data-accent="${c}" style="background:${c}" aria-label="Colore ${c}"></button>`).join('')}
       </div>
     </div>
 
@@ -369,6 +376,9 @@ function renderImpostazioni() {
   view.querySelectorAll('[data-tema]').forEach((b) =>
     b.addEventListener('click', () => { store.setSetting('tema', b.dataset.tema); applyTheme(b.dataset.tema); renderImpostazioni(); }));
 
+  view.querySelectorAll('[data-accent]').forEach((b) =>
+    b.addEventListener('click', () => { store.setSetting('accent', b.dataset.accent); applyAccent(b.dataset.accent); renderImpostazioni(); }));
+
   $('#set-padd').addEventListener('click', () => {
     const name = (window.prompt('Nuova persona:') || '').trim();
     if (name) store.addPerson(name); // emette change -> ri-render automatico
@@ -404,6 +414,38 @@ function wireCommon() {
     el.addEventListener('click', () => openMovementSheet(store.getMovement(el.dataset.edit))));
   view.querySelectorAll('[data-goto]').forEach((el) =>
     el.addEventListener('click', () => { ui.tab = el.dataset.goto; render(); }));
+}
+
+// ---------------- scheda persona ----------------
+function openPersonSheet(name) {
+  const movs = store.getState().movements.filter((m) => m.person === name)
+    .slice().sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  const out = movs.filter((m) => m.type === 'out');
+  const totalOut = out.reduce((s, m) => s + m.amount, 0);
+  const months = new Set(movs.map((m) => monthKey(m.date)).filter(Boolean));
+  const avg = months.size ? totalOut / months.size : 0;
+  const last = movs[0];
+  const col = personColor(name);
+  const stat = (lbl, val) => `<div class="pstat"><div class="pstat-v">${val}</div><div class="pstat-l">${lbl}</div></div>`;
+  const html = `
+    <h2><span style="color:${col}">👤</span> ${escapeHtml(name)}</h2>
+    <div class="pstats">
+      ${stat('Totale dato', money(totalOut))}
+      ${stat('Movimenti', out.length)}
+      ${stat('Media / mese', money(avg))}
+      ${stat('Ultimo', last ? fmtDate(last.date) : '—')}
+    </div>
+    <div class="mlist" style="margin-top:6px">
+      ${movs.length ? movs.map((m) => `<div class="mrow" data-edit="${m.id}">
+        <div class="ic" style="background:${col}22;color:${col}">${catMeta(m.category).icon}</div>
+        <div class="mid"><div class="desc">${escapeHtml(m.description || m.category)}</div>
+          <div class="meta">${escapeHtml(m.category)} · ${fmtDate(m.date)}</div></div>
+        <div class="amt ${m.type === 'in' ? 'pos' : 'neg'}">${m.type === 'in' ? '+' : '−'} ${money(m.amount)}</div>
+      </div>`).join('') : emptyInline('Nessun movimento per questa persona')}
+    </div>`;
+  const { sheet } = openSheet(html);
+  sheet.querySelectorAll('[data-edit]').forEach((el) =>
+    el.addEventListener('click', () => openMovementSheet(store.getMovement(el.dataset.edit))));
 }
 
 // ---------------- sheet aggiungi/modifica ----------------
@@ -526,6 +568,12 @@ function applyTheme(tema) {
   const root = document.documentElement;
   if (tema === 'light' || tema === 'dark') root.setAttribute('data-theme', tema);
   else root.removeAttribute('data-theme');
+}
+
+const ACCENTS = ['#7C5CFF', '#0A84FF', '#30D158', '#FF9F0A', '#FF375F', '#BF5AF2', '#FF453A', '#64D2FF'];
+function applyAccent(color) {
+  if (!color) return;
+  document.documentElement.style.setProperty('--accent', color);
 }
 
 // ---------------- helpers ----------------
