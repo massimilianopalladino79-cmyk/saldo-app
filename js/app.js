@@ -299,7 +299,7 @@ function renderAnalisi() {
               <span>${money(c.total)} · ${pct.toFixed(0)}%</span></div>
             <div class="track"><div class="fill" style="width:${pct.toFixed(1)}%;background:${c.color}"></div></div>
           </div>`;
-        }).join('') : `<div class="empty" style="padding:26px"><p>${a.dim === 'person' ? 'Nessun movimento con persona per questo periodo' : 'Nessun dato per questo periodo'}</p></div>`}
+        }).join('') : `<div class="empty" style="padding:26px"><p>${a.dim === 'person' ? 'Nessuna spesa assegnata a una persona in questo periodo' : 'Nessun dato per questo periodo'}</p></div>`}
       </div>
     </div>
 
@@ -328,7 +328,7 @@ function personTimeCardHTML() {
   if (!ot.people.length) {
     return `<div class="card">
       <div class="card-t"><h3>Dato a ciascuno · nel tempo</h3></div>
-      <div class="empty" style="padding:22px"><p>Attribuisci le spese a una persona (campo "Chi la usa") per vedere qui l'andamento nel tempo.</p></div>
+      <div class="empty" style="padding:22px"><p>Assegna le spese a chi le fa (campo "Chi spende") per vedere qui l'andamento nel tempo.</p></div>
     </div>`;
   }
   const top = ot.people.slice(0, 8);
@@ -387,12 +387,13 @@ function renderImpostazioni() {
     </div>
 
     <div class="card">
-      <div class="card-t"><h3>Persone · Chi la usa</h3><span class="muted">${(s.people || []).length}</span></div>
+      <div class="card-t"><h3>Persone · Chi spende</h3><span class="muted">${(s.people || []).length}</span></div>
       <div class="peoplepick" id="set-people">
         ${(s.people || []).map((p) => `<span class="pchip" style="color:${personColor(p)}">👤 ${escapeHtml(p)}<button class="prm" data-rmperson="${escapeAttr(p)}" aria-label="Rimuovi">×</button></span>`).join('')}
         <button type="button" class="pchip add" id="set-padd">＋ Nuovo</button>
       </div>
-      <div class="page-sub" style="margin-top:8px">Usate quando inserisci una spesa per indicare a chi è destinata.</div>
+      <button class="btn btn-ghost" id="set-assign" style="margin-top:12px">Assegna "Chi spende" dalle categorie</button>
+      <div class="page-sub" style="margin-top:8px">Seleziona chi spende quando aggiungi/modifichi una spesa. Il pulsante assegna in automatico i movimenti la cui categoria è uno di questi nomi.</div>
     </div>
 
     <div class="card">
@@ -473,6 +474,10 @@ function renderImpostazioni() {
   });
   view.querySelectorAll('[data-rmperson]').forEach((b) =>
     b.addEventListener('click', () => store.removePerson(b.dataset.rmperson)));
+  $('#set-assign').addEventListener('click', () => {
+    const n = store.assignPersonFromCategory(store.getPeople());
+    toast(n ? `Assegnati ${n} movimenti` : 'Nessun movimento da assegnare', 'ok');
+  });
 
   const fileInput = $('#file-input');
   $('#do-import').addEventListener('click', () => fileInput.click());
@@ -559,7 +564,7 @@ function openMovementSheet(mov) {
       <div class="field"><label>Data</label>
         <input id="f-date" type="date" value="${m.date}"></div>
     </div>
-    <div class="field"><label>Chi la usa</label>
+    <div class="field"><label>Chi spende</label>
       <div class="peoplepick" id="f-people"></div></div>
     <div class="field"><label>Note (facoltative)</label>
       <textarea id="f-note" placeholder="Aggiungi una nota…">${escapeHtml(m.note)}</textarea></div>
@@ -588,7 +593,7 @@ function openMovementSheet(mov) {
     peopleBox.querySelectorAll('[data-person]').forEach((b) =>
       b.addEventListener('click', () => { person = b.dataset.person; renderPeople(); }));
     $('#p-add', peopleBox).addEventListener('click', () => {
-      const name = (window.prompt('Nome della persona a cui è destinata la spesa:') || '').trim();
+      const name = (window.prompt('Nome della persona che spende:') || '').trim();
       if (name) { store.addPerson(name); person = name; renderPeople(); }
     });
   }

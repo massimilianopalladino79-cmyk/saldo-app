@@ -7,11 +7,13 @@ import { SEED } from './seed.js';
 const KEY = 'saldoapp:v1';
 const SEED_FLAG = 'saldoapp:seeded';
 
-const DATA_VERSION = 1;
+const DATA_VERSION = 2;
 // Date dedotte (regola: data del movimento precedente nel file) per i 5 movimenti
 // che nell'Excel erano senza data. Chiavi = ID stabili del seed.
 const DATE_FIX = { x1: '2026-02-28', x3: '2026-03-10', x16: '2026-04-18', x17: '2026-04-18', x24: '2026-05-09' };
 const DEFAULT_PEOPLE = ['Cecio', 'Gaia', 'Max', 'Evelyn'];
+// Nomi-persona usati come categoria nei dati reali: vanno copiati in "Chi spende"
+const PERSON_NAMES = ['Cecio', 'Gaia', 'Max', 'Evelyn', 'Ivan', 'Paola', 'Jenny', 'Stefano'];
 
 const DEFAULT_STATE = {
   // niente dataVersion qui: i dati già presenti (senza versione) devono risultare v0
@@ -63,8 +65,33 @@ function migrate() {
       state.settings.people = [...DEFAULT_PEOPLE];
     }
   }
+  if (from < 2) {
+    // "Chi spende": copia dal campo Categoria i nomi-persona (Evelyn, Max, ...)
+    assignFromCategory(PERSON_NAMES);
+  }
   state.settings.dataVersion = DATA_VERSION;
   return true;
+}
+
+// Assegna "Chi spende" = categoria, per i movimenti la cui categoria è un nome
+// nell'elenco `names` e che non hanno ancora una persona. Aggiorna la lista persone.
+function assignFromCategory(names) {
+  const set = new Set(names);
+  let n = 0;
+  for (const m of state.movements) {
+    if (!m.person && set.has(m.category)) { m.person = m.category; n++; }
+  }
+  if (!Array.isArray(state.settings.people)) state.settings.people = [];
+  for (const nm of names) if (!state.settings.people.includes(nm)) state.settings.people.push(nm);
+  return n;
+}
+
+// Versione pubblica (pulsante in Impostazioni): usa la lista persone corrente.
+export function assignPersonFromCategory(names) {
+  const list = Array.isArray(names) && names.length ? names : getPeople();
+  const n = assignFromCategory(list);
+  emit();
+  return n;
 }
 
 function persist() {
