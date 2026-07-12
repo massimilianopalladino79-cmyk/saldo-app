@@ -10,7 +10,7 @@ import {
 const $ = (s, r = document) => r.querySelector(s);
 const view = $('#view');
 let balanceHidden = true; // privacy: saldo nascosto a ogni apertura
-const APP_VERSION = 'v18';
+const APP_VERSION = 'v19';
 const money = (n) => fmtCurrency(n, store.getSettings().valuta);
 
 const ui = {
