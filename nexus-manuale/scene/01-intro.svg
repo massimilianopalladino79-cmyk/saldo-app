@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="-0.031005 0 80.06787 80">
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <defs>
+    <filter id="filter0_d_21534_59498" x=".5586" y="18.54" width="78.88" height="42.56" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset/>
+      <feGaussianBlur stdDeviation="0.65625"/>
+      <feColorMatrix values="0 0 0 0 0.0235294 0 0 0 0 0.454902 0 0 0 0 0.980392 0 0 0 0.85 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_21534_59498"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow_21534_59498" result="shape"/>
+    </filter>
+  </defs>
+  <style type="text/css">@keyframes nodes-pulse { 0% { opacity: 0.25; } 25% { opacity: 0.85; } 45% { opacity: 0.45; } 60% { opacity: 1; } 80% { opacity: 0.6; } 100% { opacity: 0.25; } }
+@keyframes conduit-flow { 0% { stroke-dashoffset: 40; opacity: 0.2; } 30% { opacity: 0.5; } 55% { stroke-dashoffset: 0; opacity: 1; } 75% { stroke-dashoffset: -20; opacity: 0.6; } 100% { stroke-dashoffset: -40; opacity: 0.2; } }
+@keyframes hex-pulse { 0%, 100% { transform: scale(0.92); opacity: 0.35; stroke-width: 0.3px; } 40% { transform: scale(0.95); opacity: 0.55; stroke-width: 0.35px; } 55% { transform: scale(1.14); opacity: 1; stroke-width: 0.65px; } 70% { transform: scale(1); opacity: 0.8; stroke-width: 0.4px; } }
+@keyframes core-pulse { 0% { transform: rotate(0deg) scale(0.88); opacity: 0.35; } 40% { transform: rotate(45deg) scale(0.95); opacity: 0.6; } 55% { transform: rotate(180deg) scale(1.22); opacity: 1; } 75% { transform: rotate(270deg) scale(1); opacity: 0.75; } 100% { transform: rotate(360deg) scale(0.88); opacity: 0.35; } }
+.anim-nodes { animation: nodes-pulse 4s ease-in-out infinite; }
+.anim-conduit { stroke-dasharray: 8 12; animation: conduit-flow 4s linear infinite; }
+.anim-hex { transform-origin: 40px 39.41px; animation: hex-pulse 4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.anim-core { transform-origin: 40px 39.45px; animation: core-pulse 4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }</style>
+  <rect y="17.64" width="80" height="44.71" fill="#000710"/>
+  <g filter="url(#filter0_d_21534_59498)">
+    <g class="anim-nodes" id="peripheral-nodes--part-1">
+      <circle cx="3.691" cy="21.11" r="1.523" fill="#2A5CDE" opacity=".1"/>
+      <circle cx="3.691" cy="21.06" r=".8203" fill="#77B0FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-1">
+      <path d="m4.31 21.3 24.61 12.41 0.62 0.71c0.11 0.12 0.24 0.22 0.39 0.28l4.69 2.05" stroke="#5186F8" stroke-width=".2812"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-2">
+      <circle cx="6.414" cy="28.23" r="1.25" fill="#3476E2" opacity=".1"/>
+      <circle cx="6.414" cy="28.21" r=".6406" fill="#90C8FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-2">
+      <path d="m6.73 28.29 14.21 4.86" stroke="#487EE7" stroke-width=".1719"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-3">
+      <circle cx="20.95" cy="33.16" r=".3906" fill="#7AD4FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-3">
+      <path d="m14.33 34.76c5.6 0.64 14.31 1.4 18.4 2.82" stroke="#428CEB" stroke-width=".1406"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-4">
+      <circle cx="14.29" cy="34.77" r=".3281" fill="#639CF7"/>
+      <circle cx="2.434" cy="39.29" r="1.25" fill="#091D47"/>
+      <circle cx="2.406" cy="39.29" r=".7109" fill="#90C8FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-4">
+      <path d="m2.8 39.27 26.53 0.14" stroke="#528BFA" stroke-width=".25"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-5">
+      <circle cx="29.3" cy="39.41" r=".5547" fill="#22E3FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-5">
+      <path d="m9.43 44.98c7.65-1.09 16.23-2.39 23.3-3.63" stroke="#3169D1" stroke-width=".1406"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-6">
+      <circle cx="9.504" cy="44.98" r=".3438" fill="#4575E5"/>
+      <circle cx="20.88" cy="45.99" r=".3906" fill="#6BB3FB"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-6">
+      <path d="m5.71 50.67 15.04-4.59" stroke="#3D78E2" stroke-width=".1719"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-7">
+      <circle cx="5.742" cy="50.68" r=".2734" fill="#83B9FC"/>
+      <circle cx="3.535" cy="57.92" r="1.461" fill="#2153B0" opacity=".1"/>
+      <circle cx="3.523" cy="57.89" r=".8281" fill="#82BEFF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-7">
+      <path d="m4.09 57.61 25.68-12.74 0.42-0.46 4.43-2.15" stroke="#4F94F3" stroke-width=".2812"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-8">
+      <circle cx="17.48" cy="53.93" r=".2969" fill="#65B7F9"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-8">
+      <path d="m17.57 53.87 12.09-7.26 0.38-0.47 0.46-0.45 4.4-2.83" stroke="#3272CC" stroke-width=".09375"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-9">
+      <circle cx="26.01" cy="51.93" r=".375" fill="#21DFFF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-9">
+      <path d="m26.12 51.78 10.02-8.18" stroke="#2179D0" stroke-width=".09375"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-10">
+      <circle cx="40" cy="20.15" r="1.43" fill="#093260" opacity=".1"/>
+      <circle cx="39.98" cy="20.09" r=".75" fill="#64B7FB"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-10">
+      <path d="m40 20.73v12.66" stroke="#5199F3" stroke-width=".2188"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-11">
+      <circle cx="37.61" cy="26.82" r=".3438" fill="#67B8FB"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-11">
+      <path d="m37.62 26.98 0.94 4.8" stroke="#248AE2" stroke-width=".125"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-12">
+      <circle cx="38.54" cy="31.82" r=".207" fill="#22B5FF"/>
+      <circle cx="42.36" cy="26.82" r=".3438" fill="#15DFFF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-12">
+      <path d="m42.36 26.98-0.94 4.8" stroke="#179FE7" stroke-width=".125"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-13">
+      <circle cx="41.41" cy="31.82" r=".207" fill="#14C5F8"/>
+      <circle cx="39.98" cy="58.86" r="1.445" fill="#093464" opacity=".1"/>
+      <circle cx="40.01" cy="58.83" r=".7656" fill="#26DBFF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-13">
+      <path d="m40.01 45.37v12.86" stroke="#43A5F1" stroke-width=".2188"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-14">
+      <circle cx="38.55" cy="47.02" r=".2344" fill="#21D8FE"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-14">
+      <path d="m38.55 47.15-0.94 4.97" stroke="#1C85D8" stroke-width=".125"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-15">
+      <circle cx="37.59" cy="52.22" r=".3281" fill="#20A4F6"/>
+      <circle cx="41.36" cy="47.02" r=".2344" fill="#17D6FA"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-15">
+      <path d="m41.36 47.15 1.02 4.97" stroke="#1789D3" stroke-width=".125"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-16">
+      <circle cx="42.35" cy="52.22" r=".3281" fill="#18B2F3"/>
+      <circle cx="76.5" cy="21.11" r="1.477" fill="#082655" opacity=".1"/>
+      <circle cx="76.34" cy="21.09" r=".8281" fill="#19C6FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-16">
+      <path d="m75.65 21.32-24.44 12.47-0.7 0.75c-0.09 0.1-0.2 0.17-0.32 0.22l-4.81 2.03" stroke="#20A3F3" stroke-width=".2812"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-17">
+      <circle cx="73.54" cy="28.23" r="1.25" fill="#0A3354" opacity=".1"/>
+      <circle cx="73.54" cy="28.21" r=".625" fill="#18E8FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-17">
+      <path d="m73.08 28.34-13.96 4.81" stroke="#18B2F3" stroke-width=".1875"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-18">
+      <circle cx="59.06" cy="33.17" r=".375" fill="#17C3F6"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-18">
+      <path d="m65.71 34.76c-6.1 0.73-14.48 1.34-18.47 2.82" stroke="#19AAEF" stroke-width=".1406"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-19">
+      <circle cx="65.68" cy="34.77" r=".3281" fill="#16C5F7"/>
+      <circle cx="77.54" cy="39.29" r="1.25" fill="#041D35"/>
+      <circle cx="77.52" cy="39.28" r=".7188" fill="#16E8FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-19">
+      <path d="m77.25 39.29-26.59 0.12" stroke="#17D0FA" stroke-width=".25"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-20">
+      <circle cx="50.64" cy="39.41" r=".5547" fill="#16E8FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-20">
+      <path d="m70.51 44.98c-8.18-1.24-16.77-2.34-23.3-3.63" stroke="#1896DE" stroke-width=".1406"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-21">
+      <circle cx="70.45" cy="44.98" r=".3438" fill="#20B8F5"/>
+      <circle cx="59.11" cy="45.99" r=".3672" fill="#17D9FD"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-21">
+      <path d="m59.3 46.06 14.9 4.62" stroke="#15C5F8" stroke-width=".1875"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-22">
+      <circle cx="74.23" cy="50.68" r=".2656" fill="#15E1FD"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-22">
+      <path d="m79.99 52.28-5.77-1.6" stroke="#1169B0" stroke-width=".07031"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-23">
+      <circle cx="76.52" cy="57.92" r="1.477" fill="#0A3960" opacity=".1"/>
+      <circle cx="76.48" cy="57.89" r=".8438" fill="#16EDFF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-23">
+      <path d="m75.85 57.61-25.66-12.75-0.37-0.45-4.43-2.16" stroke="#20A7F1" stroke-width=".2812"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-24">
+      <circle cx="62.43" cy="53.93" r=".2969" fill="#17DFFC"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-24">
+      <path d="m62.29 53.86-11.89-7.21-0.43-0.61-0.53-0.36-4.46-2.82" stroke="#1370B6" stroke-width=".07031"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-25">
+      <circle cx="53.95" cy="51.93" r=".3906" fill="#16F1FF"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-25">
+      <path d="m53.8 51.79-10.01-8.19" stroke="#127EC9" stroke-width=".1016"/>
+      <path d="m61.25 25.82-10.85 6.76-0.32 0.27-0.39 0.69-4.26 2.28" stroke="#0D5CA0" stroke-width=".07812"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-26">
+      <circle cx="61.23" cy="25.82" r=".1719" fill="#0CD5FB"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-26">
+      <path d="m53.58 27.49-9.6 7.72" stroke="#0D5CA0" stroke-width=".08594"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-27">
+      <circle cx="53.59" cy="27.45" r=".3281" fill="#17C5F8"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-27">
+      <path d="m18.73 25.79 10.83 6.78 0.32 0.28 0.41 0.7 4.24 2.27" stroke="#2559C1" stroke-width=".0625"/>
+    </g>
+    <g class="anim-nodes" id="peripheral-nodes--part-28">
+      <circle cx="18.73" cy="25.79" r=".1719" fill="#3D78E1"/>
+      <circle cx="26.39" cy="27.45" r=".3281" fill="#4790F6"/>
+    </g>
+    <g class="anim-conduit" id="network-lines--part-28">
+      <path d="m26.49 27.56 9.14 7.61" stroke="#306ED3" stroke-width=".08594"/>
+    </g>
+    <path d="m34.75 36.41 5.24-3 5.24 3v6l-5.24 3-5.24-3v-6z" stroke="#48E1FF" stroke-width=".3594" class="anim-hex" id="center-hexagon"/>
+    <g class="anim-core" id="center-core">
+      <circle cx="39.98" cy="36.41" r=".4844" fill="#41B5FA"/>
+      <circle cx="37.36" cy="37.86" r=".4688" fill="#65C5FD"/>
+      <circle cx="37.36" cy="41.06" r=".4688" fill="#379EF9"/>
+      <circle cx="39.98" cy="42.54" r=".4844" fill="#2AA5F8"/>
+      <circle cx="42.58" cy="41.06" r=".4688" fill="#21AEFA"/>
+      <circle cx="42.58" cy="37.85" r=".4688" fill="#20DBFC"/>
+      <circle cx="39.98" cy="39.45" r=".75" fill="#28E9FE"/>
+      <path d="m39.99 36.65v5.83" stroke="#34A5F7" stroke-width=".125"/>
+      <path d="m37.46 37.92 5.03 3.16" stroke="#2CB3F9" stroke-width=".1406"/>
+      <path d="m42.51 37.92-5.14 3.16" stroke="#2CB3F9" stroke-width=".1406"/>
+      <circle cx="32.7" cy="37.57" r=".25" fill="#359EEB"/>
+      <circle cx="32.71" cy="41.34" r=".25" fill="#2FA5E9"/>
+      <circle cx="47.19" cy="37.57" r=".2656" fill="#18B8F3"/>
+      <circle cx="47.18" cy="41.33" r=".2656" fill="#19ABEB"/>
+    </g>
+  </g>
+  <path d="m0.01 26.25 6.14 1.97" stroke="#223C8B" stroke-width=".08203"/>
+  <path d="m0.01 52.26 5.67-1.6" stroke="#2644A6" stroke-width=".08203"/>
+  <path d="m79.99 26.25-6.34 2.01" stroke="#0D4478" stroke-width=".09375"/>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 80 80">
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <defs>
+    <filter id="filter0_d_25435_46026" x=".5234" y="40.23" width="13.95" height="14.97" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset/>
+      <feGaussianBlur stdDeviation="1.14"/>
+      <feColorMatrix values="0 0 0 0 0.113725 0 0 0 0 0.337255 0 0 0 0 0.945098 0 0 0 0.74 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_25435_46026"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow_25435_46026" result="shape"/>
+    </filter>
+    <filter id="filter1_d_25435_46026" x="64.25" y="26.89" width="14.84" height="13.77" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset/>
+      <feGaussianBlur stdDeviation="1.5"/>
+      <feColorMatrix values="0 0 0 0 1 0 0 0 0 0.294118 0 0 0 0 0.372549 0 0 0 0.83 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_25435_46026"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow_25435_46026" result="shape"/>
+    </filter>
+  </defs>
+  <style type="text/css">@keyframes rotateClock { 0% { transform: rotate(0deg); } 100% { transform: rotate(720deg); } } @keyframes animMessage { 0% { transform: scale(0.6); opacity: 0.2; } 8% { transform: scale(1.15); opacity: 1; } 14% { transform: scale(1); opacity: 1; } 45% { transform: scale(1) translateY(0); opacity: 1; } 50% { transform: scale(1) translateY(-0.8px); opacity: 1; } 55% { transform: scale(1) translateY(0); opacity: 1; } 85% { transform: scale(1); opacity: 1; } 95% { transform: scale(0.7); opacity: 0.3; } 100% { transform: scale(0.6); opacity: 0.2; } } @keyframes animBell { 0%, 25% { transform: rotate(0deg) scale(1); } 28% { transform: scale(1.15) rotate(-12deg); } 31% { transform: scale(1.18) rotate(12deg); } 34% { transform: scale(1.15) rotate(-10deg); } 37% { transform: scale(1.12) rotate(8deg); } 40% { transform: scale(1.08) rotate(-5deg); } 43% { transform: scale(1.03) rotate(3deg); } 46% { transform: scale(1) rotate(0deg); } 100% { transform: rotate(0deg) scale(1); } } @keyframes animArrow { 0%, 46% { transform: scale(0.2); opacity: 0; } 52% { transform: scale(0.6); opacity: 0.7; } 58% { transform: scale(1.08); opacity: 1; } 64% { transform: scale(1); opacity: 1; } 86% { transform: scale(1); opacity: 1; } 93% { transform: scale(0.9); opacity: 0.2; } 100% { transform: scale(0.2); opacity: 0; } } @keyframes animHalo { 0%, 56% { transform: scale(1); opacity: 0.8; } 63% { transform: scale(1.3); opacity: 1; } 69% { transform: scale(1.14); opacity: 0.85; } 75% { transform: scale(1.25); opacity: 1; } 83% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1); opacity: 0.8; } } @keyframes animShield { 0%, 61% { transform: scale(1) rotate(0deg); } 67% { transform: scale(1.35) rotate(-4deg); } 73% { transform: scale(1.1) rotate(3deg); } 79% { transform: scale(1.24) rotate(-2deg); } 85% { transform: scale(1) rotate(0deg); } 100% { transform: scale(1) rotate(0deg); } } .anim-clock { transform-origin: 7.51px 47.24px; animation: rotateClock 4s linear infinite; } .anim-message { transform-origin: 20.5px 46.5px; animation: animMessage 4s ease-in-out infinite; } .anim-bell { transform-origin: 40.5px 46.5px; animation: animBell 4s ease-in-out infinite; } .anim-arrow { transform-origin: 53px 49px; animation: animArrow 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; } .anim-halo { transform-origin: 71.54px 33.33px; animation: animHalo 4s ease-in-out infinite; } .anim-shield { transform-origin: 75.8px 36.5px; animation: animShield 4s ease-out infinite; }</style>
+  <rect y="22.66" width="80" height="34.67" fill="#02060E"/>
+  <g filter="url(#filter0_d_25435_46026)">
+    <circle cx="7.5" cy="47.21" r="5.016" fill="#4881FF"/>
+    <circle cx="7.5" cy="47.21" r="4.121" fill="#EAF1FF"/>
+    <path d="m7.5 43.64v0.83" stroke="#4881FF" stroke-linecap="round" stroke-width=".3662"/>
+    <path d="m7.5 50.09v0.82" stroke="#4881FF" stroke-linecap="round" stroke-width=".3662"/>
+    <path d="m11.1 47.22h-0.78" stroke="#4881FF" stroke-linecap="round" stroke-width=".3291"/>
+    <path d="m4.65 47.22h-0.76" stroke="#4881FF" stroke-linecap="round" stroke-width=".3291"/>
+    <g class="anim-clock" id="clock-hands">
+      <path d="m5.78 46.07 1.39 0.96" stroke="#152D58" stroke-linecap="round" stroke-width=".4063"/>
+      <path d="m9.97 45.24-2.14 1.74" stroke="#152D58" stroke-linecap="round" stroke-width=".4063"/>
+    </g>
+    <circle cx="7.511" cy="47.24" r=".4678" fill="#D5E3FF" stroke="#152D58" stroke-width=".3662"/>
+  </g>
+  <g class="anim-message" id="message-bubble">
+    <path d="m17.02 44.04h5.79c0.57 0 0.95 0.42 0.95 1v1.05l1.27 0.74c0.06 0.04 0.06 0.15 0 0.19l-1.27 0.67v0.67c0 0.59-0.42 0.95-0.95 0.95h-5.79c-0.58 0-0.94-0.44-0.94-1.03v-3.24c0-0.58 0.36-1 0.94-1z" fill="#4881FF"/>
+    <path d="m17.61 45.71h4.66" stroke="#D5E1FF" stroke-linecap="round" stroke-width=".4141"/>
+    <path d="m17.61 46.83h3.75" stroke="#D5E1FF" stroke-linecap="round" stroke-width=".4141"/>
+    <path d="m17.61 47.85h2" stroke="#D5E1FF" stroke-linecap="round" stroke-width=".4141"/>
+  </g>
+  <path d="m13.48 46.76h1.67" stroke="#4975DA" stroke-linecap="round" stroke-width=".3555"/>
+  <g class="anim-bell" id="bell-bubble">
+    <path d="m37.32 43.71h6.14c0.69 0 1.12 0.49 1.12 1.13v3.56c0 0.69-0.49 1.14-1.12 1.14h-6.14c-0.67 0-1.06-0.51-1.06-1.14v-0.88l-1.2-0.74c-0.05-0.03-0.05-0.11 0-0.14l1.2-0.75v-1.05c0-0.66 0.42-1.13 1.06-1.13z" fill="#FDB527"/>
+    <path d="m40.61 45.06c0.83 0.06 1.02 0.72 1.02 1.45 0 0.64 0.06 0.98 0.41 1.22 0.12 0.1 0.08 0.36-0.1 0.36h-3.08c-0.19 0-0.23-0.25-0.1-0.35 0.37-0.28 0.39-0.59 0.39-1.22 0-0.86 0.34-1.46 1.23-1.46h0.23z" fill="#995D05"/>
+    <circle cx="40.37" cy="44.88" r=".3437" fill="#995D05"/>
+    <path d="m39.93 48.31h0.98c0 0.24-0.19 0.41-0.49 0.41-0.24 0-0.49-0.17-0.49-0.41z" fill="#995D05"/>
+    <path d="m38.05 45.54c-0.44 0.38-0.49 1.27-0.23 1.67" stroke="#7F4D04" stroke-linecap="round" stroke-width=".3232"/>
+    <path d="m38.49 45.92c-0.22 0.21-0.24 0.69-0.13 0.94" stroke="#7F4D04" stroke-linecap="round" stroke-width=".2911"/>
+    <path d="m42.75 45.54c0.43 0.38 0.48 1.27 0.22 1.67" stroke="#7F4D04" stroke-linecap="round" stroke-width=".3232"/>
+    <path d="m42.29 45.92c0.22 0.21 0.25 0.69 0.14 0.94" stroke="#7F4D04" stroke-linecap="round" stroke-width=".2911"/>
+  </g>
+  <path d="m33.07 46.76h1.39" stroke="#FDB527" stroke-linecap="round" stroke-width=".3555"/>
+  <path d="m32.98 49.59c-0.67-0.26-1.63-0.45-2.03-0.64-0.38-0.17-0.35-0.54-0.35-0.54h-2.17s0.03 0.37-0.35 0.54c-0.4 0.19-1.36 0.38-2.03 0.64-0.83 0.34-1.11 1.11-1.11 2.4 1.27 0.38 3.27 0.62 4.65 0.62 1.39 0 3.58-0.24 4.58-0.62 0.02-1.29-0.31-2.06-1.19-2.4z" fill="#4582FF"/>
+  <path d="m28.48 48.46-0.61 0.6 0.29 1.58 0.93-0.51 0.54 0.45 0.57-0.45 0.78 0.51 0.3-1.53-0.56-0.65h-2.24z" fill="#6199FF"/>
+  <path d="m28.47 48.25v0.44c0.08 0.6 1.16 1.84 1.16 1.84s1.06-1.19 1.09-1.84v-0.44h-2.25z" fill="#FFB592"/>
+  <path d="m28.49 47.95v0.28c0.14 0.35 0.63 0.74 1.13 0.74 0.56 0 0.96-0.36 1.1-0.66v-0.36h-2.23z" fill="#EF9773"/>
+  <path d="m31.51 45.65c-0.06-0.02-0.11-0.02-0.16-0.01 0.01-0.11 0.01-0.23 0.01-0.36 0-1.03-0.72-1.69-1.79-1.69s-1.63 0.66-1.63 1.69 0 0.13 0 0.25 0.01 0.36-0.06-0.02-0.13-0.03-0.21 0-0.44 0.13-0.44 1.29 0.24 1.32 0.21 1.06 0.88 1.68 1.68 1.68 0.94 0 1.52-0.71 1.68-1.7 0.65-0.03 0.55-1.2 0.17-1.29z" fill="#FFB592"/>
+  <path d="m31.9 42.76c-0.25 0.04-0.58 0.01-0.58 0.01 0-0.3-0.56-0.8-1.38-0.79-0.69 0.07-2.3 0.31-2.36 1.3-1.18 0.09-0.64 2.06 0.01 2.45 0.56-0.06 0.61-1.19 0.61-1.19 1.05 0.32 2.31 0.12 2.95-0.23 0.16 0.44 0.18 1.1 0.2 1.49 0.04 0.1 0.31 0.07 0.33-0.72 0.5-1.09 0.59-2.37 0.22-2.32z" fill="#0F2449"/>
+  <path d="m53.47 49.59c-0.67-0.26-1.63-0.45-2.03-0.64-0.38-0.17-0.35-0.54-0.35-0.54h-2.17s0.03 0.37-0.35 0.54c-0.4 0.19-1.36 0.38-2.03 0.64-0.84 0.34-1.08 1.18-1.08 2.4 1.27 0.36 3.38 0.62 4.68 0.62 1.46 0 3.62-0.29 4.54-0.62 0.01-1.29-0.32-2.06-1.21-2.4z" fill="#4582FF"/>
+  <path d="m48.94 48.46-0.56 0.59 0.33 1.54 0.82-0.5 0.62 0.49 0.65-0.49 0.72 0.46 0.29-1.47-0.53-0.62h-2.34z" fill="#6199FF"/>
+  <path d="m48.94 48.31v0.38c0.08 0.6 1.21 1.84 1.21 1.84s1.07-1.19 1.1-1.84v-0.38h-2.31z" fill="#FFB592"/>
+  <path d="m48.96 47.95v0.28c0.14 0.35 0.65 0.74 1.17 0.74 0.56 0 0.95-0.36 1.09-0.66v-0.36h-2.26z" fill="#EF9773"/>
+  <path d="m52.08 45.65c-0.06-0.02-0.12-0.02-0.17-0.01 0.01-0.11 0.02-0.23 0.02-0.36 0-1.03-0.73-1.69-1.84-1.69-1.16 0-1.77 0.66-1.77 1.69 0 0.13 0.01 0.25 0.02 0.36-0.07-0.02-0.15-0.03-0.24 0-0.55 0.14-0.41 1.29 0.38 1.32 0.21 1.11 0.89 1.68 1.69 1.68 0.96 0 1.47-0.71 1.64-1.7 0.7-0.07 0.59-1.2 0.27-1.29z" fill="#FFB592"/>
+  <path d="m52.29 42.24c-0.8 0.17-1.75-0.27-1.96-0.26-0.85 0.09-2.1 0.45-2.18 1.27-1.19 0.24-0.69 2.17 0.17 2.57 0.48-0.19 0.47-1.33 0.47-1.33 1.1 0.32 2.38 0.16 2.93-0.23 0.1 0.46 0.13 0.98 0.17 1.35 0.04 0.13 0.32 0.07 0.4-0.62 0.03-0.34 0.05-0.74 0.09-0.93 0.49-0.68 0.29-1.64-0.09-1.82z" fill="#0F2449"/>
+  <path d="m65.81 36.52-3.59 1.59c-0.15 0.06-0.14 0.25-0.02 0.33l0.92 0.51c-2.23 3.65-6.3 6.84-9.85 8.13-0.21 0.08-0.14 0.34 0.12 0.29 4.9-0.95 9.31-4.2 11.6-7.19l0.89 0.55c0.13 0.07 0.26 0 0.26-0.15v-3.92c0.01-0.11-0.14-0.2-0.33-0.14z" fill="#FC4F5C" class="anim-arrow" id="escalation-arrow"/>
+  <g filter="url(#filter1_d_25435_46026)">
+    <circle cx="71.54" cy="33.33" r="5.344" fill="#FC4F5C" class="anim-halo" id="manager-halo"/>
+  </g>
+  <path d="m73.86 34.78-1.18-0.31h-2.31l-2.16 0.58c-0.82 0.23-1.13 0.64-1.13 0.98 0.75 1.51 2.46 2.59 4.46 2.59 1.35 0 2.55-0.46 3.45-1.21v-2.37l-1.13-0.26z" fill="#0F2449"/>
+  <path d="m70.19 34.44 0.72 4.13c0.2 0.03 0.43 0.04 0.62 0.04 0.15 0 0.28 0 0.41-0.01l1.05-4.16h-2.8z" fill="#DCE1EC"/>
+  <path d="m70.98 35.93 0.23 0.71-0.36 1.85c0.22 0.08 0.7 0.1 0.94 0l-0.2-1.85 0.26-0.71-0.5-0.67-0.37 0.67z" fill="#EA5151"/>
+  <path d="m70.43 34.13-0.31 0.35 0.56 1.75 0.7-0.99-0.95-1.11z" fill="#fff"/>
+  <path d="m72.7 34.13-1.32 1.11 0.73 0.99 0.96-1.69-0.37-0.41z" fill="#fff"/>
+  <path d="m70.37 34.46-1.21 0.33-0.04 0.86 0.56 0.33-0.55 0.44 1.35 2.11 0.43 0.04-0.74-4 0.2-0.11z" fill="#142A4F"/>
+  <path d="m72.68 34.44 0.23 0.14-1.43 4.03h0.46l1.62-1.92-0.39-0.56 0.52-0.29-0.12-1.13-0.89-0.27z" fill="#142A4F"/>
+  <path d="m70.41 33.97v0.29c0.13 0.35 0.59 0.9 0.97 1 0.46-0.14 1.09-0.7 1.32-1.02v-0.41l-2.29 0.14z" fill="#EF9773"/>
+  <path d="m69.98 31.35c-0.83-0.12-0.72 1.2-0.04 1.22 0.21 1.05 0.89 1.75 1.6 1.75 0.92 0 1.55-0.76 1.71-1.73 0.73-0.08 0.82-1.34 0.19-1.22-0.11-1.24-0.81-1.78-1.9-1.78-1.15 0-1.48 0.76-1.56 1.76z" fill="#FFB592"/>
+  <path d="m73.29 29.19c-0.08-0.51-0.83-0.95-1.8-0.93-0.97 0.04-1.76 0.75-2.2 0.75-0.2 0.15-0.1 0.72 0.2 0.88-0.12 0.58 0.05 1.45 0.31 1.76 0.15-0.12 0.27-1.41 0.27-1.41 1.02 0.28 2.18 0.15 2.84-0.24 0.21 0.54 0.31 1.25 0.34 1.64 0.06 0.07 0.22 0 0.29-0.23 0.48-1.28 0.44-2.22-0.25-2.22z" fill="#0F2449"/>
+  <g class="anim-shield" id="shield-badge">
+    <path d="m75.61 33.55-2.12 1v0.44l0.12 0.53 3.06-0.99-1.06-0.98z" fill="#B3252D" opacity=".2"/>
+    <path d="m77.88 34.79c-0.86-0.15-1.62-0.54-2.09-0.86-0.67 0.4-1.59 0.75-2.28 0.86v1.92c0 1.48 1.69 2.52 2.29 2.68 0.87-0.32 2.28-1.25 2.28-2.68v-1.74c0-0.09-0.09-0.17-0.2-0.18z" fill="#FF6563"/>
+    <path d="m75.83 38.25c-0.7-0.28-1.25-0.89-1.25-1.66v-0.94c0.5-0.07 0.95-0.23 1.24-0.46 0.33 0.25 0.78 0.39 1.29 0.46v0.94c0 0.81-0.6 1.39-1.28 1.66z" fill="#fff"/>
+    <path d="m75.83 37.84c-0.55-0.24-0.91-0.69-0.91-1.32v-0.67c0.38-0.05 0.68-0.16 0.91-0.32 0.25 0.18 0.58 0.27 0.94 0.32v0.67c0 0.65-0.4 1.09-0.94 1.32z" fill="#FF6563"/>
+    <path d="m75.83 37.55c-0.44-0.22-0.66-0.56-0.66-1.06v-0.48c0.27-0.04 0.48-0.12 0.66-0.23 0.2 0.13 0.44 0.2 0.7 0.25v0.46c0 0.52-0.26 0.85-0.7 1.06z" fill="#fff"/>
+  </g>
+</svg>

@@ -1,0 +1,438 @@
+<title>Manuale animato Nexus</title>
+<meta name="description" content="Manuale d'uso animato di Nexus: dieci passaggi, dal quadro dei reparti al controllo operativo.">
+<link rel="icon" href="img/nexus-app-icon-128.png">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#070b12; --bg2:#0b111c;
+  --glow1:rgba(91,140,255,.14); --glow2:rgba(34,211,238,.10);
+  --surface:rgba(255,255,255,.045); --surface2:rgba(255,255,255,.028);
+  --raised:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.055);
+  --ink:#f3f6fc; --ink2:#b6c0cf; --muted-s:#7a8494;
+  --a1:#5b8cff; --a2:#22d3ee; --a-ink:#eaf1ff;
+  --ok:#34d399; --ok-bg:rgba(52,211,153,.13);
+  --warn:#fbbf24; --warn-bg:rgba(251,191,36,.13);
+  --stop:#f87171; --stop-bg:rgba(248,113,113,.13);
+  --prop:#60a5fa; --prop-bg:rgba(96,165,250,.14);
+  --neu:#94a3b8; --neu-bg:rgba(148,163,184,.13);
+  --stage:#070b12;
+  --shadow:0 22px 60px -20px rgba(0,0,0,.7);
+  --radius:20px;
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#eef2f9; --bg2:#e6ecf6;
+  --glow1:rgba(91,140,255,.20); --glow2:rgba(34,211,238,.16);
+  --surface:#ffffff; --surface2:#f7f9fd; --raised:#ffffff;
+  --line:rgba(15,23,42,.10); --line2:rgba(15,23,42,.07);
+  --ink:#0e1726; --ink2:#41506a; --muted-s:#64748b;
+  --a1:#2f6bff; --a2:#0bb6d6; --a-ink:#ffffff;
+  --ok:#0f9d58; --ok-bg:rgba(15,157,88,.12);
+  --warn:#b7791f; --warn-bg:rgba(183,121,31,.12);
+  --stop:#d1242f; --stop-bg:rgba(209,36,47,.10);
+  --prop:#2f6bff; --prop-bg:rgba(47,107,255,.12);
+  --neu:#64748b; --neu-bg:rgba(100,116,139,.12);
+  --shadow:0 18px 40px -22px rgba(15,23,42,.35);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    color-scheme:light;
+    --bg:#eef2f9; --bg2:#e6ecf6;
+    --glow1:rgba(91,140,255,.20); --glow2:rgba(34,211,238,.16);
+    --surface:#ffffff; --surface2:#f7f9fd; --raised:#ffffff;
+    --line:rgba(15,23,42,.10); --line2:rgba(15,23,42,.07);
+    --ink:#0e1726; --ink2:#41506a; --muted-s:#64748b;
+    --a1:#2f6bff; --a2:#0bb6d6; --a-ink:#ffffff;
+    --ok:#0f9d58; --ok-bg:rgba(15,157,88,.12);
+    --warn:#b7791f; --warn-bg:rgba(183,121,31,.12);
+    --stop:#d1242f; --stop-bg:rgba(209,36,47,.10);
+    --prop:#2f6bff; --prop-bg:rgba(47,107,255,.12);
+    --neu:#64748b; --neu-bg:rgba(100,116,139,.12);
+    --shadow:0 18px 40px -22px rgba(15,23,42,.35);
+  }
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 12% -10%,var(--glow1),transparent 60%),
+    radial-gradient(800px 500px at 100% 110%,var(--glow2),transparent 60%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+  font:14px/1.5 "Segoe UI Variable","Segoe UI",system-ui,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:16px;padding-block:14px 70px;display:flex;flex-direction:column;gap:14px}
+
+/* testata */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.htit{display:flex;flex-direction:column;gap:2px;min-width:0}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-s);font-weight:700}
+h1{margin:0;font-size:clamp(20px,2.6vw,26px);font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.prog{display:flex;align-items:center;gap:10px}
+.prog img{width:38px;height:38px;border-radius:10px}
+.prog .t{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15}
+.pnome{font-size:15px;font-weight:800;letter-spacing:.09em;color:var(--a1)}
+.pcasa{font-size:8.5px;color:var(--muted-s);letter-spacing:.06em}
+.iconbtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink2);width:34px;height:34px;border-radius:10px;cursor:pointer;display:grid;place-items:center}
+.iconbtn:hover{color:var(--ink);background:var(--raised)}
+.iconbtn svg{width:17px;height:17px;fill:currentColor}
+
+/* fasi */
+.fasi{display:flex;gap:6px;flex-wrap:wrap}
+.fase{font-size:11.5px;font-weight:700;letter-spacing:.04em;padding:5px 11px;border-radius:999px;border:1px solid var(--line);color:var(--muted-s);background:var(--surface2);transition:all .3s}
+.fase.on{color:var(--a-ink);border-color:transparent;background:linear-gradient(90deg,var(--a1),var(--a2))}
+.fase.done{color:var(--ink2);border-color:var(--line)}
+
+/* griglia */
+.grid{display:grid;grid-template-columns:270px minmax(0,1fr);gap:14px;align-items:start}
+.glass{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+
+/* indice passaggi */
+.indice{padding:10px;display:flex;flex-direction:column;gap:2px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+.indice h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-s);margin:6px 8px 8px;font-weight:700}
+.step{appearance:none;border:0;background:transparent;color:var(--ink2);display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;text-align:left;padding:8px;border-radius:12px;cursor:pointer;font:inherit}
+.step:hover{background:var(--surface2);color:var(--ink)}
+.step .n{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;border:1px solid var(--line);color:var(--muted-s)}
+.step .l{font-size:13px;font-weight:600;line-height:1.25}
+.step.on{background:var(--raised);color:var(--ink)}
+.step.on .n{background:linear-gradient(135deg,var(--a1),var(--a2));color:var(--a-ink);border-color:transparent}
+.step.done .n{color:var(--ok);border-color:var(--ok)}
+:focus-visible{outline:2px solid var(--a2);outline-offset:2px}
+
+/* palco */
+.main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.palco{position:relative;overflow:hidden;padding:0}
+.schermo{position:relative;aspect-ratio:16/9;max-width:100%;background:var(--stage);display:grid;place-items:center;overflow:hidden}
+.schermo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transform:scale(1.04);transition:opacity .7s ease,transform 1.2s ease}
+.schermo img.on{opacity:1;transform:scale(1)}
+.schermo .vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(7,11,18,.55))}
+.badge{position:absolute;left:14px;top:14px;display:flex;gap:8px;align-items:center;z-index:2;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#eaf1ff;background:rgba(7,11,18,.6);border:1px solid rgba(255,255,255,.12);padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)}
+.badge b{font-variant-numeric:tabular-nums}
+.demo{position:absolute;right:14px;top:14px;z-index:2;font-size:10.5px;color:#b6c0cf;background:rgba(7,11,18,.6);border:1px solid rgba(255,255,255,.1);padding:4px 9px;border-radius:999px}
+.barra{height:3px;background:var(--line2)}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a1),var(--a2))}
+.comandi{display:flex;align-items:center;gap:8px;padding:10px 12px;flex-wrap:wrap}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font:inherit;font-weight:700;font-size:13px;padding:7px 14px;border-radius:11px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+.btn:hover{background:var(--raised)}
+.btn.pri{background:linear-gradient(90deg,var(--a1),var(--a2));color:var(--a-ink);border-color:transparent;min-width:118px;justify-content:center}
+.btn svg{width:15px;height:15px;fill:currentColor}
+.comandi .sp{flex:1}
+.hint{color:var(--muted-s);font-size:12px}
+
+/* spiegazione */
+.spiega{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px}
+.card{padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.card h3{margin:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-s);font-weight:700}
+.titolo{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+.intro{margin:0;color:var(--ink2);max-width:62ch}
+ol.azioni{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;counter-reset:a}
+ol.azioni li{counter-increment:a;display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;color:var(--ink);opacity:0;transform:translateY(6px);animation:su .5s ease forwards}
+ol.azioni li::before{content:counter(a);width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:11px;font-weight:800;background:var(--prop-bg);color:var(--prop);margin-top:1px}
+@keyframes su{to{opacity:1;transform:none}}
+.nota{font-size:12.5px;color:var(--ink2);border-top:1px solid var(--line2);padding-top:10px}
+.nota b{color:var(--ink)}
+
+/* flusso informazioni */
+.flusso{display:flex;flex-direction:column;gap:10px}
+.nodo{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--surface2);border:1px solid var(--line2);opacity:.35;transition:opacity .4s,border-color .4s,background .4s}
+.nodo.acceso{opacity:1;border-color:var(--line);background:var(--raised)}
+.nodo .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--prop-bg);color:var(--prop);flex:none}
+.nodo .ic svg{width:16px;height:16px;fill:currentColor}
+.nodo .tx{display:flex;flex-direction:column;min-width:0}
+.nodo .tx b{font-size:13px}
+.nodo .tx span{font-size:12px;color:var(--muted-s)}
+.link{position:relative;height:22px;margin-left:26px;width:2px;background:var(--line)}
+.link i{position:absolute;left:-3px;top:-4px;width:8px;height:8px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);opacity:0}
+.link.vivo i{animation:scorri 1.1s ease-in infinite}
+.link .et{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted-s);white-space:nowrap}
+@keyframes scorri{0%{top:-4px;opacity:0}20%{opacity:1}100%{top:22px;opacity:0}}
+.stati{display:flex;gap:6px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--neu-bg);color:var(--neu)}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.stop{background:var(--stop-bg);color:var(--stop)}
+.pill.prop{background:var(--prop-bg);color:var(--prop)}
+
+.capo{position:fixed;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:50;opacity:.95}
+.capo img{height:26px;display:block;filter:drop-shadow(0 1px 3px rgba(0,0,0,.3))}
+
+@media (max-width:900px){
+  .grid{grid-template-columns:1fr}
+  .indice{position:static;flex-direction:row;overflow-x:auto;padding:8px;gap:4px}
+  .indice h2{display:none}
+  .step{grid-template-columns:28px;padding:6px}
+  .step .l{display:none}
+  .spiega{grid-template-columns:1fr}
+  .hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="htit">
+      <span class="eyebrow">Manuale d'uso · 10 passaggi</span>
+      <h1>Come lavora <em>Nexus</em>, passo dopo passo</h1>
+    </div>
+    <div class="prog">
+      <button class="iconbtn" id="tema" aria-label="Cambia tema chiaro/scuro" title="Tema chiaro/scuro">
+        <svg viewBox="0 0 24 24"><path d="M12.3 22A10 10 0 0 1 9.6 2.4a.8.8 0 0 1 .9 1A8 8 0 0 0 20.6 13.5a.8.8 0 0 1 1 .9A10 10 0 0 1 12.3 22Z"/></svg>
+      </button>
+      <div class="t"><span class="pnome">NEXUS</span><span class="pcasa">MAFALDA SOFTWARE INTELLIGENCE</span></div>
+      <img src="img/nexus-app-icon-128.png" alt="Logo Nexus">
+    </div>
+  </header>
+
+  <div class="fasi" id="fasi" aria-label="Fasi del flusso"></div>
+
+  <div class="grid">
+    <nav class="glass indice" id="indice" aria-label="Passaggi del manuale">
+      <h2>Passaggi</h2>
+    </nav>
+
+    <div class="main">
+      <section class="glass palco" aria-label="Animazione del passaggio">
+        <div class="schermo" id="schermo">
+          <div class="badge">Passaggio <b id="bn">1</b>/<b>10</b></div>
+          <div class="demo">Illustrazione · non è una schermata dell'app</div>
+          <div class="vig"></div>
+        </div>
+        <div class="barra"><i id="barra"></i></div>
+        <div class="comandi">
+          <button class="btn" id="prev" aria-label="Passaggio precedente"><svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>Indietro</button>
+          <button class="btn pri" id="play"><svg viewBox="0 0 24 24" id="playic"><path d="M8 5v14l11-7z"/></svg><span id="playtx">Riproduci</span></button>
+          <button class="btn" id="next" aria-label="Passaggio successivo">Avanti<svg viewBox="0 0 24 24"><path d="M8.6 16.6 10 18l6-6-6-6-1.4 1.4 4.6 4.6z"/></svg></button>
+          <span class="sp"></span>
+          <span class="hint">Tastiera: ← → per scorrere, spazio per avviare</span>
+        </div>
+      </section>
+
+      <div class="spiega">
+        <section class="glass card" aria-live="polite">
+          <h3 id="fase-lbl">Fase</h3>
+          <p class="titolo" id="titolo"></p>
+          <p class="intro" id="intro"></p>
+          <ol class="azioni" id="azioni"></ol>
+          <p class="nota" id="nota"></p>
+        </section>
+        <section class="glass card">
+          <h3>Flusso dell'informazione</h3>
+          <div class="flusso" id="flusso"></div>
+          <div class="stati" id="stati"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="capo"><img src="img/logo-capo-mafalda.png" alt="Mafalda Industries"></div>
+
+<script>
+const IC = {
+  user:'<path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4 0-8 2-8 5v2h16v-2c0-3-4-5-8-5Z"/>',
+  boss:'<path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm-8 9v-2c0-3 4-5 8-5s8 2 8 5v2H4Zm8-6 1.2 2.5L12 20l-1.2-2.5z"/>',
+  hex:'<path d="m12 2 8.7 5v10L12 22l-8.7-5V7L12 2Zm0 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>',
+  task:'<path d="M9 3h6v2h4v16H5V5h4V3Zm-.5 10.5 2.5 2.5 5-5-1.4-1.4-3.6 3.6-1.1-1.1z"/>',
+  chat:'<path d="M4 4h16v12H8l-4 4V4Zm4 5v2h8V9H8Z"/>',
+  cam:'<path d="M9 4h6l1.5 2H20v14H4V6h3.5L9 4Zm3 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>',
+  eye:'<path d="M12 5c5 0 9 4.5 10 7-1 2.5-5 7-10 7S3 14.5 2 12c1-2.5 5-7 10-7Zm0 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/>',
+  clock:'<path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm-1 5v6l5 3 1-1.7-4-2.3V7h-2Z"/>',
+  cal:'<path d="M7 2h2v2h6V2h2v2h3v17H4V4h3V2Zm-1 7v10h12V9H6Z"/>',
+  grid:'<path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"/>',
+  ai:'<path d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 18l-2.2-5.8L4 10l5.8-2.2L12 2Zm6 13 1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5Z"/>',
+  chart:'<path d="M4 20V10h3v10H4Zm6.5 0V4h3v16h-3ZM17 20v-7h3v7h-3Z"/>'
+};
+
+const FASI = ['Apertura','Leggi','Crea','Instrada','Esegui','Verifica','Presidia','Controlla'];
+
+const PASSI = [
+  {img:'01-intro', fase:'Apertura', breve:'Benvenuto in Nexus',
+   titolo:'Dalle attività al controllo operativo',
+   intro:'Nexus assegna ogni attività a una sola persona, calcolata in automatico da turno e presenza, e segue il lavoro finché non è chiuso. Se nessuno risponde, sollecita e poi avvisa il responsabile.',
+   azioni:['Avvia Nexus e accedi con il tuo utente.','Controlla in alto quale utente sta operando.','Segui i passaggi di questo manuale nell’ordine: descrivono il percorso di una singola attività.'],
+   nota:'<b>Esempio usato nel manuale:</b> «Verifica area magazzino», con descrizione «Controllare che il percorso sia libero e confermare il completamento».',
+   flusso:[['hex','Nexus','il motore delle attività'],['grid','Reparti','magazzino, CNC, qualità, spedizioni'],['user','Persone','chi è di turno e presente']],
+   link:['organizza','raggiunge'], stati:[]},
+
+  {img:'02-mappa', fase:'Leggi', breve:'Mappa di Stato',
+   titolo:'Leggi il quadro nella Mappa di Stato',
+   intro:'Dopo l’accesso la Mappa di Stato mostra tutti i reparti. A sinistra ci sono azioni e riepilogo, al centro le schede reparto con le attività aperte.',
+   azioni:['Verifica l’ambito: quale utente e quali reparti stai guardando.','Leggi lo stato di ogni reparto: ogni colore ha sempre anche la sua scritta.','Parti dai reparti in stato Critico, poi Attenzione.','Scegli l’azione dal pannello di sinistra.'],
+   nota:'<b>Regola:</b> prima chi ha bisogno di attenzione. Gli elenchi sono ordinati per urgenza.',
+   flusso:[['task','Attività aperte','da tutti i reparti'],['grid','Mappa di Stato','riepilogo per reparto'],['boss','Tu','CEO o responsabile']],
+   link:['conteggi','lettura'],
+   stati:[['stop','Critico'],['warn','Attenzione'],['prop','Monitorare'],['ok','Regolare']]},
+
+  {img:'03-crea', fase:'Crea', breve:'Nuova attività',
+   titolo:'Crea un’attività: una tantum o ricorrente',
+   intro:'Con «+ Nuova attività» scegli il tipo: Una tantum per un incarico singolo, Ricorrente per un lavoro che si ripete, Intervento coordinato per un lavoro a fasi.',
+   azioni:['Premi «+ Nuova attività» e scegli «Una tantum».','Scrivi un titolo riconoscibile e, nella descrizione, il risultato atteso.','Imposta scadenza e incaricato (o il ruolo, per le ricorrenti).','Se serve, richiedi la foto di completamento.','Premi «Crea attività» e attendi il messaggio di conferma.'],
+   nota:'<b>Attenzione:</b> il messaggio conferma la creazione. La consegna della notifica è un passaggio diverso. Nelle ricorrenti controlla l’unità di misura dei tempi (minuti, ore, giorni).',
+   flusso:[['boss','Chi crea','titolo, descrizione, scadenza'],['task','Attività','una tantum · ricorrente · a fasi'],['hex','Nexus','registra e pianifica']],
+   link:['compila','salva'],
+   stati:[['prop','Nuova'],['neu','Pianificata']]},
+
+  {img:'04-destinatario', fase:'Instrada', breve:'Chi la riceve',
+   titolo:'Nexus sceglie una sola persona',
+   intro:'Per le attività ricorrenti non scrivi un nome fisso. A ogni scadenza Nexus guarda il turno del reparto e verifica chi è davvero presente.',
+   azioni:['Trova il turno pianificato per quel reparto e quella data.','Controlla la presenza: se la persona c’è, riceve lei l’attività.','Se è assente o non più attiva, passa al turno successivo presente quel giorno.','Se non c’è nessuno, passa al responsabile di riferimento del reparto.','Se manca anche lui, lo segnala come buco organizzativo: nessun invio a caso.'],
+   nota:'<b>Esempio:</b> primo turno al magazzino. Drago è assente, Capurso è presente: l’attività va a Capurso.',
+   flusso:[['cal','Turno','chi è pianificato oggi'],['user','Presenza','chi è davvero in azienda'],['user','Destinatario','una persona sola']],
+   link:['verifica','sceglie'],
+   stati:[['ok','Presente'],['neu','Assente'],['warn','Fallback responsabile'],['stop','Nessun destinatario']]},
+
+  {img:'05-whatsapp', fase:'Esegui', breve:'Promemoria WhatsApp',
+   titolo:'Il promemoria arriva su WhatsApp',
+   intro:'Nexus invia il messaggio al telefono della persona scelta, dal numero WhatsApp Business aziendale. La persona conferma dal telefono quando ha finito.',
+   azioni:['L’operatore riceve il promemoria con titolo e istruzioni.','Esegue il lavoro sul posto.','Conferma il completamento dal telefono (con foto, se richiesta).'],
+   nota:'<b>Invio fallito ≠ nessuna risposta.</b> Se il messaggio non parte (numero errato, errore di rete) lo stato diventa «Invio fallito» e chi ha creato l’attività viene avvisato subito.',
+   flusso:[['hex','Nexus','compone il messaggio'],['chat','WhatsApp Business','numero aziendale'],['user','Operatore','riceve sul telefono']],
+   link:['invia','consegna'],
+   stati:[['warn','In attesa'],['stop','Invio fallito'],['ok','Completato']]},
+
+  {img:'06-foto', fase:'Verifica', breve:'Verifica foto',
+   titolo:'La foto conferma che il lavoro è fatto',
+   intro:'Se l’attività richiede una prova, l’operatore invia una foto. Un controllo automatico guarda il contenuto dell’immagine, perché WhatsApp spesso toglie data e posizione.',
+   azioni:['L’operatore scatta la foto, per esempio dell’indicatore livello olio.','Nexus valuta se la foto è nitida e coerente con l’attività.','Verificata: l’attività si chiude normalmente.','Sospetta: resta completata, ma responsabile e CEO la rivedono.','Rifiutata: l’attività resta aperta e parte subito la richiesta di una nuova foto.'],
+   nota:'<b>Rifiutata</b> vale solo per prove palesemente estranee o inutilizzabili. Nei casi dubbi l’esito è <b>Sospetta</b>.',
+   flusso:[['cam','Foto','dal telefono dell’operatore'],['eye','Verifica','nitidezza e coerenza'],['task','Esito','sull’attività']],
+   link:['carica','valuta'],
+   stati:[['ok','Verificata'],['warn','Sospetta'],['stop','Rifiutata']]},
+
+  {img:'07-escalation', fase:'Presidia', breve:'Sollecito ed escalation',
+   titolo:'Se nessuno risponde: sollecito, poi escalation',
+   intro:'Nexus controlla di continuo le attività in attesa. Superati i tempi impostati nell’attività, alza il livello in due scatti.',
+   azioni:['Scaduto il tempo di sollecito, invia un secondo messaggio alla stessa persona.','Lo stato passa a «Sollecitato».','Scaduto il tempo di escalation, avvisa il responsabile indicato.','Lo stato passa a «Escalato» e compare in evidenza nella Mappa di Stato.'],
+   nota:'<b>Esempio di tempi:</b> sollecito dopo 30 minuti, escalation dopo 90 minuti. Li decidi tu quando crei l’attività.',
+   flusso:[['clock','Tempo','minuti trascorsi senza risposta'],['chat','Sollecito','alla stessa persona'],['boss','Responsabile','riceve l’escalation']],
+   link:['supera','poi'],
+   stati:[['warn','In attesa'],['warn','Sollecitato'],['stop','Escalato']]},
+
+  {img:'08-delega', fase:'Esegui', breve:'Delega a cascata',
+   titolo:'Passa l’attività a chi deve eseguirla',
+   intro:'Chi riceve un’attività può girarla a un collega invece di eseguirla. L’attività resta una sola: cambia chi la ha in mano, e ogni passaggio viene registrato.',
+   azioni:['Apri l’attività ricevuta e scegli la delega.','Indica la persona o il ruolo (per esempio Capoturno).','I promemoria vanno sempre a chi ha l’attività adesso.','Il messaggio indica come richiedente l’ultima persona che ha delegato.'],
+   nota:'<b>Esempio:</b> Giorgio → Ducacicu (Capoturno) → Barbieri (operatore macchina). Nexus rifiuta le deleghe che chiuderebbero un giro, per esempio di nuovo a Giorgio.',
+   flusso:[['boss','Giorgio','assegna'],['user','Ducacicu','Capoturno · delega 1'],['user','Barbieri','operatore · delega 2']],
+   link:['livello 1','livello 2'],
+   stati:[['prop','Assegnata'],['prop','Delegata'],['stop','Ciclo rifiutato']]},
+
+  {img:'09-segnalazione', fase:'Crea', breve:'Segnalazione dal basso',
+   titolo:'Un operatore segnala un problema',
+   intro:'Il flusso funziona anche al contrario. L’operatore scrive al numero aziendale e Nexus instrada il messaggio al suo responsabile, secondo l’organigramma.',
+   azioni:['L’operatore scrive, per esempio: «ho la macchina senza un utensile».','Anna, l’assistente AI, propone titolo e descrizione.','Il responsabile controlla la proposta e la archivia come attività.','Da quel momento l’attività riceve promemoria e può essere delegata o scalata.'],
+   nota:'<b>Controllo umano:</b> di serie Anna propone e basta. L’archiviazione automatica si attiva solo se la direzione lo decide.',
+   flusso:[['user','Barbieri','scrive su WhatsApp'],['ai','Anna','propone titolo e testo'],['boss','Ducacicu','conferma e archivia']],
+   link:['messaggio','proposta'],
+   stati:[['neu','Non letto'],['ok','Archiviato'],['neu','Scartato']]},
+
+  {img:'10-mission', fase:'Controlla', breve:'Mission Control',
+   titolo:'Segui tutto da Mission Control',
+   intro:'Mission Control raccoglie le disposizioni: obiettivo, attività collegate, avanzamento e cronologia degli interventi.',
+   azioni:['Apri Mission Control e scegli la disposizione nell’elenco.','Confronta attività create e concluse.','Leggi la traiettoria: la previsione compare con almeno tre completamenti reali.','Per cambiare priorità o scadenza usa il menu Azione: il motivo è obbligatorio e resta nella cronologia.'],
+   nota:'<b>Creata non vuol dire completata.</b> Un’attività appena creata compare con 0 concluse su 1.',
+   flusso:[['task','Attività','completamenti e ritardi'],['chart','Mission Control','avanzamento e cronologia'],['boss','Direzione','decide e interviene']],
+   link:['aggiorna','informa'],
+   stati:[['ok','Conclusa'],['warn','In corso'],['stop','In ritardo']]}
+];
+
+const DUR = 9000;
+let i = 0, playing = false, t0 = 0, raf = 0;
+const $ = s => document.querySelector(s);
+
+// struttura statica
+const indice = $('#indice');
+PASSI.forEach((p,k) => {
+  const b = document.createElement('button');
+  b.className = 'step'; b.id = 'st' + k;
+  b.innerHTML = `<span class="n">${k+1}</span><span class="l">${p.breve}</span>`;
+  b.onclick = () => { vai(k); ferma(); };
+  indice.appendChild(b);
+});
+FASI.forEach(f => { const s = document.createElement('span'); s.className='fase'; s.textContent=f; s.dataset.f=f; $('#fasi').appendChild(s); });
+
+const schermo = $('#schermo');
+const imgs = PASSI.map(p => {
+  const im = new Image(); im.alt = p.titolo; im.decoding='async';
+  im.src = 'scene/' + p.img + '.svg';
+  schermo.insertBefore(im, schermo.querySelector('.vig'));
+  return im;
+});
+
+function nodo(n){ return `<div class="nodo"><span class="ic"><svg viewBox="0 0 24 24">${IC[n[0]]}</svg></span><span class="tx"><b>${n[1]}</b><span>${n[2]}</span></span></div>`; }
+
+let timers = [];
+function vai(k){
+  i = (k + PASSI.length) % PASSI.length;
+  const p = PASSI[i];
+  imgs.forEach((im,j) => {
+    if (j === i) { const s = im.src; im.src = ''; im.src = s; } // riavvia l'animazione
+    im.classList.toggle('on', j === i);
+  });
+  document.querySelectorAll('.step').forEach((b,j) => {
+    b.classList.toggle('on', j === i); b.classList.toggle('done', j < i);
+    if (j === i) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current');
+  });
+  const fi = FASI.indexOf(p.fase);
+  document.querySelectorAll('.fase').forEach((s,j) => { s.classList.toggle('on', j === fi); s.classList.toggle('done', j < fi); });
+  $('#bn').textContent = i + 1;
+  $('#fase-lbl').textContent = 'Fase · ' + p.fase;
+  $('#titolo').textContent = p.titolo;
+  $('#intro').textContent = p.intro;
+  $('#azioni').innerHTML = p.azioni.map((a,j) => `<li style="animation-delay:${.25 + j*.35}s">${a}</li>`).join('');
+  $('#nota').innerHTML = p.nota;
+  $('#flusso').innerHTML = nodo(p.flusso[0]) + `<div class="link"><i></i><span class="et">${p.link[0]}</span></div>` + nodo(p.flusso[1]) + `<div class="link"><i></i><span class="et">${p.link[1]}</span></div>` + nodo(p.flusso[2]);
+  $('#stati').innerHTML = p.stati.map(s => `<span class="pill ${s[0]}">${s[1]}</span>`).join('');
+  // accende il flusso in sequenza
+  timers.forEach(clearTimeout); timers = [];
+  const nodi = [...document.querySelectorAll('#flusso .nodo')], links = [...document.querySelectorAll('#flusso .link')];
+  nodi[0].classList.add('acceso');
+  timers.push(setTimeout(() => links[0].classList.add('vivo'), 400));
+  timers.push(setTimeout(() => nodi[1].classList.add('acceso'), 1500));
+  timers.push(setTimeout(() => links[1].classList.add('vivo'), 1900));
+  timers.push(setTimeout(() => nodi[2].classList.add('acceso'), 3000));
+  t0 = performance.now();
+  if (!playing) $('#barra').style.width = '0';
+  try { history.replaceState(null, '', '#passo' + (i+1)); } catch(e) {}
+}
+
+function tick(now){
+  const f = Math.min(1, (now - t0) / DUR);
+  $('#barra').style.width = (f*100) + '%';
+  if (f >= 1) { if (i === PASSI.length - 1) { ferma(); return; } vai(i+1); }
+  raf = requestAnimationFrame(tick);
+}
+function avvia(){ if (i === PASSI.length - 1) vai(0); playing = true; t0 = performance.now(); raf = requestAnimationFrame(tick); aggiornaPlay(); }
+function ferma(){ playing = false; cancelAnimationFrame(raf); aggiornaPlay(); }
+function aggiornaPlay(){
+  $('#playtx').textContent = playing ? 'Pausa' : 'Riproduci';
+  $('#playic').innerHTML = playing ? '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
+}
+$('#play').onclick = () => playing ? ferma() : avvia();
+$('#prev').onclick = () => { vai(i-1); if (playing) t0 = performance.now(); };
+$('#next').onclick = () => { vai(i+1); if (playing) t0 = performance.now(); };
+document.addEventListener('keydown', e => {
+  if (e.target.closest('button') && e.key === ' ') return;
+  if (e.key === 'ArrowRight') $('#next').click();
+  else if (e.key === 'ArrowLeft') $('#prev').click();
+  else if (e.key === ' ') { e.preventDefault(); $('#play').click(); }
+});
+
+// tema
+$('#tema').onclick = () => {
+  const r = document.documentElement;
+  const scuro = r.dataset.theme ? r.dataset.theme === 'dark' : !matchMedia('(prefers-color-scheme: light)').matches;
+  r.dataset.theme = scuro ? 'light' : 'dark';
+  try { localStorage.setItem('nexus-tema', r.dataset.theme); } catch(e) {}
+};
+try { const t = localStorage.getItem('nexus-tema'); if (t) document.documentElement.dataset.theme = t; } catch(e) {}
+
+const m = /passo(\d+)/.exec(location.hash);
+vai(m ? Math.min(PASSI.length, Math.max(1, +m[1])) - 1 : 0);
+</script>

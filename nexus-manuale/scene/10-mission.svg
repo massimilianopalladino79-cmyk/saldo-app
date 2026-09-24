@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 80 80">
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <defs>
+    <linearGradient id="paint0_linear_21205_58566" x1="1.891" x2="78.11" y1="37.13" y2="37.13" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1173C1" offset="0"/>
+      <stop stop-color="#08ABE9" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear_21205_58566" x1="40.2" x2="40.2" y1="34.41" y2="47.94" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#056B93" offset="0"/>
+      <stop stop-color="#01284A" offset="1"/>
+    </linearGradient>
+    <radialGradient id="paint2_radial_21205_58566" cx="0" cy="0" r="1" gradientTransform="translate(31.22 31.22) rotate(90) scale(7.902)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#004576" offset="0"/>
+      <stop stop-color="#011D38" offset="1"/>
+    </radialGradient>
+    <linearGradient id="paint3_linear_21205_58566" x1="24.87" x2="37.48" y1="31.22" y2="31.22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1775FC" offset="0"/>
+      <stop stop-color="#0AC3F8" offset=".4294"/>
+      <stop stop-color="#07DEE2" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint4_linear_21205_58566" x1="40" x2="40" y1="54.57" y2="58.75" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#04569D" offset="0"/>
+      <stop stop-color="#023767" offset=".3438"/>
+      <stop stop-color="#012143" offset="1"/>
+    </linearGradient>
+    <clipPath id="trend-clip">
+      <rect x="23.4" y="30" width="0" height="25">
+        <animate attributeName="width" values="0; 33; 33; 0" keyTimes="0; 0.6; 0.85; 1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
+  </defs>
+  <style type="text/css">@keyframes pulse-points { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } } .anim-points { animation: pulse-points 4s ease-in-out infinite; } @keyframes timeline-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } } .anim-timeline { animation: timeline-glow 2s ease-in-out infinite; } @keyframes screen-reflect { 0%, 100% { opacity: 0.82; } 50% { opacity: 1; } } .anim-operator { animation: screen-reflect 4s ease-in-out infinite; }</style>
+  <rect y="17.65" width="80" height="44.7" fill="#000814"/>
+  <rect y="54.53" width="80" height="4.219" fill="#001A38"/>
+  <rect y="58.75" width="80" height="3.594" fill="#00060E"/>
+  <path d="m19.22 54.61-5.2 4.14h-14.02v-4.14h19.22z" fill="#011E40"/>
+  <path d="m24.89 54.61-3.59 4.14h-7.28l5.2-4.14h5.67z" fill="#011A37"/>
+  <path d="m29.42 54.61-2.25 4.14h-5.870l3.59-4.14h4.53z" fill="#022B56"/>
+  <path d="m41.48 54.61-1.71 4.14h-12.6l2.250-4.14h12.06z" fill="url(#paint4_linear_21205_58566)"/>
