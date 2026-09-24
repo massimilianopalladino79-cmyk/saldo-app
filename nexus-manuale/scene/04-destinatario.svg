@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 80 80">
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <defs>
+    <radialGradient id="paint0_radial_17595_97225" cx="0" cy="0" r="1" gradientTransform="translate(67.68 35.53) rotate(90) scale(9.047 9.271)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19A0F8" offset="0"/>
+      <stop stop-color="#031735" offset="1"/>
+    </radialGradient>
+    <radialGradient id="paint1_radial_17595_97225" cx="0" cy="0" r="1" gradientTransform="translate(67.68 35.53) rotate(90) scale(7.984 7.826)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19A0F8" offset="0"/>
+      <stop stop-color="#052E5B" offset="1"/>
+    </radialGradient>
+    <linearGradient id="paint2_linear_17595_97225" x1="7.547" x2="25.55" y1="41.57" y2="41.57" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1775FC" offset="0"/>
+      <stop stop-color="#0CCCF2" offset=".5833"/>
+    </linearGradient>
+    <linearGradient id="paint3_linear_17595_97225" x1="27.36" x2="32.16" y1="41.7" y2="41.7" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#899FBB" offset="0"/>
+      <stop stop-color="#7189A8" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint4_linear_17595_97225" x1="30.33" x2="32.97" y1="41.63" y2="41.63" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6BBCE3" offset="0"/>
+      <stop stop-color="#74D5F7" offset="1"/>
+    </linearGradient>
+  </defs>
+  <style type="text/css">@keyframes shift-glow-1 { 0%, 100% { opacity: 0.7; transform: translateY(0); filter: drop-shadow(0 0 0px transparent); } 10%, 25% { opacity: 1; transform: translateY(-0.8px); filter: drop-shadow(0 0 1.5px rgba(23,117,252,0.9)); } 35% { opacity: 0.7; transform: translateY(0); filter: drop-shadow(0 0 0px transparent); } }
+@keyframes shift-glow-2 { 0%, 15%, 100% { opacity: 0.7; transform: translateY(0); filter: drop-shadow(0 0 0px transparent); } 25%, 40% { opacity: 1; transform: translateY(-0.8px); filter: drop-shadow(0 0 1.5px rgba(12,204,242,0.9)); } 50% { opacity: 0.7; transform: translateY(0); filter: drop-shadow(0 0 0px transparent); } }
+@keyframes shift-glow-3 { 0%, 30%, 100% { opacity: 0.6; transform: translateY(0); filter: drop-shadow(0 0 0px transparent); } 40%, 55% { opacity: 1; transform: translateY(-0.8px); filter: drop-shadow(0 0 1.5px rgba(148,171,199,0.9)); } 65% { opacity: 0.6; transform: translateY(0); filter: drop-shadow(0 0 0px transparent); } }
+@keyframes reject-dim { 0%, 100% { opacity: 0.5; transform: scale(1); } 30%, 38% { opacity: 0.9; transform: scale(1.05); } 48%, 90% { opacity: 0.35; transform: scale(0.96); filter: grayscale(0.5); } }
+@keyframes accept-pop { 0%, 32%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px transparent); } 45% { transform: scale(1.15); filter: drop-shadow(0 0 2.5px rgba(43,219,192,0.95)); } 58% { transform: scale(1.06); filter: drop-shadow(0 0 1.5px rgba(43,219,192,0.6)); } 75% { transform: scale(1); filter: drop-shadow(0 0 0px transparent); } }
+@keyframes dispatch-pulse { 0%, 46%, 100% { opacity: 0.35; transform: translateX(0); filter: brightness(0.8); } 58%, 72% { opacity: 1; transform: translateX(0.6px); filter: brightness(1.5) drop-shadow(0 0 2px #22BFF9); } 82% { opacity: 0.35; transform: translateX(0); filter: brightness(0.8); } }
+@keyframes spotlight-pulse { 0%, 56%, 100% { transform: scale(1); opacity: 0.7; filter: drop-shadow(0 0 0px transparent); } 68%, 82% { transform: scale(1.12); opacity: 1; filter: drop-shadow(0 0 3px rgba(21,226,252,0.85)); } 92% { transform: scale(1); opacity: 0.7; filter: drop-shadow(0 0 0px transparent); } }
+@keyframes fallback-dash { 0% { opacity: 0.25; } 50% { opacity: 0.65; } 100% { opacity: 0.25; } }
+.anim-shift-1 { transform-origin: 6.75px 36.5px; animation: shift-glow-1 4s ease-in-out infinite; }
+.anim-shift-2 { transform-origin: 16.64px 36.5px; animation: shift-glow-2 4s ease-in-out infinite; }
+.anim-shift-3 { transform-origin: 26.55px 36.5px; animation: shift-glow-3 4s ease-in-out infinite; }
+.anim-absent { transform-origin: 38.83px 33.79px; animation: reject-dim 4s ease-in-out infinite; }
+.anim-present { transform-origin: 38.79px 41.11px; animation: accept-pop 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.anim-arrow { transform-origin: 53.5px 35.5px; animation: dispatch-pulse 4s ease-in-out infinite; }
+.anim-spotlight { transform-origin: 67.68px 35.53px; animation: spotlight-pulse 4s ease-in-out infinite; }
+.anim-fallback { animation: fallback-dash 4s ease-in-out infinite; }</style>
+  <rect y="23.27" width="80" height="33.44" fill="#00060F"/>
+  <g class="anim-spotlight" id="worker-spotlight--part-1">
+    <circle cx="67.68" cy="35.53" r="9.113" fill="url(#paint0_radial_17595_97225)"/>
+    <circle cx="67.68" cy="35.53" r="7.965" fill="url(#paint1_radial_17595_97225)"/>
+    <circle cx="67.65" cy="35.44" r="5.742" fill="#04275D"/>
+  </g>
+  <path d="m64.08 38.84c0-0.89 0.9-1.5 1.69-1.62 0.6-0.09 1.45-0.09 1.91-0.09s1.42 0.04 2.05 0.15c0.81 0.14 1.6 0.71 1.6 1.56-0.98 1.05-2.42 1.6-3.68 1.6-1.38 0-2.68-0.63-3.57-1.6z" fill="#0B64C2"/>
+  <path d="m66.24 37.15s0.26 0.86 0.91 1.5c0.42 0.44 0.54 1.08 0.54 1.08s0.13-0.64 0.59-1.11c0.57-0.59 0.77-1.47 0.77-1.47h-2.81z" fill="#19A3F0"/>
+  <path d="m66.71 36.52v0.6c0 0.32 0.47 0.6 0.97 0.6 0.51 0 1.07-0.3 1.07-0.6v-0.6h-2.04z" fill="#358ED4"/>
+  <path d="m66.15 37.15c0 0.44 0.27 1.18 0.83 1.9 0.48 0.6 0.52 1.33 0.52 1.33l0.31 0.01s-0.03-0.76 0.47-1.37c0.57-0.73 0.84-1.48 0.84-1.87l-0.31-0.07c0 0.39-0.28 1.06-0.77 1.7-0.25 0.34-0.34 0.73-0.34 0.73s-0.1-0.37-0.35-0.7c-0.53-0.66-0.79-1.35-0.79-1.73l-0.41 0.07z" fill="#062653"/>
+  <path d="m64.76 37.58 0.27 2.2c0.34 0.21 0.81 0.37 0.81 0.37l-0.2-2.89c-0.26 0.05-0.65 0.2-0.88 0.32z" fill="#22C7F7"/>
+  <path d="m70.56 37.58-0.32 2.17c-0.36 0.22-0.81 0.38-0.81 0.38l0.19-2.87c0.33 0.07 0.71 0.22 0.94 0.32z" fill="#22C7F7"/>
+  <path d="m66.19 34.26c-0.29-0.04-0.42 0.11-0.42 0.36 0 0.36 0.19 0.73 0.4 0.72l0.02-1.08z" fill="#82DDFE"/>
+  <path d="m69.16 34.32c0.29-0.06 0.48 0.04 0.48 0.33 0 0.35-0.17 0.72-0.41 0.72l-0.07-1.05z" fill="#82DDFE"/>
+  <path d="m67.67 32.52c-1.09 0-1.54 0.77-1.54 2.13 0 1.44 0.81 2.16 1.55 2.16 0.89 0 1.68-0.82 1.68-2.24 0-1.34-0.49-2.05-1.69-2.05z" fill="#82DDFE"/>
+  <path d="m68.19 31.61c-0.08-0.11-0.2-0.18-0.51-0.18-0.27 0-0.4 0.07-0.46 0.18-1.08 0.1-1.55 1.04-1.55 1.91h4.09c0-0.95-0.51-1.79-1.57-1.91z" fill="#22C7F7"/>
+  <path d="m67.23 31.43v1.57h0.32v-1.57h-0.32z" fill="#1075CE"/>
+  <path d="m68.14 31.43v1.57h0.28v-1.57h-0.28z" fill="#1075CE"/>
+  <path d="m65.62 33.45c-0.06 0.02-0.1 0.09-0.1 0.27 0 0.19 1.12 0.37 2.18 0.37s2.21-0.11 2.21-0.35c0-0.18-0.05-0.27-0.11-0.29h-4.18z" fill="#1095E3"/>
+  <g class="anim-spotlight" id="worker-spotlight--part-2">
+    <circle cx="67.65" cy="35.44" r="5.406" stroke="#15E2FC" stroke-width=".5312"/>
+  </g>
+  <rect x="33.69" y="29.2" width="12.82" height="16.34" rx="1.434" fill="#011626" stroke="#1785F3" stroke-width=".3047"/>
+  <g class="anim-absent" id="absent-avatar">
+    <circle cx="38.83" cy="33.79" r="2.945" fill="#031729" stroke="#869FBC" stroke-width=".3281"/>
+    <path d="m36.94 35.61c-0.03-0.77 0.65-1.09 1.35-1.2 0.12 0.11 0.3 0.18 0.49 0.18 0.2 0 0.37-0.07 0.48-0.18 0.81 0.13 1.39 0.48 1.37 1.2-0.46 0.45-1.12 0.67-1.85 0.67-0.72 0-1.39-0.26-1.84-0.67z" fill="#94ABC7"/>
+    <path d="m38.22 34.35c0 0.26 0.24 0.5 0.57 0.5s0.57-0.25 0.57-0.5h-1.14z" fill="#425A77"/>
+    <path d="m39.68 32.98c0-0.69-0.37-0.94-0.89-0.94s-0.92 0.26-0.92 0.94c-0.09 0.04-0.12 0.1-0.12 0.19 0 0.14 0.07 0.28 0.17 0.3 0.14 0.49 0.51 0.77 0.87 0.77 0.38 0 0.73-0.31 0.86-0.77 0.08-0.03 0.15-0.15 0.15-0.29 0-0.11-0.04-0.18-0.12-0.2z" fill="#A3B9D3"/>
+    <circle cx="43.16" cy="34.8" r="1.305" fill="#95ABC7"/>
+    <path d="m42.62 34.44 0.92 0.76" stroke="#132031" stroke-width=".25"/>
+    <path d="m43.54 34.44-0.92 0.76" stroke="#132031" stroke-width=".25"/>
+  </g>
+  <g class="anim-present" id="present-avatar">
+    <circle cx="38.79" cy="41.11" r="2.875" fill="#021D30" stroke="#2BDBC0" stroke-width=".3281"/>
+    <path d="m36.92 42.78c-0.05-0.77 0.67-1.07 1.34-1.19 0.11 0.14 0.3 0.23 0.52 0.23s0.39-0.09 0.49-0.23c0.81 0.15 1.46 0.48 1.43 1.19-0.47 0.49-1.16 0.71-1.93 0.71-0.74 0-1.41-0.26-1.85-0.71z" fill="#28D3B1"/>
+    <path d="m38.18 41.42c0 0.34 0.25 0.62 0.6 0.62 0.36 0 0.6-0.3 0.6-0.62h-1.2z" fill="#0A4F52"/>
+    <ellipse cx="38.79" cy="40.32" rx=".9883" ry="1.066" fill="#31E1BF"/>
+    <circle cx="43.12" cy="42.13" r="1.305" fill="#2CE1C0"/>
+    <path d="m42.47 42.18 0.43 0.33 0.78-0.79" stroke="#14202E" stroke-width=".25"/>
+  </g>
+  <path d="m46.61 34.94h12.77v-0.74l1.94 1.29-1.98 1.2v-0.86h-12.73v-0.89z" fill="#22BFF9" class="anim-arrow" id="dispatch-arrow"/>
+  <circle cx="64.65" cy="49.81" r="3.555" fill="#061220" stroke="#8FA7C5" stroke-width=".3438"/>
+  <path d="m62.25 52.25c-0.02-1.22 0.64-1.61 1.65-1.76 0.15 0.14 0.42 0.24 0.75 0.24s0.57-0.09 0.72-0.23c1.09 0.17 1.67 0.6 1.67 1.75-0.7 0.68-1.51 0.97-2.42 0.97-0.97 0-1.75-0.37-2.37-0.97z" fill="#8FA7C5"/>
+  <path d="m63.76 50.4 0.86 0.52 0.79-0.52-0.14 0.46-0.45 0.43h-0.41l-0.47-0.43-0.18-0.46z" fill="#102036"/>
+  <path d="m64.57 51.18h0.14l0.34 1.71c0 0.12-0.09 0.2-0.2 0.2h-0.43c-0.11 0-0.17-0.08-0.17-0.2l0.32-1.71z" fill="#12243D"/>
+  <path d="m65.7 48.91c0.07-1.1-0.48-1.4-1.08-1.4-0.66 0-1.18 0.31-1.11 1.4-0.13 0.01-0.17 0.09-0.17 0.22 0 0.2 0.11 0.43 0.24 0.45 0.14 0.64 0.58 0.94 1.04 0.94 0.5 0 0.9-0.37 1.03-0.94 0.12-0.03 0.23-0.24 0.23-0.44 0-0.14-0.05-0.22-0.18-0.23z" fill="#A3B9D3"/>
+  <g class="anim-shift-1" id="shift-block-1--part-1">
+    <path d="m2.94 32.58c0-0.57 0.43-0.97 0.97-0.97h5.7c0.58 0 0.97 0.41 0.97 0.97v6.61c0 0.61-0.44 1-1 1h-1.27c-0.51 0-0.78 0.33-0.78 0.79h-1.5c0-0.46-0.32-0.79-0.84-0.79h-1.27c-0.58 0-0.98-0.39-0.98-1v-6.61z" fill="#04275B" stroke="#1775FC" stroke-width=".07812"/>
+    <path d="m2.94 32.61c0-0.58 0.41-1 0.97-1h5.7c0.58 0 0.97 0.41 0.97 1v2.02h-7.64v-2.02z" fill="#1775FC"/>
+    <circle cx="6.75" cy="33.11" r=".5" fill="#fff"/>
+    <path d="m6.75 32.31v0.25" stroke="#fff" stroke-width=".125"/>
+    <path d="m6.08 32.69 0.17 0.15" stroke="#fff" stroke-width=".125"/>
+    <path d="m5.78 33.16h0.28" stroke="#fff" stroke-width=".125"/>
+    <path d="m6.08 33.78 0.17-0.15" stroke="#fff" stroke-width=".125"/>
+    <path d="m6.75 34.09v-0.28" stroke="#fff" stroke-width=".125"/>
+    <path d="m7.44 33.78-0.16-0.15" stroke="#fff" stroke-width=".125"/>
+    <path d="m7.75 33.16h-0.28" stroke="#fff" stroke-width=".125"/>
+    <path d="m7.44 32.69-0.16 0.15" stroke="#fff" stroke-width=".125"/>
+    <circle cx="6.75" cy="41.62" r="1.016" fill="#1775FC"/>
+  </g>
+  <g class="anim-shift-2" id="shift-block-2--part-1">
+    <path d="m12.81 32.58c0-0.57 0.44-0.97 0.97-0.97h5.7c0.58 0 0.97 0.41 0.97 0.97v6.61c0 0.61-0.43 1-1 1h-1.2c-0.54 0-0.81 0.33-0.81 0.79h-1.55c0-0.46-0.31-0.79-0.84-0.79h-1.25c-0.59 0-0.99-0.39-0.99-1v-6.61z" fill="#022B42" stroke="#11BCE8" stroke-width=".07812"/>
+    <path d="m12.81 32.61c0-0.58 0.41-1 0.97-1h5.7c0.58 0 0.97 0.41 0.97 1v2.02h-7.64v-2.02z" fill="#0CCCF2"/>
+    <circle cx="16.66" cy="33.11" r=".5" fill="#fff"/>
+    <path d="m16.66 32.31v0.25" stroke="#fff" stroke-width=".125"/>
+    <path d="m15.99 32.69 0.17 0.15" stroke="#fff" stroke-width=".125"/>
+    <path d="m15.69 33.16h0.28" stroke="#fff" stroke-width=".125"/>
+    <path d="m15.99 33.78 0.17-0.15" stroke="#fff" stroke-width=".125"/>
+    <path d="m16.66 34.09v-0.28" stroke="#fff" stroke-width=".125"/>
+    <path d="m17.31 33.78-0.15-0.15" stroke="#fff" stroke-width=".125"/>
+    <path d="m17.59 33.16h-0.25" stroke="#fff" stroke-width=".125"/>
+    <path d="m17.31 32.69-0.15 0.15" stroke="#fff" stroke-width=".125"/>
+    <circle cx="16.64" cy="41.59" r="1.016" fill="#0CCCF2"/>
+  </g>
+  <g class="anim-shift-3" id="shift-block-3--part-1">
+    <path d="m22.69 32.58c0-0.57 0.43-0.97 0.95-0.97h5.72c0.58 0 0.97 0.41 0.97 0.97v6.61c0 0.61-0.44 1-1 1h-1.21c-0.54 0-0.81 0.33-0.81 0.79h-1.53c0-0.46-0.31-0.79-0.84-0.79h-1.29c-0.58 0-0.96-0.39-0.96-1v-6.61z" fill="#19273A" stroke="#566C86" stroke-width=".07812"/>
+    <path d="m22.69 32.61c0-0.58 0.41-1 0.95-1h5.72c0.58 0 0.97 0.41 0.97 1v2.02h-7.64v-2.02z" fill="#6985A3"/>
+    <path d="m26.36 32.36c-0.06 0.11-0.08 0.23-0.08 0.66s0.63 0.64 1.08 0.53c-0.13 0.29-0.43 0.46-0.78 0.46-0.54 0-0.91-0.4-0.91-0.85s0.3-0.75 0.69-0.8z" fill="#CCD6E4"/>
+    <circle cx="26.55" cy="41.61" r="1.016" fill="#94ABC7"/>
+  </g>
+  <path d="m7.66 41.39h8.12v0.39h-8.12v-0.39z" fill="url(#paint2_linear_17595_97225)"/>
+  <path d="m17.53 41.39h8.02v0.39h-8.02v-0.39z" fill="#0CD8F2"/>
+  <path d="m27.36 41.39h4.52v0.41h-4.52v-0.41z" fill="url(#paint3_linear_17595_97225)"/>
+  <path d="m30.33 41.39h1.45v-0.53l1.22 0.75-1.22 0.78v-0.59h-1.45v-0.41z" fill="url(#paint4_linear_17595_97225)"/>
+  <g class="anim-shift-1" id="shift-block-1--part-2">
+    <circle cx="5.578" cy="37.02" r=".4297" fill="#77A9F2"/>
+    <circle cx="6.75" cy="36.75" r=".5469" fill="#77A9F2"/>
+    <circle cx="7.984" cy="37.02" r=".4297" fill="#77A9F2"/>
+    <path d="m4.69 38.41c0-0.55 0.44-0.77 1.12-0.72-0.15 0.19-0.2 0.53-0.18 0.75h-0.93c-0.01 0-0.01-0.01-0.01-0.03z" fill="#77A9F2"/>
+    <path d="m5.72 38.53c0-0.63 0.4-0.92 0.89-0.92l0.16 0.2h0.15l0.16-0.2c0.56 0 0.81 0.38 0.73 1h-2.08c-0.01-0.03-0.01-0.05-0.01-0.08z" fill="#77A9F2"/>
+    <path d="m7.69 37.69c0.75-0.05 1.12 0.2 1.06 0.75h-0.87c0.01-0.28-0.05-0.55-0.19-0.75z" fill="#77A9F2"/>
+  </g>
+  <g class="anim-shift-2" id="shift-block-2--part-2">
+    <circle cx="15.39" cy="37.02" r=".4297" fill="#13C3E9"/>
+    <circle cx="16.64" cy="36.75" r=".5469" fill="#13C3E9"/>
+    <circle cx="17.84" cy="37.02" r=".4297" fill="#13C3E9"/>
+    <path d="m14.58 38.38c-0.02-0.57 0.41-0.77 1.12-0.71-0.14 0.21-0.18 0.53-0.17 0.78h-0.94c0-0.01-0.01-0.04-0.01-0.07z" fill="#13C3E9"/>
+    <path d="m15.61 38.52c-0.01-0.63 0.41-0.93 0.91-0.93l0.2 0.18h0.19l0.18-0.18c0.6 0 0.68 0.47 0.58 0.99h-2.05c0-0.02-0.01-0.03-0.01-0.06z" fill="#13C3E9"/>
+    <path d="m17.55 37.67c0.78-0.03 1.14 0.24 1.09 0.78h-0.91c0.02-0.28-0.04-0.56-0.18-0.78z" fill="#13C3E9"/>
+  </g>
+  <g class="anim-shift-3" id="shift-block-3--part-2">
+    <circle cx="25.23" cy="37.02" r=".4297" fill="#94ABC7"/>
+    <circle cx="26.52" cy="36.72" r=".5469" fill="#94ABC7"/>
+    <circle cx="27.72" cy="37.02" r=".4297" fill="#94ABC7"/>
+    <path d="m24.47 38.38c-0.02-0.55 0.45-0.76 1.14-0.71-0.14 0.21-0.17 0.53-0.16 0.77h-0.97s-0.01-0.03-0.01-0.06z" fill="#94ABC7"/>
+    <path d="m25.52 38.52c-0.02-0.61 0.39-0.91 0.92-0.91l0.18 0.17h0.18l0.18-0.17c0.54 0 0.64 0.47 0.55 1h-2c0-0.03-0.01-0.06-0.01-0.09z" fill="#94ABC7"/>
+    <path d="m27.47 37.67c0.76-0.05 1.09 0.23 1.05 0.77h-0.88c0.02-0.27-0.05-0.55-0.17-0.77z" fill="#94ABC7"/>
+  </g>
+  <g class="anim-fallback" id="fallback-path">
+    <path d="m47.25 38.22h0.69c2.25 0 3.81 1.56 3.81 3.66v4.18c0 2.19 1.63 3.72 3.63 3.72h3.87" stroke="#7287A4" stroke-dasharray="0.53 0.84" stroke-linecap="square" stroke-width=".2969"/>
+    <path d="m59.03 49 1.23 0.77-1.23 0.78v-1.55z" fill="#8EA6C3"/>
+  </g>
+</svg>

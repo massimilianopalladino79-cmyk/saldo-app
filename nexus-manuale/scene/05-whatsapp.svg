@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 80 80">
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <defs>
+    <filter id="filter0_d_23113_9241" x="4.404" y="22.16" width="23.72" height="23.95" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset/>
+      <feGaussianBlur stdDeviation="2.5"/>
+      <feColorMatrix values="0 0 0 0 0.0235294 0 0 0 0 0.337255 0 0 0 0 1 0 0 0 1 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_23113_9241"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow_23113_9241" result="shape"/>
+    </filter>
+    <filter id="filter1_f_23113_9241" x="22.11" y="26.69" width="30.6" height="12.44" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur_23113_9241" stdDeviation="1.5"/>
+    </filter>
+  </defs>
+  <style type="text/css">@keyframes pulse-server { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(57, 216, 255, 0)); } 12% { transform: scale(1.06); filter: drop-shadow(0 0 3px rgba(57, 216, 255, 0.8)); } 25% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(57, 216, 255, 0)); } } .anim-server-hub { transform-origin: 16.42px 34.2px; animation: pulse-server 3s ease-in-out infinite; } @keyframes pulse-path { 0%, 100% { opacity: 0.35; } 10% { opacity: 0.5; } 25%, 45% { opacity: 1; } 60% { opacity: 0.35; } } .anim-data-path { animation: pulse-path 3s ease-in-out infinite; } @keyframes travel-bubble { 0% { transform: translate(-18px, 1.5px) scale(0.3); opacity: 0; } 8% { transform: translate(-16px, 1.2px) scale(0.85); opacity: 0.95; } 30% { transform: translate(-5px, -0.8px) scale(1); opacity: 1; } 52% { transform: translate(12px, 8.5px) scale(0.9); opacity: 1; } 58% { transform: translate(16px, 11px) scale(0.2); opacity: 0; } 100% { transform: translate(-18px, 1.5px) scale(0.3); opacity: 0; } } .anim-message-bubble { transform-box: fill-box; transform-origin: center; animation: travel-bubble 3s cubic-bezier(0.4, 0, 0.2, 1) infinite; } @keyframes flash-screen { 0%, 48%, 75%, 100% { opacity: 0.9; filter: brightness(1); } 55%, 62% { opacity: 1; filter: brightness(1.35) drop-shadow(0 0 2px #a7f7e0); } } .anim-phone-screen { animation: flash-screen 3s ease-in-out infinite; } @keyframes pop-reminder { 0%, 50% { transform: scale(0.9); opacity: 0.6; } 54% { transform: scale(0.5); opacity: 0; } 64% { transform: scale(1.22); opacity: 1; } 72% { transform: scale(0.92); opacity: 1; } 80% { transform: scale(1.06); opacity: 1; } 88%, 100% { transform: scale(1); opacity: 0.9; } } .anim-reminder-card { transform-origin: 55px 43.5px; animation: pop-reminder 3s cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }</style>
+  <rect y="17.5" width="80" height="45" fill="#010814"/>
+  <g class="anim-server-hub" id="server-hub">
+    <circle cx="16.42" cy="34.17" r="11.68" fill="#053CB2" opacity=".1"/>
+    <circle cx="16.42" cy="34.26" r="9.557" fill="#0743B8" opacity=".2"/>
+    <g filter="url(#filter0_d_23113_9241)">
+      <path d="m15.95 26.74-5.57 3.23c-0.4 0.23-0.62 0.63-0.62 1.08v6.2c0 0.46 0.24 0.89 0.64 1.12l5.52 3.14c0.42 0.24 0.93 0.24 1.35 0l5.32-3.14c0.4-0.23 0.62-0.66 0.62-1.12v-6.26c0-0.45-0.23-0.86-0.62-1.08l-5.42-3.17c-0.38-0.22-0.84-0.21-1.22 0z" stroke="#39D8FF" stroke-width=".8958"/>
+      <rect x="12.37" y="30.45" width="8.26" height="2.203" rx=".6233" fill="#1058DF"/>
+      <rect x="12.37" y="33.17" width="8.26" height="2.123" rx=".5974" fill="#1058DF"/>
+      <rect x="12.37" y="35.73" width="8.26" height="2.169" rx=".6115" fill="#1058DF"/>
+      <circle cx="19.38" cy="31.58" r=".4759" fill="#03F8E7"/>
+      <circle cx="19.38" cy="34.2" r=".4554" fill="#03F8E7"/>
+      <circle cx="19.38" cy="36.85" r=".4554" fill="#03F8E7"/>
+    </g>
+  </g>
+  <g class="anim-data-path" id="data-path--part-1">
+    <path d="m24.12 32.54c2.18-0.9 6.19-1.86 9.2-1.9" stroke="#15B6F9" stroke-width=".8367"/>
+  </g>
+  <g filter="url(#filter1_f_23113_9241)" class="anim-message-bubble" id="message-bubble">
+    <path d="m41.77 31.44c3.17 0.79 6.18 3.01 8.06 4.99" stroke="#00E6E3" stroke-width=".8367"/>
+    <rect x="33.84" y="27.85" width="7.426" height="4.815" rx="1.247" fill="#00CC7A"/>
+    <path d="m35.32 32.52v0.97c0 0.14 0.17 0.22 0.28 0.13l1.24-1.03-1.52-0.07z" fill="#00CC7A"/>
+    <circle cx="35.81" cy="30.24" r=".5268" fill="#A5F8E0"/>
+    <circle cx="37.57" cy="30.24" r=".5268" fill="#A5F8E0"/>
+    <circle cx="39.27" cy="30.24" r=".5268" fill="#A5F8E0"/>
+  </g>
+  <g class="anim-data-path" id="data-path--part-2">
+    <path d="m41.77 31.44c3.17 0.79 6.18 3.01 8.06 4.99" stroke="#00E6E3" stroke-width=".8367"/>
+  </g>
+  <path d="m61.53 48.91-0.63-0.69c0.22-1.57 0.11-2.97-0.6-4.32l-1.37-2.75c-0.21-0.37-0.89-0.21-0.84 0.27l0.26 2.39-1.68 6.52c0.51 0.39 0.99 0.61 1.4 0.66l1.2 1.91c1.17-0.89 1.96-2.36 2.26-3.99z" fill="#FF996F"/>
+  <path d="m61.59 48.86-0.26-0.11c-0.47 1.67-1.41 3.36-2.19 4.37l2.53 4.14 0.65-7.18-0.73-1.22z" fill="#1043B0"/>
+  <path d="m67.86 42.39c-2.62 0.91-4.42 2.15-5.41 4.41-0.53 1.24-0.87 2.6-0.84 4.11l0.06 6.35-0.08 5.24h18.41v-20.16l-3.32-2.02-6.42 1.22-2.4 0.85z" fill="#1249B7"/>
+  <path d="m77.64 41.04-0.15-0.02c-3.08 0.78-5.75 5.52-6.73 8.86-2.29 0.04-4.45-0.04-6.08-0.13 0.29-2.57 1.38-5.4 2.62-6.99l-1.58 0.7c-3.46 4.08-4.19 12.69-4.2 19.04h14.81l0.02-2.06c-2.54-2.15-3.08-6.5-2.78-10.16 0.01-0.12-0.08-0.2-0.22-0.24 0.79-3.77 3.63-7.84 6.57-7.72l-2.28-1.28z" fill="#001445"/>
+  <path d="m63.36 53.42-0.21 5.77c-0.02 0.5 0.34 0.91 0.84 0.96l4.98 0.57c0.54 0.07 0.97-0.3 1-0.84l0.44-6.08c0.01-0.22-0.12-0.34-0.33-0.35l-6.32-0.31c-0.24-0.02-0.39 0.07-0.4 0.28z" fill="#082975"/>
+  <path d="m63.24 54.99c2.02 0.33 5.45 0.67 7 0.57" stroke="#041A54" stroke-width=".3981"/>
+  <ellipse transform="rotate(16.24 63.62 50.42)" cx="63.62" cy="50.42" rx=".5735" ry=".8638" fill="#2887FF"/>
+  <circle cx="71.79" cy="50.73" r=".8547" fill="#2887FF"/>
+  <path d="m76.99 49.35c-0.78 2.16-1.51 7.27-1.64 9.8 0.25 0.56 0.65 1.02 1.03 1.29 0.03-3.58 0.23-7.57 0.66-11.06l-0.05-0.03z" fill="#0D3891"/>
+  <path d="m80 42.33c-2.9-0.16-5.68 4.56-6.63 7.75l2.96 10.36-0.05 2.06h3.72v-20.17z" fill="#1249B7"/>
+  <path d="m69.03 40.75c-0.8 0.51-1.64 1.76-2.2 3.42l1.28-0.84 0.05 1.66 1.07-2.57-0.2-1.67z" fill="#1959D3"/>
+  <path d="m68.81 41.19-0.66 2.09 0.01 1.71 1.05-2.63-0.4-1.17z" fill="#2887FF"/>
+  <path d="m74.52 36.41c0.49-1.54 1.37-3.9 1.44-5.72-1.55-1.97-9.64-1.73-11.66 0.29-0.42 0.62-0.32 1.58 0.14 2.21-0.02 2.12 0.79 5.02 1.83 5.87 0.45 0.32 1.56-0.09 2.27-0.29l0.69 3.65 5.91-3.38-0.62-2.63z" fill="#FF996F"/>
+  <path d="m65.18 31.4c0.04 0.39 0.2 0.77 0.55 1.08l0.44 1.47 0.58-0.01c-0.03-1.11 0.46-1.64 1.05-1.63 0.59 0.02 1.19 0.62 1.22 1.38 0.95 2.48 3.02 3.27 5.54 2.71 0.65-1.78 1.36-3.95 1.44-5.74l-10.82 0.74z" fill="#010819"/>
+  <path d="m69.37 31.45c1.59 2.02 4.5 2.75 6.15 2.04 0.23-0.74 0.39-1.52 0.47-2.25l-6.62 0.21z" fill="#051644"/>
+  <path d="m73.08 32.04c-0.24 0.48-0.29 1.09-0.22 1.52 1.02 0.24 1.97 0.14 2.65-0.1 0.15-0.54 0.28-1.1 0.37-1.66-0.93 0.28-1.91 0.34-2.8 0.24z" fill="#031547"/>
+  <path d="m64.09 31.37c-0.04 0.19 0 0.39 0.08 0.52 0.31 0.18 0.87 0.17 1.14 0.06l0.02-0.6-1.24 0.02z" fill="#FF855F"/>
+  <path d="m76.61 29.76c-0.08-4.55-2.8-6.8-6.55-6.8-3.8 0.03-6.48 2.61-6.76 6.64l-1.93 0.76c-0.46 0.19-0.39 0.78 0.25 0.87 3.99 0.38 11.74 0.29 14.87-0.16 0.86-0.14 0.82-1.12 0.12-1.31z" fill="#1A77FC"/>
+  <path d="m65.96 24.89c1.55-1.07 3.65-1.23 5.28-0.27 1.58 0.93 2.45 2.8 2.52 4.47 0.01 0.18-0.45 0.17-0.46 0.01-0.09-1.6-0.95-3.27-2.44-5-1.92-0.2-3.07 0.19-4.69 0.95-0.26 0.08-0.33-0.03-0.21-0.16z" fill="#1349BE"/>
+  <path d="m75.31 38.52c-2.07 1.22-4.23 2.7-5.8 3.85l1.22 2.38 5.95-4.4c-0.33-0.8-0.84-1.67-1.37-1.83z" fill="#1651C2"/>
+  <path d="m76.54 40.29c-1.79 1.52-4.04 3.17-5.74 4.13l-1.06-2.01-0.23-0.04 1.13 2.31c0.07 0.12 0.19 0.13 0.31 0.07 1.88-1.21 4.09-2.82 6.07-4.19l-0.48-0.27z" fill="#0D3285"/>
+  <path d="m55.58 34.89-5.59 0.93c-0.78 0.14-1.15 0.71-0.97 1.49l3.21 12.65c0.15 0.68 0.72 1.09 1.39 0.96l5.37-1.1c0.72-0.15 1.05-0.7 0.9-1.41l-3.17-12.58c-0.12-0.62-0.55-1.01-1.14-0.94z" fill="#1651C2"/>
+  <path d="m55.52 35.19-5.34 0.89c-0.6 0.1-0.86 0.52-0.73 1.14l3.24 12.49c0.12 0.54 0.55 0.8 1.1 0.69l5.08-1.05c0.55-0.11 0.75-0.5 0.63-1.06l-3.06-12.3c-0.11-0.58-0.4-0.86-0.92-0.8z" fill="#041238"/>
+  <path d="m56.27 36.34-6.38 0.94 3.09 12.2c0.1 0.46 0.47 0.67 0.94 0.58l4.79-0.94c0.48-0.09 0.61-0.41 0.51-0.89l-2.95-11.89z" fill="#A7F7E0" class="anim-phone-screen" id="phone-screen"/>
+  <path d="m52.16 36.19 1.59-0.28c0.24-0.05 0.29 0.28 0.06 0.32l-1.55 0.22c-0.23 0.04-0.29-0.22-0.1-0.26z" fill="#0D2370"/>
+  <path d="m50.27 42.42c-0.5-0.05-0.83 0.13-0.83 0.55 0.01 0.49 0.69 0.9 1.18 0.95l-0.35-1.5z" fill="#FF996F"/>
+  <ellipse transform="rotate(-47.18 50.57 45.06)" cx="50.57" cy="45.06" rx=".6147" ry=".7808" fill="#FF996F"/>
+  <ellipse transform="rotate(-47.18 50.97 46.53)" cx="50.97" cy="46.53" rx=".6024" ry=".7702" fill="#FF996F"/>
+  <ellipse transform="rotate(-47.18 51.41 47.93)" cx="51.41" cy="47.93" rx=".5537" ry=".7159" fill="#FF996F"/>
+  <path d="m56.8 50.38c0.5 0.35 1.02 0.52 1.38 0.55 0.67-0.16 1.35-0.53 1.8-0.97l-3.18 0.42z" fill="#ED8056"/>
+  <path d="m55.19 37.02-3.93 0.63c-0.37 0.06-0.53 0.33-0.45 0.68l0.26 1.15c0.05 0.22 0.21 0.35 0.43 0.36l0.42 0.41 0.27-0.44 3.61-0.59c0.36-0.06 0.48-0.28 0.42-0.62l-0.19-1.07c-0.06-0.38-0.43-0.56-0.84-0.51z" fill="#00C67A"/>
+  <path d="m51.64 38.28 3.28-0.53" stroke="#0FE097" stroke-linecap="round" stroke-width=".2646"/>
+  <path d="m51.77 38.89 1.89-0.29" stroke="#0FE097" stroke-linecap="round" stroke-width=".2646"/>
+  <path d="m55.92 39.75-2.8 0.5c-0.31 0.06-0.43 0.27-0.36 0.56l0.23 0.97c0.06 0.27 0.27 0.39 0.55 0.34l2.45-0.51 0.53 0.27 0.12-0.44c0.21-0.06 0.3-0.22 0.25-0.45l-0.18-0.81c-0.07-0.33-0.41-0.49-0.79-0.43z" fill="#79ECC9"/>
+  <path d="m53.46 40.86 2.36-0.45" stroke="#54D6B2" stroke-linecap="round" stroke-width=".2853"/>
+  <path d="m53.6 41.46 1.89-0.36" stroke="#54D6B2" stroke-linecap="round" stroke-width=".2853"/>
+  <g class="anim-reminder-card" id="reminder-card">
+    <path d="m56.24 42.24-3.68 0.66c-0.38 0.08-0.52 0.33-0.43 0.69l0.23 1.06c0.08 0.35 0.36 0.54 0.77 0.49l0.12 0.42 0.51-0.45 2.86-0.54 0.5 0.26 0.05-0.45c0.23-0.1 0.3-0.31 0.24-0.63l-0.22-0.96c-0.09-0.42-0.5-0.62-0.95-0.55z" fill="#00C67A"/>
+    <circle cx="54.66" cy="43.66" r=".6662" stroke="#fff" stroke-width=".1323"/>
+    <path d="m54.64 43.25 0.08 0.44 0.4 0.06" stroke="#fff" stroke-linecap="round" stroke-width=".1323"/>
+  </g>
+  <path d="m56.58 45.77-2.25 0.36c-0.4 0.03-0.57 0.24-0.49 0.6l0.6 2.29c0.07 0.28 0.28 0.39 0.59 0.33l2.27-0.44c0.31-0.06 0.41-0.25 0.35-0.55l-0.5-2.27c-0.04-0.26-0.24-0.37-0.57-0.32z" fill="#00C67A"/>
+  <path d="m55.25 45.65-0.26 0.04-0.07 0.4 1.16-0.12-0.06-0.29-0.3 0.04-0.05-0.13-0.42 0.06z" fill="#43DEA9" stroke="#20C487" stroke-width=".1323"/>
+  <path d="m54.61 47.23 0.24 0.15 0.3-0.36" stroke="#C5F7E6" stroke-linecap="round" stroke-width=".2205"/>
+  <path d="m55.7 47.22 0.89-0.15" stroke="#C5F7E6" stroke-linecap="round" stroke-width=".2205"/>
+  <path d="m54.79 48.2 0.24 0.17 0.29-0.36" stroke="#C5F7E6" stroke-linecap="round" stroke-width=".2205"/>
+  <path d="m55.85 48.23 0.9-0.17" stroke="#C5F7E6" stroke-linecap="round" stroke-width=".2205"/>
+</svg>

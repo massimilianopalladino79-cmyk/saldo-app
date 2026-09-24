@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 80 80">
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <defs>
+    <linearGradient id="paint0_linear_21205_58566" x1="1.891" x2="78.11" y1="37.13" y2="37.13" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1173C1" offset="0"/>
+      <stop stop-color="#08ABE9" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear_21205_58566" x1="40.2" x2="40.2" y1="34.41" y2="47.94" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#056B93" offset="0"/>
+      <stop stop-color="#01284A" offset="1"/>
+    </linearGradient>
+    <radialGradient id="paint2_radial_21205_58566" cx="0" cy="0" r="1" gradientTransform="translate(31.22 31.22) rotate(90) scale(7.902)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#004576" offset="0"/>
+      <stop stop-color="#011D38" offset="1"/>
+    </radialGradient>
+    <linearGradient id="paint3_linear_21205_58566" x1="24.87" x2="37.48" y1="31.22" y2="31.22" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1775FC" offset="0"/>
+      <stop stop-color="#0AC3F8" offset=".4294"/>
+      <stop stop-color="#07DEE2" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint4_linear_21205_58566" x1="40" x2="40" y1="54.57" y2="58.75" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#04569D" offset="0"/>
+      <stop stop-color="#023767" offset=".3438"/>
+      <stop stop-color="#012143" offset="1"/>
+    </linearGradient>
+    <clipPath id="trend-clip">
+      <rect x="23.4" y="30" width="0" height="25">
+        <animate attributeName="width" values="0; 33; 33; 0" keyTimes="0; 0.6; 0.85; 1" dur="4s" repeatCount="indefinite"/>
+      </rect>
+    </clipPath>
+  </defs>
+  <style type="text/css">@keyframes pulse-points { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } } .anim-points { animation: pulse-points 4s ease-in-out infinite; } @keyframes timeline-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } } .anim-timeline { animation: timeline-glow 2s ease-in-out infinite; } @keyframes screen-reflect { 0%, 100% { opacity: 0.82; } 50% { opacity: 1; } } .anim-operator { animation: screen-reflect 4s ease-in-out infinite; }</style>
+  <rect y="17.65" width="80" height="44.7" fill="#000814"/>
+  <rect y="54.53" width="80" height="4.219" fill="#001A38"/>
+  <rect y="58.75" width="80" height="3.594" fill="#00060E"/>
+  <path d="m19.22 54.61-5.2 4.14h-14.02v-4.14h19.22z" fill="#011E40"/>
+  <path d="m24.89 54.61-3.59 4.14h-7.28l5.2-4.14h5.67z" fill="#011A37"/>
+  <path d="m29.42 54.61-2.25 4.14h-5.87l3.59-4.14h4.53z" fill="#022B56"/>
+  <path d="m41.48 54.61-1.71 4.14h-12.6l2.25-4.14h12.06z" fill="url(#paint4_linear_21205_58566)"/>
+  <path d="m80 54.61v4.14h-13.2l-1.89-4.14h15.09z" fill="#011E40"/>
+  <rect x="2.016" y="21.11" width="76.03" height="31.25" rx=".9219" fill="#00162D" stroke="url(#paint0_linear_21205_58566)" stroke-width=".25"/>
+  <rect x="3.312" y="22.73" width="17.95" height="28.34" rx=".5742" fill="#001832" stroke="#114A85" stroke-width=".2188"/>
+  <rect x="22.49" y="22.73" width="34.98" height="28.34" rx=".5742" fill="#00162D" stroke="#114A85" stroke-width=".2344"/>
+  <rect x="58.8" y="22.73" width="17.93" height="28.34" rx=".5742" fill="#00152B" stroke="#0B3F70" stroke-width=".2188"/>
+  <path d="m21.25 22.95c0-0.15 0.3-0.26 0.63-0.26 0.32 0 0.62 0.11 0.62 0.26v27.71" stroke="#0B3F70" stroke-width=".2109"/>
+  <path d="m25.47 38.98v8.96" opacity=".3" stroke="#0B4780" stroke-dasharray="0.38 0.38" stroke-linecap="round" stroke-width=".1094"/>
+  <path d="m32.97 38.98v8.96" opacity=".3" stroke="#0B4780" stroke-dasharray="0.38 0.38" stroke-linecap="round" stroke-width=".1094"/>
+  <path d="m39.28 38.28v9.66" opacity=".3" stroke="#0B4780" stroke-dasharray="0.38 0.38" stroke-linecap="round" stroke-width=".1094"/>
+  <path d="m45.47 35.7v12.24" opacity=".3" stroke="#0B4780" stroke-dasharray="0.38 0.38" stroke-linecap="round" stroke-width=".1094"/>
+  <path d="m51.59 34.53v13.41" opacity=".3" stroke="#0B4780" stroke-dasharray="0.31 0.31" stroke-linecap="round" stroke-width=".08594"/>
+  <path d="m52.88 35.7v12.24" opacity=".3" stroke="#0B4780" stroke-dasharray="0.25 0.25" stroke-linecap="round" stroke-width=".07031"/>
+  <path d="m23.44 47.94v-1.16c1.33 0 2.58-0.36 3.47-0.74 1.41-0.62 2.93-1.7 4.63-1.7 1.07 0 2.18 0.31 3.22 0.13 1.94-0.35 3.44-2.5 5.8-2.74 3.2-0.33 4.25-2.95 7.74-3.31 1.28-0.14 2.48-0.65 3.44-1.27l3.98-2.68v13.47h-32.28z" fill="url(#paint1_linear_21205_58566)" id="trend-area">
+    <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.6; 0.85; 1" dur="4s" repeatCount="indefinite"/>
+  </path>
+  <path d="m23.47 46.82c1.24 0.01 2.51-0.35 3.44-0.77 1.41-0.63 2.93-1.71 4.63-1.71 1.07 0 2.18 0.31 3.22 0.13 1.94-0.35 3.44-2.5 5.8-2.74 3.2-0.33 4.25-2.95 7.74-3.31 1.28-0.14 2.48-0.65 3.44-1.27l3.82-2.65" stroke="#22d3ee" stroke-width=".2812" id="trend-line">
+    <animate attributeName="stroke-dasharray" values="0 40; 40 0; 40 0; 0 40" keyTimes="0; 0.6; 0.85; 1" dur="4s" repeatCount="indefinite"/>
+  </path>
+  <g class="anim-points" id="trend-points">
+    <circle cx="26.02" cy="46.38" r=".4375" fill="#1D7DFB"/>
+    <circle cx="34.32" cy="44.48" r=".4062" fill="#1D7DFB"/>
+    <circle cx="40.62" cy="41.67" r=".4219" fill="#118CF2"/>
+    <circle cx="48.01" cy="38.42" r=".4219" fill="#119DF6"/>
+    <circle cx="55.71" cy="34.42" r=".4219" fill="#07D0F0"/>
+  </g>
+  <path d="m25.47 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m27.97 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m30.45 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m32.97 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m35.52 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m37.97 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m40.47 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m42.94 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m45.44 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m47.94 48.78v1" stroke="#0B3560" stroke-linecap="round" stroke-width=".25"/>
+  <path d="m61.16 24.53v23.85" stroke="#0B3560" stroke-linecap="round" stroke-width=".2109"/>
+  <line x1="63.23" x2="70.69" y1="25.11" y2="25.11" stroke="#5b8cff" stroke-linecap="round" stroke-width=".5312"/>
+  <line x1="63.23" x2="73.25" y1="26.25" y2="26.25" stroke="#104476" stroke-linecap="round" stroke-width=".6094"/>
+  <line x1="63.23" x2="68.92" y1="28.53" y2="28.53" stroke="#5b8cff" stroke-linecap="round" stroke-width=".5312"/>
+  <line x1="63.23" x2="72.16" y1="29.69" y2="29.69" stroke="#104476" stroke-linecap="round" stroke-width=".6094"/>
+  <line x1="63.23" x2="69.11" y1="31.91" y2="31.91" stroke="#5b8cff" stroke-linecap="round" stroke-width=".5312"/>
+  <line x1="63.23" x2="73.55" y1="33.09" y2="33.09" stroke="#134777" stroke-linecap="round" stroke-width=".6094"/>
+  <line x1="63.23" x2="67.91" y1="35.34" y2="35.34" stroke="#5b8cff" stroke-linecap="round" stroke-width=".5312"/>
+  <line x1="63.23" x2="72.41" y1="36.55" y2="36.55" stroke="#194A78" stroke-linecap="round" stroke-width=".5938"/>
+  <line x1="63.23" x2="68.61" y1="38.75" y2="38.75" stroke="#5b8cff" stroke-linecap="round" stroke-width=".4844"/>
+  <line x1="63.23" x2="73.25" y1="39.95" y2="39.95" stroke="#174774" stroke-linecap="round" stroke-width=".5469"/>
+  <line x1="63.23" x2="68.94" y1="42.19" y2="42.19" stroke="#5b8cff" stroke-linecap="round" stroke-width=".4844"/>
+  <line x1="63.23" x2="72.2" y1="43.34" y2="43.34" stroke="#14426F" stroke-linecap="round" stroke-width=".5469"/>
+  <line x1="63.23" x2="69.36" y1="45.61" y2="45.61" stroke="#5b8cff" stroke-linecap="round" stroke-width=".4844"/>
+  <line x1="63.23" x2="73.55" y1="46.75" y2="46.75" stroke="#114171" stroke-linecap="round" stroke-width=".5625"/>
+  <g class="anim-timeline" id="timeline-dots">
+    <circle cx="61.16" cy="25.29" r=".6758" fill="#34d399"/>
+    <circle cx="61.16" cy="28.72" r=".6758" fill="#fbbf24"/>
+    <circle cx="61.16" cy="32.14" r=".6758" fill="#34d399"/>
+    <circle cx="61.16" cy="35.54" r=".6758" fill="#fbbf24"/>
+    <circle cx="61.16" cy="38.95" r=".6758" fill="#34d399"/>
+    <circle cx="61.16" cy="42.33" r=".6758" fill="#fbbf24"/>
+    <circle cx="61.12" cy="45.75" r=".6758" fill="#34d399"/>
+  </g>
+  <line x1="7.609" x2="14.69" y1="25.77" y2="25.77" stroke="#22d3ee" stroke-linecap="round" stroke-width=".5938"/>
+  <line x1="15.97" x2="19.17" y1="25.77" y2="25.77" stroke="#0D4172" stroke-linecap="round" stroke-width=".5938"/>
+  <circle cx="5.508" cy="25.77" r=".875" fill="#15BFAA"/>
+  <path d="m5.14 25.84 0.21 0.2 0.49-0.41" stroke="#002848" stroke-linecap="round" stroke-width=".1562"/>
+  <line x1="7.625" x2="14.68" y1="29.03" y2="29.03" stroke="#22d3ee" stroke-linecap="round" stroke-width=".5469"/>
+  <line x1="15.98" x2="19.16" y1="29.03" y2="29.03" stroke="#0D4172" stroke-linecap="round" stroke-width=".5781"/>
+  <circle cx="5.516" cy="29.06" r=".875" fill="#15BFAA"/>
+  <path d="m5.14 29.15 0.21 0.2 0.49-0.41" stroke="#002848" stroke-linecap="round" stroke-width=".1562"/>
+  <line x1="7.641" x2="14.65" y1="32.34" y2="32.34" stroke="#0A3666" stroke-linecap="round" stroke-width=".5781"/>
+  <line x1="7.641" x2="12.98" y1="32.34" y2="32.34" stroke="#22d3ee" stroke-linecap="round" stroke-width=".5781"/>
+  <line x1="15.98" x2="19.16" y1="32.34" y2="32.34" stroke="#0D4172" stroke-linecap="round" stroke-width=".5781"/>
+  <circle cx="5.508" cy="32.36" r=".875" fill="#15BFAA"/>
+  <path d="m5.14 32.42 0.21 0.2 0.49-0.41" stroke="#002848" stroke-linecap="round" stroke-width=".1562"/>
+  <line x1="7.625" x2="14.68" y1="35.53" y2="35.53" stroke="#158AF5" stroke-linecap="round" stroke-width=".5469"/>
+  <line x1="15.98" x2="19.16" y1="35.53" y2="35.53" stroke="#0E4374" stroke-linecap="round" stroke-width=".5469"/>
+  <circle cx="5.508" cy="35.54" r=".875" fill="#15BFAA"/>
+  <path d="m5.14 35.64 0.21 0.2 0.49-0.42" stroke="#002848" stroke-linecap="round" stroke-width=".1562"/>
+  <line x1="7.641" x2="14.65" y1="38.72" y2="38.72" stroke="#0A3666" stroke-linecap="round" stroke-width=".5781"/>
+  <line x1="7.641" x2="11.75" y1="38.72" y2="38.72" stroke="#22d3ee" stroke-linecap="round" stroke-width=".5938"/>
+  <line x1="15.98" x2="19.16" y1="38.72" y2="38.72" stroke="#0D4172" stroke-linecap="round" stroke-width=".5781"/>
+  <circle cx="5.492" cy="38.75" r=".875" fill="#15BFAA"/>
+  <path d="m5.14 38.68 0.21 0.2 0.49-0.41" stroke="#002848" stroke-linecap="round" stroke-width=".1562"/>
+  <line x1="7.625" x2="14.68" y1="41.94" y2="41.94" stroke="#083563" stroke-linecap="round" stroke-width=".5625"/>
+  <line x1="7.625" x2="10.73" y1="41.94" y2="41.94" stroke="#FEBF4E" stroke-linecap="round" stroke-width=".5938"/>
+  <line x1="15.98" x2="19.16" y1="41.94" y2="41.94" stroke="#0D4273" stroke-linecap="round" stroke-width=".5625"/>
+  <circle cx="5.492" cy="41.98" r=".7656" stroke="#FEBF4E" stroke-width=".2031"/>
+  <line x1="7.625" x2="14.65" y1="45.11" y2="45.11" stroke="#083563" stroke-linecap="round" stroke-width=".5625"/>
+  <line x1="7.625" x2="11.05" y1="45.11" y2="45.11" stroke="#FEBF4E" stroke-linecap="round" stroke-width=".5938"/>
+  <line x1="15.98" x2="19.16" y1="45.11" y2="45.11" stroke="#0D4273" stroke-linecap="round" stroke-width=".5625"/>
+  <circle cx="5.477" cy="45.12" r=".7656" stroke="#FEBF4E" stroke-width=".2031"/>
+  <line x1="7.625" x2="14.66" y1="48.33" y2="48.33" stroke="#0B3662" stroke-linecap="round" stroke-width=".5625"/>
+  <line x1="7.625" x2="11.98" y1="48.33" y2="48.33" stroke="#158AF5" stroke-linecap="round" stroke-width=".5625"/>
+  <line x1="15.98" x2="19.16" y1="48.33" y2="48.33" stroke="#0D4273" stroke-linecap="round" stroke-width=".5625"/>
+  <circle cx="5.477" cy="48.33" r=".7812" stroke="#1D7DFB" stroke-width=".2109"/>
+  <circle cx="31.2" cy="31.21" r="7.922" fill="url(#paint2_radial_21205_58566)" fill-opacity=".3"/>
+  <path d="m31.25 24.84c-3.52 0-6.37 2.86-6.37 6.38s2.85 6.37 6.37 6.37 6.28-2.85 6.28-6.37-2.76-6.38-6.28-6.38zm0 11.19c-2.71 0-4.84-2.17-4.84-4.81 0-2.72 2.16-4.84 4.84-4.84s4.81 2.17 4.81 4.84c0 2.71-2.13 4.81-4.81 4.81z" fill="url(#paint3_linear_21205_58566)" id="donut-ring">
+    <animateTransform attributeName="transform" type="rotate" from="0 31.22 31.22" to="360 31.22 31.22" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8; 1; 0.8" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <path d="m30.98 24.84c-2.13 0-4.16 1.24-5.05 2.91-0.17 0.37-0.05 0.78 0.32 0.96 0.31 0.18 0.74 0.05 0.94-0.27 0.81-1.33 2.29-2.06 3.86-2.06 0.43 0 0.7-0.31 0.7-0.76 0-0.44-0.34-0.78-0.77-0.78z" fill="#1B528E" opacity=".5" id="donut-accent">
+    <animateTransform attributeName="transform" type="rotate" from="360 31.22 31.22" to="0 31.22 31.22" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3; 0.9; 0.3" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <line x1="40.06" x2="49.73" y1="26.97" y2="26.97" stroke="#22d3ee" stroke-linecap="round" stroke-width=".8125"/>
+  <line x1="40.07" x2="46.67" y1="28.64" y2="28.64" stroke="#11487B" stroke-linecap="round" stroke-width=".8125"/>
+  <line x1="40.07" x2="46.67" y1="30.22" y2="30.22" stroke="#11487B" stroke-linecap="round" stroke-width=".8125"/>
+  <circle cx="40.09" cy="33.01" r=".4062" fill="#0BA9F9"/>
+  <circle cx="41.8" cy="33.01" r=".4062" fill="#0BA9F9"/>
+  <circle cx="43.45" cy="33.01" r=".4062" fill="#0D4170"/>
+  <g class="anim-operator" id="operator-silhouette">
+    <path d="m65.2 55.96c0.11-0.6-0.31-1.02-0.51-0.98 0.07-1.29-0.8-3.33-1.53-3.47l-5.86-1.95c-0.36-0.52-0.93-1.4-1.38-1.55-1.41-0.37-3.34-0.34-4.45 0-0.58 0.21-1.38 1.19-1.74 1.57l-6.4 2c-0.89 0.23-1.57 2.36-1.85 3.36l-3.2 7.34h30.03l-3.11-6.32z" fill="#000711" stroke="#125FBD" stroke-width=".3438"/>
+    <path d="m64.53 62.22c-0.19-1.6-0.47-3.37-0.79-4.67-0.25-1.13-1.23-1.81-2.5-1.91-4.67-0.31-10.17-0.31-14.5-0.02-1.52 0.11-2.48 0.89-2.73 2.07l-1 4.53" stroke="#011735" stroke-width=".5156"/>
+    <path d="m56.08 47.93v-1.39c0.26-0.36 0.43-0.75 0.5-1.01 0.74 0.31 1.31-2.17 0.8-2.12 0.36-1.31 0.61-3.07-0.53-3.44-0.1-1.24-2.09-1.74-3.43-1.74-1.72 0.02-2.8 0.94-2.03 1.79-0.88 0.3-0.86 2.05-0.73 2.91-0.77-0.23-0.45 2.34 0.1 2.32-0.1 1.01 0.11 1.91 0.62 2.04l0.01 0.73" fill="#000711"/>
+    <path d="m56.08 47.93v-1.39c0.26-0.36 0.43-0.75 0.5-1.01 0.74 0.31 1.31-2.17 0.8-2.12 0.36-1.31 0.61-3.07-0.53-3.44-0.1-1.24-2.09-1.74-3.43-1.74-1.72 0.02-2.8 0.94-2.03 1.79-0.88 0.3-0.86 2.05-0.73 2.91-0.77-0.23-0.45 2.34 0.1 2.32-0.1 1.01 0.11 1.91 0.62 2.04l0.01 0.73" stroke="#0E4690" stroke-width=".2812"/>
+    <path d="m51.39 47.89c1.32-0.39 3.31-0.34 4.58-0.02" stroke="#0E4690" stroke-width=".3125"/>
+    <path d="m49.62 49.58 0.76-0.04" stroke="#125FBD" stroke-width=".25"/>
+    <path d="m57.22 49.56h0.49" stroke="#125FBD" stroke-width=".2266"/>
+  </g>
+</svg>

@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 80 80">
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <defs>
+    <linearGradient id="paint0_linear_3398_11462" x1="7.299" x2="47.17" y1="17.43" y2="71.85" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#152B4C" offset="0"/>
+      <stop stop-color="#0F1F37" offset=".2103"/>
+      <stop stop-color="#09152B" offset=".5203"/>
+      <stop stop-color="#081326" offset=".7238"/>
+      <stop stop-color="#081327" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear_3398_11462" x1="4.812" x2="68.39" y1="17.43" y2="68.26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7292C4" offset="0"/>
+      <stop stop-color="#2A4978" offset=".3295"/>
+      <stop stop-color="#294A7D" offset=".6664"/>
+      <stop stop-color="#2BC5F1" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint2_linear_3398_11462" x1="8.119" x2="12.72" y1="23.24" y2="23.24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#52CEF5" offset="0"/>
+      <stop stop-color="#4586FD" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint3_linear_3398_11462" x1="14.56" x2="42.46" y1="23.27" y2="23.27" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#487FFD" offset="0"/>
+      <stop stop-color="#2BD8F1" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint4_linear_3398_11462" x1="10.6" x2="14.01" y1="46.38" y2="46.38" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4880FD" offset="0"/>
+      <stop stop-color="#31D2F2" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint5_linear_3398_11462" x1="43.56" x2="49.5" y1="46.41" y2="46.41" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B3A6A" offset="0"/>
+      <stop stop-color="#1D3960" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint6_linear_3398_11462" x1="49.6" x2="65.15" y1="56.91" y2="56.91" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#487FFD" offset="0"/>
+      <stop stop-color="#2BD8F1" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint7_linear_3398_11462" x1="66.59" x2="71.83" y1="56.88" y2="56.88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3B58A5" offset="0"/>
+      <stop stop-color="#2BD2F3" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint8_linear_3398_11462" x1="36.53" x2="38.22" y1="46.44" y2="46.44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4880FD" offset="0"/>
+      <stop stop-color="#31B9F0" offset="1"/>
+    </linearGradient>
+  </defs>
+  <style type="text/css">@keyframes header-fade { 0%, 100% { opacity: 0.4; } 15%, 85% { opacity: 1; } }
+@keyframes lines-shimmer { 0%, 10% { opacity: 0.35; filter: drop-shadow(0 0 0 rgba(64,175,248,0)); } 25%, 35% { opacity: 1; filter: drop-shadow(0 0 1.5px rgba(64,175,248,0.7)); } 45%, 85% { opacity: 1; filter: drop-shadow(0 0 0 rgba(64,175,248,0)); } 95%, 100% { opacity: 0.35; } }
+@keyframes date-pulse { 0%, 25% { filter: brightness(1) drop-shadow(0 0 0 rgba(64,175,248,0)); } 35% { filter: brightness(1.3) drop-shadow(0 0 2px rgba(64,175,248,0.85)); } 45%, 100% { filter: brightness(1) drop-shadow(0 0 0 rgba(64,175,248,0)); } }
+@keyframes avatar-pulse { 0%, 32% { filter: brightness(1) drop-shadow(0 0 0 rgba(64,216,244,0)); } 42% { filter: brightness(1.35) drop-shadow(0 0 2.5px rgba(64,216,244,0.9)); } 52%, 100% { filter: brightness(1) drop-shadow(0 0 0 rgba(64,216,244,0)); } }
+@keyframes button-press { 0%, 46% { transform: scale(1); filter: brightness(1); } 51% { transform: scale(0.92); filter: brightness(1.3) drop-shadow(0 0 3px rgba(43,197,241,0.8)); } 56% { transform: scale(1.03); filter: brightness(1.1); } 62%, 100% { transform: scale(1); filter: brightness(1); } }
+@keyframes repeat-spin { 0%, 58% { transform: rotate(0deg); } 83% { transform: rotate(360deg); } 100% { transform: rotate(360deg); } }
+.anim-header { animation: header-fade 4s ease-in-out infinite; }
+.anim-lines { animation: lines-shimmer 4s ease-in-out infinite; }
+.anim-date { animation: date-pulse 4s ease-in-out infinite; }
+.anim-avatar { animation: avatar-pulse 4s ease-in-out infinite; }
+.anim-create { transform-origin: 57.38px 56.88px; animation: button-press 4s ease-in-out infinite; }
+.anim-repeat { transform-origin: 69.21px 56.88px; animation: repeat-spin 4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }</style>
+  <rect y="12.5" width="80" height="54.96" fill="#010611"/>
+  <rect x="4.925" y="17.54" width="70.14" height="44.99" rx="1.926" fill="url(#paint0_linear_3398_11462)" stroke="url(#paint1_linear_3398_11462)" stroke-width=".2266"/>
+  <g class="anim-header" id="header-elements">
+    <circle cx="10.42" cy="23.24" r="2.302" fill="url(#paint2_linear_3398_11462)"/>
+    <rect x="14.56" y="22.23" width="27.91" height="2.078" rx="1.039" fill="url(#paint3_linear_3398_11462)"/>
+  </g>
+  <path d="m8.24 29.06c0-0.97 0.78-1.69 1.75-1.69l60.07-0.62c0.97 0 1.71 0.73 1.71 1.7v9.87c0 0.97-0.74 1.72-1.71 1.72h-60.12c-0.97 0-1.7-0.75-1.7-1.72v-9.26z" fill="#0D1D36" stroke="#263F66" stroke-width=".1699"/>
+  <g class="anim-lines" id="content-lines">
+    <rect x="10.29" y="30.04" width="42.73" height="1.543" rx=".7715" fill="#3B557D"/>
+    <rect x="10.29" y="33.05" width="31.23" height="1.543" rx=".7715" fill="#3B557D"/>
+    <rect x="10.29" y="36.03" width="22.05" height="1.543" rx=".7715" fill="#3B557D"/>
+  </g>
+  <g class="anim-date" id="date-selector--part-1">
+    <rect x="8.223" y="42.38" width="31.95" height="8.078" rx="1.676" fill="#0B1932" stroke="#253F65" stroke-width=".1699"/>
+  </g>
+  <g class="anim-avatar" id="avatar-selector--part-1">
+    <rect x="42.34" y="42.38" width="29.37" height="8.078" rx="1.648" fill="#0B1932" stroke="#253F65" stroke-width=".1699"/>
+  </g>
+  <g class="anim-date" id="date-selector--part-2">
+    <rect x="16.27" y="45.65" width="15.3" height="1.531" rx=".7656" fill="#37527A"/>
+    <path d="m11.48 45.06h2c0.23 0 0.33 0.12 0.33 0.35v2.21c0 0.24-0.13 0.4-0.37 0.4h-2.25c-0.24 0-0.37-0.15-0.37-0.4v-2.17c0-0.25 0.41-0.39 0.66-0.39z" stroke="url(#paint4_linear_3398_11462)" stroke-width=".3359"/>
+    <path d="m11.44 44.77v0.4" stroke="#40AFF8" stroke-linecap="round" stroke-width=".3359"/>
+    <path d="m13.12 44.77v0.4" stroke="#40AFF8" stroke-linecap="round" stroke-width=".3359"/>
+    <path d="m10.88 46.06h2.85" stroke="#40AFF8" stroke-width=".2734"/>
+  </g>
+  <g class="anim-avatar" id="avatar-selector--part-2">
+    <circle cx="46.53" cy="46.41" r="2.973" fill="url(#paint5_linear_3398_11462)" stroke="#40D8F4" stroke-width=".207"/>
+    <circle cx="46.52" cy="45.63" r=".8867" fill="#40D8F4"/>
+    <ellipse cx="46.54" cy="47.52" rx="1.367" ry=".75" fill="#40D8F4"/>
+    <circle cx="53.41" cy="46.42" r="2.461" fill="#1F3457"/>
+    <circle cx="53.39" cy="45.75" r=".7656" fill="#6786B4"/>
+    <ellipse cx="53.41" cy="47.35" rx="1.184" ry=".6562" fill="#6786B4"/>
+    <circle cx="59.77" cy="46.42" r="2.461" fill="#1F3457"/>
+    <circle cx="59.77" cy="45.75" r=".7656" fill="#6786B4"/>
+    <ellipse cx="59.78" cy="47.35" rx="1.184" ry=".6562" fill="#6786B4"/>
+    <circle cx="66.23" cy="46.42" r="2.461" fill="#1D3254"/>
+    <circle cx="66.22" cy="45.75" r=".7656" fill="#6786B4"/>
+    <ellipse cx="66.23" cy="47.35" rx="1.25" ry=".6562" fill="#6786B4"/>
+  </g>
+  <g class="anim-create" id="button-create">
+    <rect x="49.6" y="54.2" width="15.55" height="5.367" rx="2.684" fill="url(#paint6_linear_3398_11462)"/>
+    <path d="m57.37 55.88v2.09" stroke="#fff" stroke-linecap="round" stroke-width=".3906"/>
+    <path d="m58.4 56.88h-2.17" stroke="#fff" stroke-linecap="round" stroke-width=".3672"/>
+  </g>
+  <g class="anim-repeat" id="icon-repeat">
+    <circle cx="69.21" cy="56.88" r="2.576" stroke="url(#paint7_linear_3398_11462)" stroke-width=".1562"/>
+    <path d="m68.14 56.41c0.15-0.39 0.55-0.64 1.05-0.64 0.49 0 0.93 0.28 1.08 0.67" stroke="#2BC5F1" stroke-linecap="round" stroke-width=".2695"/>
+    <path d="m70.4 56.98c0 0.56-0.52 0.99-1.18 0.99-0.57 0-1.05-0.41-1.09-0.82" stroke="#2BC5F1" stroke-linecap="round" stroke-width=".2852"/>
+    <path d="m68.02 57.52 0.01-0.46 0.55 0.06-0.56 0.4z" fill="#2BC5F1"/>
+    <path d="m70.55 56.78-0.49-0.27 0.42-0.26 0.07 0.53z" fill="#2BC5F1"/>
+  </g>
+  <g class="anim-date" id="date-selector--part-3">
+    <path d="m36.63 46.15 0.75 0.63 0.7-0.63" stroke="url(#paint8_linear_3398_11462)" stroke-linecap="round" stroke-linejoin="round" stroke-width=".375"/>
+  </g>
+</svg>
