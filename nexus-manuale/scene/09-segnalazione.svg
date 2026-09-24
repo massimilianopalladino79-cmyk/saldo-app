@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="none" viewBox="0 0 80 80">
+  <rect x="0" y="0" width="80" height="80" fill="#070b12"/>
+  <!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <defs>
+    <filter id="filter0_d_26427_52158" x="25.79" y="20.45" width="26.5" height="23.98" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset/>
+      <feGaussianBlur stdDeviation="2.5"/>
+      <feColorMatrix values="0 0 0 0 0.0235294 0 0 0 0 0.772549 0 0 0 0 0.980392 0 0 0 1 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_26427_52158"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow_26427_52158" result="shape"/>
+    </filter>
+    <linearGradient id="paint0_linear_26427_52158" x1="38.7" x2="38.7" y1="18.15" y2="26.62" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#05E1F9" offset="0"/>
+      <stop stop-color="#05E1F9" stop-opacity="0" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear_26427_52158" x1="38.59" x2="38.59" y1="26.16" y2="38.02" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B0F6FF" offset="0"/>
+      <stop stop-color="#0CE8F9" offset=".3073"/>
+      <stop stop-color="#0CA3F1" offset="1"/>
+    </linearGradient>
+    <radialGradient id="paint2_radial_26427_52158" cx="0" cy="0" r="1" gradientTransform="translate(38.57 32.26) rotate(90) scale(3.875 4.625)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#023286" offset="0"/>
+      <stop stop-color="#06256B" offset="1"/>
+    </radialGradient>
+    <linearGradient id="paint3_linear_26427_52158" x1="31.58" x2="33.27" y1="32.33" y2="32.33" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B0F6FF" offset="0"/>
+      <stop stop-color="#25DFFD" offset=".5104"/>
+      <stop stop-color="#0CB4F2" offset="1"/>
+    </linearGradient>
+    <linearGradient id="paint4_linear_26427_52158" x1="45.57" x2="43.88" y1="32.33" y2="32.33" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B0F6FF" offset="0"/>
+      <stop stop-color="#25DFFD" offset=".5104"/>
+      <stop stop-color="#0CB4F2" offset="1"/>
+    </linearGradient>
+  </defs>
+  <style type="text/css">@keyframes alertBubble {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  12% { transform: translateY(-2px) scale(1.02); opacity: 1; }
+  32% { transform: translateY(-11px) scale(0.65); opacity: 0.9; }
+  42% { transform: translateY(-14px) scale(0.2); opacity: 0; }
+  88% { transform: translateY(2px) scale(0.3); opacity: 0; }
+  95% { transform: translateY(0.5px) scale(0.85); opacity: 0.7; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes lowerArrowPulse {
+  0%, 100% { opacity: 0.35; transform: translateY(0); }
+  15%, 32% { opacity: 1; transform: translateY(-1.8px); }
+  45% { opacity: 0.35; transform: translateY(0); }
+  85% { opacity: 0.35; }
+}
+@keyframes aiHeadProcess {
+  0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+  28% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+  38% { transform: scale(1.08) rotate(-3deg); filter: brightness(1.2); }
+  48% { transform: scale(1.12) rotate(3deg); filter: brightness(1.3); }
+  58% { transform: scale(1.06) rotate(-2deg); filter: brightness(1.15); }
+  68% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+}
+@keyframes aiAuraPulse {
+  0%, 25%, 85%, 100% { transform: scale(0.92); opacity: 0.15; }
+  42% { transform: scale(1.22); opacity: 0.65; }
+  54% { transform: scale(1.38); opacity: 0.3; }
+  66% { transform: scale(1.05); opacity: 0.15; }
+}
+@keyframes upperArrowPulse {
+  0%, 48%, 90%, 100% { opacity: 0.3; transform: translateY(0); }
+  58%, 72% { opacity: 1; transform: translateY(-2px); }
+  82% { opacity: 0.4; transform: translateY(0); }
+}
+@keyframes taskCardEmerge {
+  0%, 46% { transform: translateY(14px) scale(0.3); opacity: 0; }
+  54% { transform: translateY(10px) scale(0.6); opacity: 0.75; }
+  68% { transform: translateY(0px) scale(1.04); opacity: 1; }
+  78% { transform: translateY(-0.8px) scale(1); opacity: 1; }
+  92% { transform: translateY(0px) scale(1); opacity: 1; }
+  98% { transform: translateY(0px) scale(0.95); opacity: 0; }
+  100% { transform: translateY(14px) scale(0.3); opacity: 0; }
+}
+@keyframes slotTelemetry {
+  0% { stroke-dashoffset: 0; opacity: 0.75; }
+  50% { stroke-dashoffset: 1; opacity: 1; }
+  100% { stroke-dashoffset: 2; opacity: 0.75; }
+}
+.anim-alert-bubble {
+  animation: alertBubble 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-lower-arrow {
+  animation: lowerArrowPulse 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-ai-orb {
+  animation: aiHeadProcess 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-ai-aura {
+  animation: aiAuraPulse 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-upper-arrow {
+  animation: upperArrowPulse 4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-task-card {
+  animation: taskCardEmerge 4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.anim-indicator-slot {
+  animation: slotTelemetry 2s linear infinite;
+}</style>
+  <rect x="11.47" width="57.08" height="80" fill="#000611"/>
+  <circle cx="46.89" cy="11.54" r="7.145" fill="#2655A6"/>
+  <path d="m43.76 9.98c0.75-0.32 1.79-0.65 1.79-0.65h2.26s2.82 0.74 3.77 1.52c1.02 0.85 0.75 6.29 0.75 6.29h-9.21s-0.1-6.94 0.64-7.16z" fill="#113793"/>
+  <path d="m45.49 9.33c-0.74 1.3 0.11 5.21 0.36 5.56 0.58-0.77 2.28-4.36 2.45-5.56h-2.81z" fill="#F2F8FF"/>
+  <path d="m45.92 10.4-0.59 0.46 0.46 0.4-0.21 2.25 0.3 1.38 0.37-1.35-0.1-2.28 0.48-0.39-0.49-0.47h-0.22z" fill="#B0D5FF"/>
+  <path d="m45.47 9.25-0.13 0.82 0.58 0.53 0.61 0.14 1.63-1.09-0.28-0.77-2.41 0.37z" fill="#F7B69B"/>
+  <path d="m47.91 7.58c-0.12 0.6-0.04 1.35 0.06 1.68-0.29 0.54-1.33 1.12-2.11 1.02-0.22-0.17-0.36-0.77-0.31-1.14 0.76-0.34 1.64-0.94 2.36-1.56z" fill="#EDA88E"/>
+  <path d="m44.3 5.14c-0.19 1.67-0.17 3.83 1.39 3.83 1.05 0 2.01-0.78 2.33-1.61 0.33-0.82 0.44-2.07 0.14-2.83-0.57-1.45-3.63-1.23-3.86 0.61z" fill="#FFCDB3"/>
+  <path d="m44.75 3.08c-0.91-0.48-1.48 0.57-1.06 1.35 0.61 1.17 2.63 0.67 3.36 0.19 0.16-0.1 0.36-0.02 0.35 0.16-0.09 0.66 0.04 1.37 0.35 1.68 0.12 0.13 0.33 0.19 0.46 0.29 0.17 0.14 0.38 0.16 0.51-0.01 0.5-0.75 0.41-2.14-0.34-3.12-0.83-1.13-2.67-0.84-3.63-0.54z" fill="#091744"/>
+  <path d="m44.07 4.56c-0.08-0.45 0.12-1.05 0.79-1.32 0.1-0.04 0.16-0.08 0.24-0.13-0.28-0.02-0.52-0.04-0.67-0.02-0.94 0.12-0.99 1.11-0.36 1.47z" fill="#316AEB"/>
+  <path d="m48.45 3.79c-0.33-1.14-1.87-1.26-3.18-0.73 1.24-0.14 2.39 0.14 3.18 0.73z" fill="#316AEB"/>
+  <circle cx="48.12" cy="6.67" r=".6367" fill="#FFCDB3"/>
+  <path d="m45.55 9.33c-0.43 0.17-1.06 0.37-1.51 0.57-0.52 1.61 0.83 4.23 1.79 4.98-0.62-1.61-0.84-4.18-0.28-5.55z" fill="#1341A6"/>
+  <path d="m48.3 9.33c-1 1.56-2.06 3.82-2.45 5.56 0.94-0.74 2.32-2.31 2.57-2.78l-0.16-0.77 0.6-0.13c0.05-0.49 0.03-1.24-0.06-1.64l-0.5-0.24z" fill="#1341A6"/>
+  <path d="m45.75 15.08v2.01" stroke="#0D2D77" stroke-width=".1172"/>
+  <path d="m49.77 12.87c-0.21 1.29-0.3 2.74-0.28 4.03" stroke="#0D2D77" stroke-width=".1172"/>
+  <path d="m47.09 15.69 2.43-0.32" stroke="#0D2D77" stroke-width=".1172"/>
+  <path d="m29.51 72.88h31.25v3.84h-31.25v-3.84z" fill="#2A63E9"/>
+  <path d="m28.78 58.44v13.84c0 0.36 0.24 0.6 0.6 0.6h3.5v-14.97h-3.5c-0.36 0-0.6 0.19-0.6 0.53z" fill="#E3F0FF"/>
+  <path d="m59.07 56.34h-26.1c-0.88 0-1.47 0.7-1.47 1.57h28.98c0.06-0.87-0.55-1.57-1.41-1.57z" fill="#CEE3FC"/>
+  <path d="m60.92 57.91h-7.2c-0.33 0-0.53 0.21-0.53 0.55v11.42c0 0.34 0.2 0.54 0.53 0.54h7.2c0.4 0 0.58-0.19 0.58-0.54v-11.34c0-0.39-0.2-0.63-0.58-0.63z" fill="#2E67E5"/>
+  <path d="m53.19 70.42v2.42h7.76c0.38 0 0.55-0.19 0.55-0.54v-2.04c-0.09 0.11-0.25 0.16-0.51 0.16h-7.8z" fill="#A2CBF7"/>
+  <path d="m54.35 54.65h-5.57c-0.52 0-0.83 0.35-0.83 0.83v0.86h7.07v-0.89c0-0.49-0.21-0.8-0.67-0.8z" fill="#2E67E5"/>
+  <path d="m50.88 56.34c-0.69 0.15-0.83 0.95-0.83 1.57h0.78v15.78h-0.78v0.53h2.25c0.62 0 0.93-0.34 0.93-0.95v-15.36c0-0.85 0.37-1.34 0.99-1.57h-3.34z" fill="#E1EEFD"/>
+  <path d="m50.19 57.91h-2.08c0.46 0.08 0.68 0.4 0.68 0.94v14.03h1.69v-14.37c0-0.36-0.07-0.55-0.29-0.6z" fill="#3170ED"/>
+  <path d="m48.05 57.91h-14.06c-0.35 0-0.5 0.23-0.5 0.65v12.56h15.3v-12.35c0-0.55-0.24-0.86-0.74-0.86z" fill="#092668"/>
+  <path d="m33.49 71.12v1.07c0 0.43 0.2 0.69 0.6 0.69h14.23c0.37 0 0.47-0.23 0.47-0.69v-1.07h-15.3z" fill="#E1EEFD"/>
+  <rect x="34.21" y="70.21" width="13.75" height=".8203" fill="#1743A6"/>
+  <path d="m37.72 52.8c0 1.21-0.98 1.82-1.87 2-2.1 0.45-3.42 2.21-3.42 3.96v13.49c0 0.38 0.09 0.6 0.23 0.69h1.18c-0.24-0.09-0.33-0.34-0.33-0.74v-13.26c0-0.63 0.33-0.96 0.98-1.15 2.74-0.86 5.15-2.61 5.15-4.7v-0.29h-1.92z" fill="#316AEB"/>
+  <path d="m42.59 55.88h-4.21c-0.36 0-0.57 0.19-0.57 0.58v3.43c0 0.4 0.21 0.59 0.6 0.59h4.22c0.42 0 0.56-0.17 0.56-0.56v-3.43c0-0.43-0.17-0.61-0.6-0.61z" fill="#306EF0"/>
+  <path d="m38.69 60.48v0.59c0 0.27 0.14 0.4 0.42 0.4h2.78c0.28 0 0.39-0.13 0.39-0.4v-0.59h-3.59z" fill="#2355D1"/>
+  <path d="m39.47 61.47v0.31c0 0.21 0.1 0.32 0.3 0.32h1.4c0.2 0 0.27-0.1 0.27-0.32v-0.31h-1.97z" fill="#415E9E"/>
+  <path d="m40.01 62.1 0.22 1.44c0.06 0.21 0.34 0.23 0.38 0l0.21-1.44h-0.81z" fill="#A4B0CC"/>
+  <circle cx="40.34" cy="61.85" r=".207" fill="#394E7F"/>
+  <path d="m35.02 64.58-0.05 1.26h1.08l-0.06-1.26h-0.97z" fill="#41558D"/>
+  <path d="m34.88 66.48 0.2 1.02h0.86l0.18-1.02h-1.24z" fill="#394A70"/>
+  <path d="m35.15 67.5 0.21 1.69c0.04 0.2 0.29 0.21 0.32 0l0.19-1.69h-0.72z" fill="#96A3B7"/>
+  <circle cx="35.52" cy="64.25" r=".1406" fill="#2D3E6D"/>
+  <rect x="34.55" y="65.73" width="1.934" height=".7148" fill="#5A78B5"/>
+  <path d="m37.49 64.58-0.05 1.26h1.08l-0.06-1.26h-0.97z" fill="#41558D"/>
+  <path d="m37.35 66.48 0.2 1.02h0.86l0.18-1.02h-1.24z" fill="#394A70"/>
+  <path d="m37.62 67.5 0.21 1.69c0.04 0.2 0.29 0.21 0.32 0l0.19-1.69h-0.72z" fill="#96A3B7"/>
+  <circle cx="37.95" cy="64.25" r=".1406" fill="#2D3E6D"/>
+  <rect x="37.03" y="65.73" width="1.934" height=".7148" fill="#5A78B5"/>
+  <path d="m42.26 64.58-0.06 1.26h1.16l-0.06-1.26h-1.04z" fill="#41558D"/>
+  <path d="m42.2 66.48 0.18 1.02h0.87l0.19-1.02h-1.24z" fill="#394A70"/>
+  <path d="m42.49 67.5 0.26 1.69c0.03 0.2 0.28 0.21 0.31 0l0.16-1.69h-0.73z" fill="#96A3B7"/>
+  <circle cx="42.81" cy="64.25" r=".1406" fill="#2D3E6D"/>
+  <rect x="41.93" y="65.73" width="1.93" height=".7148" fill="#5A78B5"/>
+  <path d="m44.58 64.58-0.1 1.36h1.17l-0.1-1.36h-0.97z" fill="#4F6599"/>
+  <path d="m44.38 66.52 0.18 1.06h0.9l0.16-1.06h-1.24z" fill="#3F5077"/>
+  <path d="m44.67 67.58 0.22 1.64c0.05 0.21 0.32 0.22 0.35 0l0.16-1.64h-0.73z" fill="#97A3B7"/>
+  <circle cx="45.02" cy="64.25" r=".1562" fill="#2D3E6D"/>
+  <rect x="44.06" y="65.77" width="1.926" height=".6953" fill="#5B79B6"/>
+  <path d="m46.51 64.58-0.04 1.36h1.09l-0.05-1.36h-1z" fill="#46598B"/>
+  <path d="m46.34 66.52 0.17 1.06h0.86l0.16-1.06h-1.19z" fill="#36456B"/>
+  <path d="m46.62 67.58 0.25 1.73c0.04 0.19 0.31 0.2 0.33 0l0.17-1.73h-0.75z" fill="#8E9AB2"/>
+  <circle cx="46.96" cy="64.25" r=".1562" fill="#243563"/>
+  <rect x="46.07" y="65.77" width="1.777" height=".6953" fill="#49639D"/>
+  <rect x="49.57" y="63.88" width=".6445" height="4.516" rx=".3125" fill="#253D7D"/>
+  <rect x="54.06" y="58.83" width="6.516" height="10.67" rx=".4219" fill="#113894"/>
+  <rect x="54.91" y="59.72" width="4.816" height="3.148" rx=".207" fill="#22d3ee"/>
+  <circle cx="55.22" cy="64.09" r=".3633" fill="#4D81ED"/>
+  <circle cx="56.68" cy="64.09" r=".3633" fill="#4D81ED"/>
+  <circle cx="57.97" cy="64.09" r=".3633" fill="#4D81ED"/>
+  <circle cx="59.34" cy="64.09" r=".3633" fill="#4D81ED"/>
+  <circle cx="55.22" cy="65.48" r=".3633" fill="#4D81ED"/>
+  <circle cx="56.68" cy="65.48" r=".3633" fill="#4D81ED"/>
+  <circle cx="57.97" cy="65.48" r=".3633" fill="#4D81ED"/>
+  <circle cx="59.34" cy="65.48" r=".3633" fill="#4D81ED"/>
+  <circle cx="55.22" cy="66.73" r=".3633" fill="#316AEB"/>
+  <circle cx="56.68" cy="66.73" r=".3633" fill="#316AEB"/>
+  <circle cx="57.97" cy="66.73" r=".3633" fill="#316AEB"/>
+  <circle cx="59.34" cy="66.73" r=".3633" fill="#316AEB"/>
+  <rect x="54.82" y="67.98" width="3.145" height=".6719" rx=".3203" fill="#4578E3"/>
+  <circle cx="59.31" cy="68.32" r=".5117" fill="#4578E3"/>
+  <rect x="32.61" y="63.52" width=".6445" height="4.516" rx=".3125" fill="#CEE3FC"/>
+  <path d="m29.21 63.68-1.74 3.29 0.32 0.98 2.9-1.04 1.63-2.92-3.11-0.31z" fill="#122F63"/>
+  <path d="m29.33 64.05-1.59 2.88 0.3 0.86 2.43-0.87 1.27-2.77-2.41-0.1z" fill="#CEE3FC"/>
+  <path d="m29.73 66.99c0.25-0.24 0.55-0.52 0.78-0.61 0.14-0.06 0.31-0.05 0.44 0l0.42-0.69 0.11-0.05c0.17 0.14 0.14 0.16 0.04 0.38l0.02 0.03c0.11-0.09 0.17-0.1-0.04 0.06 0.17 0.07 0.13 0.09 0.01 0.16 0.09 0.05 0.06 0.11 0 0.15 0.08 0.05 0.07 0.13 0.01 0.17 0.08 0.06 0.02 0.14-0.04 0.18 0.06 0.48-0.56 1.17-1.2 1.21l-0.55-0.99z" fill="#FEC1A4"/>
+  <path d="m19.86 62.25c-1.34 0.3-2.08 2.34-2.4 5.33-0.22 1.93 0.36 2.68 1.94 2.67l0.58-4.5-0.12-3.5z" fill="#3170ED"/>
+  <path d="m25.57 62.25c-1.19-0.53-2.94-0.83-4-0.78-0.59 0.16-1.26 0.44-1.71 0.68-0.22 0.96-0.24 2.36-0.35 3.26-0.23 1.81-0.19 4.11-0.3 5.75-0.17 1.89-0.18 4.04-0.16 5.56h7.49c-0.05-1.73-0.23-3.99-0.35-6.6-0.08-2.57 0.02-6.28-0.62-7.87z" fill="#103897"/>
+  <path d="m24.45 61.99c-1.13 0.23-1.84 1.85-1.96 3.12h-2.11c-0.06-1.08-0.04-2.34 0.08-3.07l-0.63 0.17c-0.2 0.92-0.21 2.19-0.24 3.09h3.84c0.06-1.54 0.79-2.79 1.76-3.08l-0.74-0.23z" fill="#2D6CE8"/>
+  <path d="m25.57 62.25c-1.43 0.04-2.19 2-2.14 3.44 0.06 2.58 1 4.14 2.19 3.96 0.13 0.7 0.62 1.25 1.26 1.19 1.2-0.13 3.21-1.92 3.56-2.61 0.18-0.61-0.27-1.26-0.72-1.39l-1.8 0.91c-0.56-3.4-0.69-5.21-2.35-5.5z" fill="#3472F0"/>
+  <path d="m24.54 66.16c0.07 1.28 0.27 2.58 0.6 3.51" stroke="#2153C2" stroke-width=".125"/>
+  <path d="m21.03 74.29 0.69 0.64 0.18 1.79" stroke="#0D2562" stroke-width=".1406"/>
+  <path d="m25.83 57.35c0.06 0.47 0.13 1.01 0.34 1.34 0.08 0.15 0.04 0.33-0.08 0.42 0.03 1.26-0.51 1.94-1.67 1.83l0.02 0.82c-0.98-0.24-2.09-0.32-2.89-0.27l0.36-1.13c-0.57-0.66-0.99-1.72-0.96-2.59 0.07-1.76 4.63-2.38 4.88-0.42z" fill="#FEC1A4"/>
+  <path d="m24.75 57.26c0.07 0.55 0.07 1.09-0.1 1.25-0.14 0.1-0.31 0.03-0.44-0.07-0.24-0.17-0.63 0.03-0.62 0.49 0.01 0.23 0.1 0.46 0.24 0.62-0.07 0.64-0.71 1.02-1.37 0.99-1.03-0.04-1.81-1.58-1.77-2.73 0.06-1.45 3.01-1.65 4.06-0.55z" fill="#2D2A42"/>
+  <path d="m25.79 56.09c0.01-1.17-0.89-1.59-2.04-1.36-0.83 0.2-1.93 0.51-2.56 0.96-0.82 0.6-0.96 1.55-0.56 2.37 0.34 0.55 1.67 0.3 2.94-0.09 1.23-0.39 3.17-1.14 3.44-1.55 0.16-0.36-0.53-0.42-1.22-0.33z" fill="#3576F0"/>
+  <path d="m23.35 54.86c1.06 0.21 1.59 0.96 1.64 1.92l0.84-0.57c0.04-1.4-0.98-1.74-2.48-1.35z" fill="#A7D0FF"/>
+  <path d="m20.68 57.94c0.49 0.28 1.12 0.25 1.59 0.12-0.22-0.62-1.34-0.7-1.59-0.12z" fill="#103383"/>
+  <path d="m24.48 60.82c-0.32-0.09-0.64-0.36-0.78-0.67l-0.15 0.2 0.27 0.62 0.66-0.15z" fill="#EDA88E"/>
+  <path d="m51.79 74.22h-1.74" stroke="#8BB9F3" stroke-width=".1484"/>
+  <path d="m17.5 76.75h45.23" stroke="#0A204D" stroke-width=".1875"/>
+  <path d="m38.72 18.22-2.16 2.93c-0.13 0.18-0.01 0.4 0.2 0.4h0.93v5.07h2.03v-5.07h1c0.21 0 0.32-0.21 0.22-0.37l-2.07-2.96c0-0.04-0.11-0.04-0.15 0z" fill="url(#paint0_linear_26427_52158)" class="anim-upper-arrow" id="upper-arrow"/>
+  <g class="anim-ai-aura" id="ai-aura-rings">
+    <circle cx="38.57" cy="32.18" r="9.773" fill="#088ED6" opacity=".2"/>
+    <circle cx="38.53" cy="32.18" r="8.02" fill="#088ED6" opacity=".2"/>
+  </g>
+  <g filter="url(#filter0_d_26427_52158)" class="anim-ai-orb" id="ai-orb-head">
+    <path d="m38.59 26.16c-3.38 0-5.86 2.35-5.86 5.99 0 3.86 2.89 5.87 5.86 5.87s5.86-2.12 5.86-5.87c0-3.8-2.56-5.99-5.86-5.99z" fill="url(#paint1_linear_26427_52158)"/>
+    <path d="m38.59 28.74c-3.12 0-4.73 1.36-4.73 3.69 0 2.53 2.16 3.7 4.73 3.7s4.59-1.28 4.59-3.7c0-2.49-1.84-3.69-4.59-3.69z" fill="url(#paint2_radial_26427_52158)"/>
+    <path d="m35.51 32.28c0-0.49 0.37-0.86 0.83-0.86s0.81 0.38 0.81 0.86" stroke="#10DFFB" stroke-linecap="round" stroke-linejoin="round" stroke-width=".6094"/>
+    <path d="m39.83 32.28c0-0.49 0.36-0.86 0.82-0.86 0.47 0 0.8 0.38 0.8 0.86" stroke="#10DFFB" stroke-linecap="round" stroke-linejoin="round" stroke-width=".6094"/>
+    <path d="m37.7 33.99c0.49 0.38 1.1 0.34 1.57 0" stroke="#29BDF2" stroke-linecap="round" stroke-linejoin="round" stroke-width=".4453"/>
+    <path d="m32.82 30.13c-0.9 0.06-1.25 0.91-1.23 2.11 0.03 1.38 0.62 2.38 1.58 2.37-0.37-1.49-0.42-3.02-0.35-4.48z" fill="url(#paint3_linear_26427_52158)"/>
+    <path d="m44.3 30.13c0.9 0.06 1.25 0.91 1.23 2.11-0.02 1.38-0.57 2.37-1.42 2.37 0.33-1.5 0.31-3.11 0.19-4.48z" fill="url(#paint4_linear_26427_52158)"/>
+  </g>
+  <path d="m38.65 39.1-2.13 3.05c-0.12 0.16 0 0.37 0.2 0.37h0.98v2.61h2.01v-2.61h1.01c0.2 0 0.3-0.19 0.21-0.34l-2.11-3.08c-0.04-0.04-0.13-0.04-0.17 0z" fill="#5b8cff" class="anim-lower-arrow" id="lower-arrow"/>
+  <g class="anim-alert-bubble" id="lower-alert-bubble">
+    <path d="m42.19 45.13h-9.31c-1.17 0-1.98 0.89-1.98 1.98v3.62c0 1.14 0.79 2 1.79 2.04v1.85c0 0.17 0.22 0.25 0.35 0.15l2.46-2.01h6.68c1.2 0 1.99-0.91 1.99-1.99v-3.65c0.03-1.13-0.82-1.99-1.98-1.99z" fill="#F3F9FF"/>
+    <path d="m36.95 46.39-2.46 4.44c-0.22 0.41 0.05 0.82 0.52 0.82h5.01c0.51 0 0.78-0.43 0.57-0.83l-2.47-4.43c-0.24-0.41-0.93-0.4-1.17 0z" fill="#fbbf24"/>
+    <path d="m37.48 47.69v1.68" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width=".625"/>
+    <circle cx="37.5" cy="50.53" r=".3555" fill="#fff"/>
+  </g>
+  <g class="anim-task-card" id="upper-task-card">
+    <rect x="25.92" y="7.875" width="17.68" height="9.504" rx="1.258" fill="#F6FBFF"/>
+    <rect x="26.98" y="8.945" width="5.039" height="4.703" rx=".7188" fill="#A4E5FC"/>
+    <path d="m29.29 9.76-1.58 2.6c-0.17 0.26 0.02 0.54 0.35 0.54h2.94c0.35 0 0.52-0.29 0.38-0.55l-1.43-2.59c-0.12-0.23-0.53-0.22-0.66 0z" fill="#fbbf24"/>
+    <path d="m29.59 10.64v0.95" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width=".3906"/>
+    <circle cx="29.57" cy="12.25" r=".2188" fill="#fff"/>
+    <rect x="32.91" y="9.445" width="7.855" height=".9062" rx=".4492" fill="#1687DB"/>
+    <rect x="32.94" y="11.2" width="9.367" height=".8359" rx=".418" fill="#A4E3FC"/>
+    <rect x="32.93" y="12.7" width="6.965" height=".8555" rx=".4277" fill="#9DDDF9"/>
+    <rect x="38.86" y="14.35" width="3.508" height="1.977" rx=".4688" fill="#22d3ee"/>
+  </g>
+  <path d="m37.68 52.8v0.29h1.95v-0.29h-1.95z" fill="#1A46B6"/>
+  <rect x="39.57" y="64.56" width="1.723" height="5.023" rx=".8555" stroke="#11D2F9" stroke-dasharray="0.2 0.3" stroke-linecap="round" stroke-width=".1445" class="anim-indicator-slot" id="machine-indicator-slot"/>
+</svg>
