@@ -11,7 +11,7 @@ import {
 const $ = (s, r = document) => r.querySelector(s);
 const view = $('#view');
 let balanceHidden = true; // privacy: saldo nascosto a ogni apertura
-const APP_VERSION = 'v21';
+const APP_VERSION = 'v22';
 let currentUser = null;
 let canEdit = false;      // true solo per l'amministratore
 const money = (n) => fmtCurrency(n, store.getSettings().valuta);
@@ -126,14 +126,14 @@ function renderDashboard() {
 
     ${budgetCardHTML(cur.uscite)}
 
-    <div class="card" data-tip="area">
+    <div class="card">
       <div class="card-t"><h3>Andamento saldo</h3><span class="muted">${months.length} mesi</span></div>
-      ${charts.areaChart(areaPts, { color: store.getSettings().accent || '#7C5CFF', fmtY: fmtShort })}
+      ${charts.areaChart(areaPts, { color: store.getSettings().accent || '#7C5CFF', fmtY: fmtShort, fmtTip: money })}
     </div>
 
-    <div class="card" data-tip="bars">
+    <div class="card">
       <div class="card-t"><h3>Entrate vs Uscite</h3><span class="muted">ultimi ${barsData.length || 0} mesi</span></div>
-      ${charts.groupedBars(barsData, { fmtY: fmtShort })}
+      ${charts.groupedBars(barsData, { fmtY: fmtShort, fmtTip: money })}
       <div class="legend">
         <span class="li"><span class="sw" style="background:var(--green)"></span>Entrate</span>
         <span class="li"><span class="sw" style="background:var(--red)"></span>Uscite</span>
@@ -147,10 +147,6 @@ function renderDashboard() {
     </div>
   `;
   wireCommon();
-  attachChartTip(view.querySelector('[data-tip="area"]'), (i) =>
-    areaPts[i] ? `<b>${escapeHtml(areaPts[i].label)}</b> ${money(areaPts[i].value)}` : '');
-  attachChartTip(view.querySelector('[data-tip="bars"]'), (i) =>
-    barsData[i] ? `<b>${escapeHtml(barsData[i].label)}</b> <span class="pos">+${money(barsData[i].a)}</span> <span class="neg">−${money(barsData[i].b)}</span>` : '');
 }
 
 // Card budget mensile con avviso (uscite del mese vs tetto impostato)
@@ -292,9 +288,9 @@ function renderAnalisi() {
     <div class="page-head"><div><h1 class="page-title">Analisi</h1>
       <div class="page-sub">Dove vanno i tuoi soldi</div></div></div>
 
-    <div class="card" data-tip="bars">
+    <div class="card">
       <div class="card-t"><h3>Entrate vs Uscite</h3><span class="muted">per mese</span></div>
-      ${charts.groupedBars(barsData, { fmtY: fmtShort })}
+      ${charts.groupedBars(barsData, { fmtY: fmtShort, fmtTip: money })}
       <div class="legend">
         <span class="li"><span class="sw" style="background:var(--green)"></span>Entrate</span>
         <span class="li"><span class="sw" style="background:var(--red)"></span>Uscite</span>
@@ -318,7 +314,7 @@ function renderAnalisi() {
         <label>A <input type="date" id="ana-to" value="${a.to}"></label>
         ${hasRange ? '<button class="range-clear" id="ana-clear">Pulisci</button>' : ''}
       </div>
-      ${charts.donut(slices, { centerLabel: a.type === 'out' ? 'Uscite' : 'Entrate', centerValue: fmtShort(tot) })}
+      ${charts.donut(slices, { centerLabel: a.type === 'out' ? 'Uscite' : 'Entrate', centerValue: fmtShort(tot), fmtTip: money })}
       <div style="margin-top:14px">
         ${items.length ? items.map((c) => {
           const pct = tot ? (c.total / tot) * 100 : 0;
@@ -345,8 +341,6 @@ function renderAnalisi() {
   if (anaClear) anaClear.addEventListener('click', () => { a.from = ''; a.to = ''; renderAnalisi(); });
   view.querySelectorAll('[data-persondetail]').forEach((el) =>
     el.addEventListener('click', () => openPersonSheet(el.dataset.persondetail)));
-  attachChartTip(view.querySelector('[data-tip="bars"]'), (i) =>
-    barsData[i] ? `<b>${escapeHtml(barsData[i].label)}</b> <span class="pos">+${money(barsData[i].a)}</span> <span class="neg">−${money(barsData[i].b)}</span>` : '');
   wireCommon();
 }
 
@@ -364,7 +358,7 @@ function personTimeCardHTML() {
   const series = top.map((pp) => ({ name: pp.person, color: personColor(pp.person), points: pp.cumulative }));
   return `<div class="card">
     <div class="card-t"><h3>Dato a ciascuno · nel tempo</h3><span class="muted">cumulato</span></div>
-    ${charts.multiLine(series, { labels, fmtY: fmtShort })}
+    ${charts.multiLine(series, { labels, fmtY: fmtShort, fmtTip: money })}
     <div class="legend">
       ${top.map((pp) => `<span class="li"><span class="sw" style="background:${personColor(pp.person)}"></span>${escapeHtml(pp.person)}</span>`).join('')}
     </div>
@@ -768,33 +762,6 @@ const ACCENTS = ['#7C5CFF', '#0A84FF', '#30D158', '#FF9F0A', '#FF375F', '#BF5AF2
 function applyAccent(color) {
   if (!color) return;
   document.documentElement.style.setProperty('--accent', color);
-}
-
-// Tooltip interattivo sui grafici: mostra il valore del punto/mese toccato.
-function attachChartTip(container, formatHtml) {
-  if (!container) return;
-  const svg = container.querySelector('svg.chart');
-  if (!svg) return;
-  container.style.position = 'relative';
-  let tip = container.querySelector('.chart-tip');
-  if (!tip) { tip = document.createElement('div'); tip.className = 'chart-tip'; container.appendChild(tip); }
-  const show = (i, el) => {
-    const html = formatHtml(i);
-    if (!html) { tip.classList.remove('show'); return; }
-    const er = el.getBoundingClientRect(), cr = container.getBoundingClientRect();
-    tip.innerHTML = html;
-    let left = er.left - cr.left + er.width / 2;
-    left = Math.max(46, Math.min(cr.width - 46, left));
-    tip.style.left = left + 'px';
-    tip.style.top = Math.max(2, er.top - cr.top - 4) + 'px';
-    tip.classList.add('show');
-  };
-  svg.querySelectorAll('.ch-hit').forEach((h) => {
-    const i = +h.dataset.i;
-    h.addEventListener('pointerenter', () => show(i, h));
-    h.addEventListener('pointerdown', () => show(i, h));
-  });
-  svg.addEventListener('pointerleave', () => tip.classList.remove('show'));
 }
 
 // ---------------- login (Firebase Auth) ----------------
