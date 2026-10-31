@@ -1,5 +1,5 @@
 ﻿// sw.js - service worker: rete-prima per i file dell'app, cache come fallback offline
-const CACHE = 'saldo-v21';
+const CACHE = 'saldo-v22';
 const ASSETS = [
   './',
   'index.html',
@@ -9,11 +9,13 @@ const ASSETS = [
   'js/app.js',
   'js/store.js',
   'js/charts.js',
+  'js/sf-license.js',
   'js/format.js',
   'js/xlsx-io.js',
   'js/seed.js',
   'js/firebase.js',
   'vendor/xlsx.full.min.js',
+  'vendor/syncfusion-charts.min.js',
   'icons/icon-192.png',
   'icons/icon-512.png',
   'icons/icon-512-maskable.png',
